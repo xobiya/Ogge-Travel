@@ -34,3 +34,4 @@ XAMPP – Local development environment (Apache, MySQL, PHP, and more)
 📌 Project Name
 Ogge – Your next adventure starts here.
 
+![Ogge Website](image.png)

@@ -35,5 +35,4 @@ XAMPP – Local development environment (Apache, MySQL, PHP, and more)
 Ogge – Your next adventure starts here.
 
 ![Ogge Website](image.png)
-
-![Package ](image-1.png)
+![Ogge Website](image-2.png)

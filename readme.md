@@ -1,38 +1,36 @@
-Group name                      ID
-Feleke Eshetu                 NSR/388/15
-Erimyas Getenet               NSR/344/15
-Zinash  Getiso                NSR/1044/15   
-Shalom Alemayehu              NSR/846/15
-Teketel Elsa                  NSR/893/15
+🌍 Ogge Travel Agency Web App
+A modern, responsive web application for managing travel packages and user bookings. Ogge Travel offers users an intuitive way to explore destinations, book packages, and manage their travel history — all in one seamless interface.
 
+Built using PHP, MySQL, Tailwind CSS, JavaScript, and HTML, the app is powered locally using XAMPP for easy development and testing.
 
-# Travel Agency Web App
+✨ Features
+🔐 User Authentication (Login & Registration)
+📦 Travel Package Booking
+👤 User Profile Management
+📩 Contact Form
+📱 Responsive Design with Tailwind CSS
+🕘 View Booking History
+🛠️ Admin Dashboard (Coming Soon)
+🗺️ Destination Listings (Coming Soon)
 
-A modern and responsive web application for managing travel packages, and user bookings. Built with PHP, HTML, and CSS,Javascript, and MYsql database this application provides a seamless experience for users to explore and book travel packages.
+🛠️ System Requirements
+Local Server
+XAMPP (includes Apache, MySQL, PHP)
+PHP 7.4 or higher
+MySQL 5.7 or higher
+Composer (for managing PHP dependencies)
+Node.js & npm (for Tailwind CSS build process)
 
-## Features
+PHP Extensions
+PDO, mysqli, GD Library, cURL
 
-- User Authentication (Login/Registration)
-- Travel Package Booking
-- User Profile Management
-- Contact Form
-- Responsive Design
-- See the there travel package history
-- Admin Dashboard (Coming Soon)
--Destination listing(Coming Soon)
+🚀 Technologies Used
+PHP – Server-side scripting
+MySQL – Database management
+Tailwind CSS – Utility-first CSS framework for responsive design
+JavaScript – Client-side interactivity
+XAMPP – Local development environment (Apache, MySQL, PHP, and more)
 
-## System Requirements
-
-### Server Requirements
-- Web Server (Apache/Nginx)
-- PHP 7.4 or higher
-- MySQL 5.7 or higher
-- Composer (for dependency management)
-- Node.js (optional, for additional frontend tools)
-
-### PHP Extensions
-- PDO
-- mysqli
-- GD Library
-- cURL
+📌 Project Name
+Ogge – Your next adventure starts here.
 

@@ -102,7 +102,7 @@ session_start(); // Start session for user authentication
                         <p class="text-gray-600 leading-relaxed mb-4">
                             Ethiopia is a land of contrasts and wonders. From the ancient obelisks of Aksum to the vibrant markets of Addis Ababa, every corner of this country tells a story. Explore the rock-hewn churches of Lalibela, trek through the Simien Mountains, or witness the cultural diversity of the Omo Valley.
                         </p>
-                        <a href="packages-1.php" 
+                        <a href="package-1.php" 
                            class="inline-block bg-amber-600 text-white py-2 px-6 rounded-lg hover:bg-amber-700 transition-colors">
                             Explore Our Packages
                         </a>

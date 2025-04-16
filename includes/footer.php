@@ -24,7 +24,7 @@
                     <h4 class="text-white font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-sm">
                         <li>📞 +251 992752075</li>
-                        <li>✉️ EggeTravel.com</li>
+                        <li>✉️ OggeTravel.com</li>
                         <li>📍 123 Adventure St, Ethiopian</li>
                     </ul>
                 </div>

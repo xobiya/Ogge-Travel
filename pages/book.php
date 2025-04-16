@@ -214,7 +214,7 @@ if (!$package) {
             travelersSelect.addEventListener('change', function () {
                 const travelers = this.value;
                 const totalPrice = pricePerPerson * travelers;
-                totalPriceDisplay.textContent = `Total Price: ETB ptotalPrice.toFixed(2)}`;
+                totalPriceDisplay.textContent ="Total Price: ETB " + totalPrice.toFixed(2)
             });
         });
     </script>

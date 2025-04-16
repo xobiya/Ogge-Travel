@@ -1,0 +1,90 @@
+.featured-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.featured-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 180px;
+}
+
+.logo img {
+    max-width: 40px;
+    height: auto;
+}
+
+.logo span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-top: -2px;
+}
+.close-btn {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+    opacity: 0.7;
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #f59e0b;
+    left: 50%;
+    bottom: -4px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Profile dropdown styles */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.profile-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-width: 200px;
+    z-index: 1000;
+}
+.profile-dropdown:hover .profile-menu {
+    display: block;
+}
+.profile-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #4b5563;
+    transition: background-color 0.3s;
+}
+.profile-menu a:hover {
+    background-color: #f3f4f6;
+}
+.profile-menu svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}

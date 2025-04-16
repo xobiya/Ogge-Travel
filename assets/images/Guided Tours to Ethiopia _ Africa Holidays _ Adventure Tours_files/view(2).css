@@ -1,0 +1,26 @@
+.brimshare ul.list-inline {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+.brimshare ul.list-inline li {
+    padding: 0px;
+    list-style-type: none;
+    margin-right: 0px;
+    display: inline-block;
+    
+}
+.brimshare {
+	margin: 25px 0px;
+}
+.brimshare ul.list-inline li a{
+	font-size: 15px;
+	width: 35px;
+    height: 35px;
+    
+    border-radius: 999px;
+    padding: 5px 0 0 0;
+    text-align: center;
+    display: inline-block;
+}

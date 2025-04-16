@@ -1,0 +1,198 @@
+body .master-container {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 17px;
+}
+
+.master-container h1, .master-container h2, .master-container h3, .master-container h4, .master-container h5
+{
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: 600;
+}
+
+ .master-container #banner h1 {
+    font-weight: 800;
+    text-shadow: none;
+
+}
+
+
+.master-container .navcontrol .custom-nav-class nav ul li a, .master-container .navcontrol .custom-nav-class ul.nav li a {
+    color: #ffffff !important;
+    font-family: 'Raleway', sans-serif !important;
+    
+  }
+
+    .c5box-parallax-block{
+        margin: 0px 0px !important;
+         min-height: 800px !important;
+    }
+  .master-container #innerwrapper, .master-container #home-pagetype {
+    padding-top: 70px;
+    
+}
+
+
+.master-container #banner::before, .master-container #banner::after {
+    border-width: 0px;
+}
+
+
+
+/*
+.master-container .c5box-parallax-block {
+	background-image: 40% !important;
+}
+*/
+
+.master-container .c5box-parallax-block {
+    padding: 150px 0 50px;
+    text-align: center;
+ }
+ 
+
+ 
+ .master-container .c5box-parallax-block h2 {
+    font-family: "Open Sans Condensed",sans-serif;
+    font-weight: 800;
+    margin: 0;
+    padding: 0;
+    text-shadow: none;
+}
+
+
+.master-container .c5box-parallax-block p {
+    line-height: 180%;
+    text-shadow: 0 0 0;
+    font-size: 20px;
+}
+
+
+.fa-arrow-down {
+	font-size: 40px;
+	color: rgba(255, 255, 255, .5)
+	
+}
+.down-arrow {
+position: absolute; bottom: 0; text-align: center; width: 100%;
+
+}
+
+.bancontcenter .down-arrow {
+	bottom: 20px;
+}
+
+.master-container .navcontrol .custom-nav-class nav ul ul li a, .master-container .navcontrol .custom-nav-class ul.nav ul li a {
+    text-align: center;
+}
+
+.master-container ul {
+    list-style: disc;
+}
+
+#innerwrapper li {
+    margin-bottom: 10px;
+}
+
+.rslides_nav.prev {
+     left: 10px;
+ }
+
+.rslides_nav.next {
+     right: 10px;
+ }
+ 
+ .master-container .navcontrol .custom-nav-class nav ul li a, .master-container .navcontrol .custom-nav-class ul.nav li a {
+    font-size: 18px;
+}
+
+
+.master-container #homesection2 h1, .master-container #homesection2 h2, .master-container #homesection2 h3, .master-container #homesection2 h4, .master-container #homesection2 h5, .master-container #homesection2 h6, .master-container #homesection2 p {
+    color: #333333;
+/*     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8); */
+    text-shadow: none;
+
+}
+
+blockquote {
+    line-height: 180%;
+}
+
+.master-container blockquote {
+     quotes: "“" "”" "“" "”";
+}
+
+.credit p, .copyright p {
+	font-size: 12px;
+	margin: 0 !important;
+	line-height: 16px;
+}
+
+.credit p {
+	text-align: right;
+	color: #95a5a6 !important;
+}
+
+.credit a {
+	color: #95a5a6 !important;
+}
+
+.btn {
+	white-space: normal;
+}
+
+@media only screen and (min-device-width : 1000px) {
+
+ .master-container #banner h1 {
+    font-size: 70px;
+}
+
+ .master-container .c5box-parallax-block h2 {
+    font-size: 70px;
+}
+
+
+}
+ 
+@media only screen and (max-device-width : 480px) 
+ { 
+	 
+	 
+
+ .master-container #banner h1 {
+    font-size: 35px;
+}
+
+ .master-container .c5box-parallax-block h2 {
+    font-size: 35px;
+}
+
+.master-container h2 {
+    font-size: 23px;
+}	 
+	 
+	 
+ }
+ 
+@media only screen and (max-device-width : 340px) 
+ { 
+	 
+	 
+#logo img {
+	max-width: 180px !important;
+	height: 40px !important;
+}	 
+
+ .master-container #banner h1 {
+    font-size: 28px;
+}
+
+ .master-container .c5box-parallax-block h2 {
+    font-size: 28px;
+}
+
+.master-container h2 {
+    font-size: 18px;
+}
+	 
+	 
+ }

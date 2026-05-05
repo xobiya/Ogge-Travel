@@ -3,29 +3,50 @@ session_start();
 include('db-connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-    // Check if user exists
-    $query = "SELECT * FROM users where email = '$email' AND password = '$password'";
-    $result = mysqli_query($db, $query);
+    // Prepared statement to prevent SQL Injection
+    $stmt = $db->prepare("SELECT id, email, password, role FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($user = $result->fetch_assoc()) {
+        $stored_password = $user['password'];
+        $is_valid = false;
 
-    if ($result) {
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        if ($user) {
-            // Store user session
+        // Secure password verification with a legacy fallback to automatically migrate any unhashed development accounts
+        if (password_verify($password, $stored_password)) {
+            $is_valid = true;
+        } elseif ($password === $stored_password) {
+            // Legacy fallback for plain text dummy data: auto-upgrade it!
+            $new_hash = password_hash($password, PASSWORD_DEFAULT);
+            $upd = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $upd->bind_param("si", $new_hash, $user['id']);
+            $upd->execute();
+            $upd->close();
+            $is_valid = true;
+        }
+
+        if ($is_valid) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
-            // Redirect to index.php
+            $_SESSION['user_role'] = $user['role'] ?? 'user';
+            
+            $_SESSION['success'] = "Welcome back!";
             header("Location: ../pages/index.php");
-            echo 'Login Success';
+            exit();
         } else {
-            echo "<script>alert('Either username or password is incorrect.');
-            window.location.href = '../pages/account.php';
-            </script>";
+            $_SESSION['error'] = "Invalid email or password.";
+            header("Location: ../pages/Account.php");
+            exit();
         }
     } else {
-        echo "Error: " . mysqli_error($db);
+        $_SESSION['error'] = "Invalid email or password.";
+        header("Location: ../pages/Account.php");
+        exit();
     }
+    $stmt->close();
 }
 ?>

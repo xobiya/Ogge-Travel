@@ -1,52 +1,52 @@
 <?php
 session_start();
-
 include('db-connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
     $role = 'user';
 
-    // Check if fields are empty
     if (empty($name) || empty($email) || empty($password)) {
         $_SESSION['error'] = "Please fill all fields!";
         header('Location: ../pages/Account.php');
         exit();
     }
 
-    // Check if passwords match
     if ($password !== $confirmPassword) {
         $_SESSION['error'] = "Passwords do not match!";
         header('Location: ../pages/Account.php');
         exit();
     }
 
-
-
-    // Check for existing email
-    $checkEmail = mysqli_query($db, "SELECT email FROM users WHERE email = '$email'");
-    
-    if (mysqli_num_rows($checkEmail) > 0) {
+    // Use prepared statements to prevent SQL Injection
+    $stmt = $db->prepare("SELECT email FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
         $_SESSION['error'] = "Email already exists!";
+        $stmt->close();
         header('Location: ../pages/Account.php');
         exit();
     }
+    $stmt->close();
 
-    // Add new user
-    $query = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', '$role')";
+    // Securely hash the password before saving
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $db->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $email, $hashed_password, $role);
     
-    if (mysqli_query($db, $query)) {
+    if ($stmt->execute()) {
         $_SESSION['success'] = "Registration successful! Please login.";
-        header('Location: ../pages/Account.php');
-        exit();
     } else {
         $_SESSION['error'] = "Registration failed. Please try again.";
-        header('Location: ../pages/Account.php');
-        exit();
     }
+    $stmt->close();
+    header('Location: ../pages/Account.php');
+    exit();
 }
 ?>

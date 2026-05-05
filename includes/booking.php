@@ -1,7 +1,6 @@
 <?php
-
+session_start();
 include("db-connect.php");
-
 
 // Validate required fields
 $required = ['package_id', 'user_id', 'travel_date', 'travelers'];
@@ -56,7 +55,7 @@ try {
     $stmt->close();
 
     $_SESSION['success'] = "Booking #$booking_id confirmed successfully!";
-    header("Location:conformation.php");
+    header("Location: ../pages/my-booking.php");
     exit();
 
 } catch (Exception $e) {

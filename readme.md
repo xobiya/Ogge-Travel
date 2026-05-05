@@ -31,6 +31,9 @@ Tailwind CSS – Utility-first CSS framework for responsive design
 JavaScript – Client-side interactivity
 XAMPP – Local development environment (Apache, MySQL, PHP, and more)
 
+php -S localhost:8000
+
+
 📌 Project Name
 Ogge – Your next adventure starts here.
 

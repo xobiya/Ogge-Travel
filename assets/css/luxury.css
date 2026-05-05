@@ -1,0 +1,347 @@
+/* ============================================
+   THE CURATED ESCAPE — OGGE Travel Design System
+   Deep Navy & Champagne Gold Luxury Palette
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap');
+
+/* === CSS Custom Properties === */
+:root {
+    /* Primary Palette */
+    --navy-950: #0a0f1e;
+    --navy-900: #0f172a;
+    --navy-800: #1a2340;
+    --navy-700: #253356;
+    --champagne: #c9a96e;
+    --champagne-light: #e8d5a8;
+    --champagne-glow: rgba(201, 169, 110, 0.15);
+
+    /* Neutrals */
+    --ivory: #faf8f5;
+    --pearl: #f1ede6;
+    --charcoal: #1e293b;
+    --stone: #64748b;
+    --mist: #e2ddd5;
+
+    /* Typography */
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-accent: 'Cormorant Garamond', Georgia, serif;
+
+    /* Spacing */
+    --section-py: clamp(5rem, 8vw, 8rem);
+}
+
+/* === Base Reset === */
+body {
+    font-family: var(--font-sans);
+    color: var(--charcoal);
+    background-color: var(--ivory);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Typography Utilities === */
+.serif { font-family: var(--font-serif); }
+.sans { font-family: var(--font-sans); }
+.accent-font { font-family: var(--font-accent); }
+
+.text-champagne { color: var(--champagne) !important; }
+.text-navy { color: var(--navy-950) !important; }
+.text-ivory { color: var(--ivory) !important; }
+.bg-navy { background-color: var(--navy-950) !important; }
+.bg-ivory { background-color: var(--ivory) !important; }
+.bg-pearl { background-color: var(--pearl) !important; }
+
+.text-champagne-gradient {
+    background: linear-gradient(135deg, var(--champagne), var(--champagne-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* === Section Headers === */
+.section-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--champagne);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-weight: 800;
+    color: var(--navy-950);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* === Glass Panels === */
+.glass-luxury {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(201, 169, 110, 0.12);
+}
+
+.glass-dark {
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+/* === Buttons === */
+.btn-champagne {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-950);
+    background: var(--champagne);
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-champagne:hover {
+    background: var(--champagne-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(201, 169, 110, 0.3);
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--champagne);
+    background: transparent;
+    border: 1.5px solid var(--champagne);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-outline:hover {
+    background: var(--champagne);
+    color: var(--navy-950);
+}
+
+.btn-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.125rem 2.5rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: var(--navy-950);
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-dark:hover {
+    background: var(--champagne);
+    color: var(--navy-950);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(201, 169, 110, 0.25);
+}
+
+/* === Cards === */
+.editorial-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    background: #fff;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.editorial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px -15px rgba(10, 15, 30, 0.15);
+}
+.editorial-card img {
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.editorial-card:hover img {
+    transform: scale(1.08);
+}
+
+/* === Pull Quotes === */
+.pull-quote {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.75rem;
+    line-height: 1.5;
+    color: var(--navy-900);
+    border-left: 3px solid var(--champagne);
+    padding-left: 2rem;
+    margin: 2rem 0;
+}
+
+/* === Divider === */
+.champagne-line {
+    width: 60px;
+    height: 2px;
+    background: var(--champagne);
+    margin: 1.5rem 0;
+}
+.champagne-line-center {
+    width: 60px;
+    height: 2px;
+    background: var(--champagne);
+    margin: 1.5rem auto;
+}
+
+/* === Scroll Animations === */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(201, 169, 110, 0); }
+}
+@keyframes kenBurns {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-1%, -1%); }
+}
+
+.animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-float { animation: gentleFloat 4s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+.animate-ken-burns { animation: kenBurns 20s ease-in-out infinite alternate; }
+
+/* === WhatsApp Widget === */
+.whatsapp-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    animation: pulseGlow 2.5s ease-in-out infinite;
+}
+.whatsapp-widget:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+}
+.whatsapp-widget svg {
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+}
+.whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--navy-950);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.whatsapp-widget:hover .whatsapp-tooltip {
+    opacity: 1;
+}
+
+/* === Noise/Grain Texture Overlay === */
+.grain-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* === Sensory Cards === */
+.sensory-card {
+    background: var(--pearl);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid var(--mist);
+}
+.sensory-card:hover {
+    background: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(10, 15, 30, 0.08);
+    border-color: var(--champagne);
+}
+
+/* === Horizontal Scroll Strip === */
+.scroll-strip {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+}
+.scroll-strip::-webkit-scrollbar { display: none; }
+.scroll-strip > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
+
+/* === Timeline === */
+.timeline-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--champagne);
+    border: 3px solid var(--ivory);
+    box-shadow: 0 0 0 2px var(--champagne);
+}

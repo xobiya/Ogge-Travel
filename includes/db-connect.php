@@ -6,7 +6,7 @@
 // $dbname = "travel_agency";
 $servername = "sql306.infinityfree.com";
 $username = "if0_41840865";
-$password = "VP6iMUzZ8R";
+$password = "VP61MUzZ8R";
 $dbname = "if0_41840865_travel_agency";
 
 // Create connection

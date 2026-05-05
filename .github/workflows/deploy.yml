@@ -1,0 +1,31 @@
+name: Deploy to InfinityFree via FTP
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch. Change to 'master' if your default branch is master.
+
+jobs:
+  web-deploy:
+    name: Deploy to FTP
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Sync files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        # The 'server-dir' is usually 'htdocs/' for InfinityFree. 
+        # Make sure to include the trailing slash!
+        server-dir: htdocs/
+        # Exclude git files and the github actions workflow from being uploaded
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/.github/**
+          **/travel_agency.sql
+          **/readme.md

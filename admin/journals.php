@@ -11,7 +11,8 @@ if ($status_filter) $wp[] = "j.status = '" . $db->real_escape_string($status_fil
 if ($search) $wp[] = "(j.title LIKE '%" . $db->real_escape_string($search) . "%' OR u.name LIKE '%" . $db->real_escape_string($search) . "%')";
 $where = $wp ? 'WHERE ' . implode(' AND ', $wp) : '';
 
-$total = $db->query("SELECT COUNT(*) as c FROM journals j JOIN users u ON j.user_id = u.id $where")->fetch_assoc()['c'];
+$total_res = $db->query("SELECT COUNT(*) as c FROM journals j JOIN users u ON j.user_id = u.id $where");
+$total = ($total_res) ? $total_res->fetch_assoc()['c'] : 0;
 $total_pages = ceil($total / $per_page);
 $journals = $db->query("SELECT j.*, u.name as user_name FROM journals j JOIN users u ON j.user_id = u.id $where ORDER BY j.created_at DESC LIMIT $per_page OFFSET $offset");
 
@@ -47,7 +48,7 @@ include('includes/admin-header.php');
                 <th class="px-5 py-3 text-right text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">Actions</th>
             </tr></thead>
             <tbody>
-                <?php while ($j = $journals->fetch_assoc()): ?>
+                <?php while ($journals && $j = $journals->fetch_assoc()): ?>
                 <tr class="border-b border-slate-50 hover:bg-slate-50/50">
                     <td class="px-5 py-3">
                         <div class="flex items-center gap-2">

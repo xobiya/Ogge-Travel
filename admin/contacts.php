@@ -45,7 +45,7 @@ include('includes/admin-header.php');
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
-                   <?php while ($messages && $m = $messages->fetch_assoc()): ?>
+                    <?php while ($messages && $m = $messages->fetch_assoc()): ?>
                     <tr class="hover:bg-slate-50/80 transition-colors group <?= !$m['is_read'] ? 'bg-blue-50/10' : '' ?>">
                         <td class="px-8 py-6">
                             <?php if (!$m['is_read']): ?>

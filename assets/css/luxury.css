@@ -29,7 +29,17 @@
     --font-accent: 'Cormorant Garamond', Georgia, serif;
 
     /* Spacing */
-    --section-py: clamp(5rem, 8vw, 8rem);
+    --section-py: clamp(3.5rem, 8vw, 8rem);
+}
+
+/* === Responsive Typography === */
+@media (max-width: 640px) {
+    html { font-size: 14px; }
+    .section-title { font-size: 2.5rem !important; }
+}
+
+@media (max-width: 768px) {
+    .container { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
 }
 
 /* === Base Reset === */
@@ -201,6 +211,9 @@ body {
     height: 2px;
     background: var(--champagne);
     margin: 1.5rem 0;
+}
+@media (max-width: 768px) {
+    .champagne-line { margin: 1rem 0; }
 }
 .champagne-line-center {
     width: 60px;

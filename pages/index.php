@@ -30,7 +30,7 @@
             <div class="container mx-auto px-6 max-w-7xl relative z-10">
                 <div class="max-w-4xl">
                     <span class="section-eyebrow reveal">The Land of Origins — የመነሻ ምድር</span>
-                    <h1 class="text-5xl md:text-8xl text-white mb-6 leading-tight reveal" style="font-family:'Playfair Display',serif; font-weight:800;">
+                    <h1 class="text-4xl sm:text-5xl md:text-8xl text-white mb-6 leading-tight reveal" style="font-family:'Playfair Display',serif; font-weight:800;">
                         Discover the <span class="text-champagne-gradient">Cradle</span> of Humanity
                     </h1>
                     
@@ -39,7 +39,7 @@
                     </p>
     
                     <!-- Metrics -->
-                    <div class="grid grid-cols-3 gap-6 max-w-2xl mb-12 reveal">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mb-12 reveal">
                         <div class="border-l border-[#c9a96e]/30 pl-4">
                             <p class="text-3xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">9+</p>
                             <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">UNESCO Sites</p>
@@ -73,8 +73,8 @@
     <!-- DESTINATION OF THE SEASON — Cinematic Spotlight -->
     <!-- ============================================ -->
     <section class="relative bg-[#0a0f1e] overflow-hidden">
-        <div class="grid lg:grid-cols-2 min-h-[600px]">
-            <div class="relative overflow-hidden">
+        <div class="grid lg:grid-cols-2 min-h-[500px] md:min-h-[600px]">
+            <div class="relative h-72 md:h-96 lg:h-auto overflow-hidden">
                 <img src="../assets/images/lalibela-3.jpg" alt="Lalibela" class="absolute inset-0 w-full h-full object-cover animate-ken-burns opacity-70" loading="lazy">
             </div>
             <div class="flex items-center p-10 lg:p-20 relative z-10">
@@ -116,10 +116,10 @@
     <!-- ============================================ -->
     <section class="bg-[#faf8f5] relative overflow-hidden" style="padding: clamp(5rem, 8vw, 8rem) 0;">
         <div class="container mx-auto px-6 max-w-7xl relative z-10">
-            <div class="text-center mb-20 reveal">
+            <div class="text-center mb-12 md:mb-20 reveal">
                 <span class="section-eyebrow">Explore The Extraordinary</span>
-                <h2 class="section-title text-4xl md:text-6xl mb-6">Where History <span class="text-champagne-gradient">Breathes</span></h2>
-                <p class="text-gray-500 max-w-2xl mx-auto text-lg" style="font-family:'Inter',sans-serif;">
+                <h2 class="section-title text-3xl md:text-6xl mb-6">Where History <span class="text-champagne-gradient">Breathes</span></h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg" style="font-family:'Inter',sans-serif;">
                     Each destination is a chapter in Ethiopia's three-thousand-year story, waiting for you to turn the page.
                 </p>
             </div>
@@ -302,6 +302,43 @@
                     Browse All Journeys
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- THE LEGACY GALLERY — New Additions -->
+    <!-- ============================================ -->
+    <section class="bg-[#0a0f1e] py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6 max-w-7xl relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="section-eyebrow">The Collective</span>
+                <h2 class="text-4xl md:text-6xl text-white mb-6" style="font-family:'Playfair Display',serif; font-weight:800;">Visual <span class="text-champagne-gradient">Legacies</span></h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-lg">A curated glimpse into the extraordinary moments captured by our private explorers.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="editorial-card h-[400px] reveal">
+                    <img src="../assets/images/Ancient book.jpg" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Ancient Chronicles</p>
+                    </div>
+                </div>
+                <div class="editorial-card h-[400px] reveal">
+                    <img src="../assets/images/Axum simien.jpg" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Highland Spires</p>
+                    </div>
+                </div>
+                <div class="editorial-card h-[400px] reveal">
+                    <img src="../assets/images/Dallo deser.jpg" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Alien Landscapes</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

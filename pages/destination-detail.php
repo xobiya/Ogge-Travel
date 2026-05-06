@@ -47,7 +47,7 @@ $pkg_stmt->close();
                 <?php if ($h): ?>
                     <p class="text-[#c9a96e] text-sm font-semibold uppercase tracking-[0.25em] mb-4" style="font-family:'Inter',sans-serif;"><?= htmlspecialchars($h['tagline']) ?></p>
                 <?php endif; ?>
-                <h1 class="text-6xl md:text-9xl text-white leading-none" style="font-family:'Playfair Display',serif; font-weight:800;"><?= htmlspecialchars($destination['name']) ?></h1>
+                <h1 class="text-4xl sm:text-6xl md:text-9xl text-white leading-tight md:leading-none" style="font-family:'Playfair Display',serif; font-weight:800;"><?= htmlspecialchars($destination['name']) ?></h1>
                 <?php if ($h && !empty($h['facts'])): ?>
                 <div class="flex flex-wrap gap-8 mt-8">
                     <?php foreach($h['facts'] as $key => $val): ?>

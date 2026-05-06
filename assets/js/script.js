@@ -2,40 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
 
-    if (menuBtn && mobileMenu) {
-        // Toggle mobile menu
-        menuBtn.addEventListener('click', function() {
-            const isOpen = mobileMenu.getAttribute('data-open') === 'true';
-            mobileMenu.setAttribute('data-open', !isOpen);
-            
-            if (!isOpen) {
-                mobileMenu.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            } else {
-                mobileMenu.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Close menu when clicking close button
-        const closeBtn = document.querySelector('.close-btn');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.setAttribute('data-open', 'false');
-                document.body.style.overflow = 'auto';
-            });
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.setAttribute('data-open', 'false');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    }
+    // Counter animation logic and other utilities will go here.
+    // (Mobile menu logic is now handled in includes/header.php for enhanced transitions)
 
     // Intersection Observer for animations
     const observer = new IntersectionObserver((entries) => {
@@ -48,39 +16,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const counterData = [
-            { selector: '#unesco-counter', value: 9 },
-            { selector: '#ethnic-counter', value: 80 },
-            { selector: '#history-counter', value: 3000 }
-        ];
-    
-        const animateCounter = (element, targetValue) => {
-            const duration = 2000; // Duration of the animation in milliseconds
-            const startTime = performance.now();
-            const initialValue = 0;
-    
-            const updateCounter = (currentTime) => {
-                const elapsedTime = currentTime - startTime;
-                const progress = Math.min(elapsedTime / duration, 1);
-                const currentValue = Math.floor(initialValue + (targetValue - initialValue) * progress);
-    
-                element.textContent = currentValue;
-    
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = targetValue + '+'; // Add '+' after reaching the target value
-                }
-            };
-    
-            requestAnimationFrame(updateCounter);
+    const counterData = [
+        { selector: '#unesco-counter', value: 9 },
+        { selector: '#ethnic-counter', value: 80 },
+        { selector: '#history-counter', value: 3000 }
+    ];
+
+    const animateCounter = (element, targetValue) => {
+        if (!element) return;
+        const duration = 2000;
+        const startTime = performance.now();
+        const initialValue = 0;
+
+        const updateCounter = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const currentValue = Math.floor(initialValue + (targetValue - initialValue) * progress);
+
+            element.textContent = currentValue;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = targetValue + '+';
+            }
         };
-    
-        counterData.forEach(counter => {
-            const element = document.querySelector(counter.selector);
-            animateCounter(element, counter.value);
-        });
+
+        requestAnimationFrame(updateCounter);
+    };
+
+    counterData.forEach(counter => {
+        const element = document.querySelector(counter.selector);
+        if (element) animateCounter(element, counter.value);
     });
 // Simple search function for packages
 function searchPackages() {

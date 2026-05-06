@@ -25,7 +25,7 @@ $journals = $result->fetch_all(MYSQLI_ASSOC);
         <div class="absolute inset-0 bg-gradient-to-b from-[#0a0f1e]/60 to-[#0a0f1e]"></div>
         <div class="container mx-auto px-6 max-w-7xl relative z-10 pb-16">
             <span class="section-eyebrow">የተጓዦች ማስታወሻ</span>
-            <h1 class="text-5xl md:text-7xl text-white" style="font-family:'Playfair Display',serif; font-weight:800;">Traveler <span class="text-champagne-gradient">Journals</span></h1>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl text-white" style="font-family:'Playfair Display',serif; font-weight:800;">Traveler <span class="text-champagne-gradient">Journals</span></h1>
             <p class="text-gray-400 mt-4 text-lg max-w-xl">Read personal stories, reflections, and adventures from those who have walked the ancient paths of Ethiopia.</p>
         </div>
     </section>

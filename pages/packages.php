@@ -28,7 +28,7 @@ $result = mysqli_query($db, $query);
         <div class="absolute inset-0 bg-gradient-to-b from-[#0a0f1e]/60 to-[#0a0f1e]"></div>
         <div class="container mx-auto px-6 max-w-7xl relative z-10 pb-16">
             <span class="section-eyebrow">Handcrafted Experiences</span>
-            <h1 class="text-5xl md:text-7xl text-white" style="font-family:'Playfair Display',serif; font-weight:800;">Curated <span class="text-champagne-gradient">Journeys</span></h1>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl text-white" style="font-family:'Playfair Display',serif; font-weight:800;">Curated <span class="text-champagne-gradient">Journeys</span></h1>
             <p class="text-gray-400 mt-4 text-lg max-w-xl">Each itinerary is a narrative — designed not just to show you Ethiopia, but to let Ethiopia reveal itself to you.</p>
         </div>
     </section>

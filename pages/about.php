@@ -13,8 +13,11 @@
     <?php include('../includes/header.php'); ?>
 
     <!-- Page Header -->
-    <section class="relative h-[45vh] flex items-end overflow-hidden bg-[#0a0f1e]">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0a0f1e]/60 to-[#0a0f1e]"></div>
+    <section class="relative h-[60vh] flex items-end overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="../assets/images/Ancient book.jpg" class="w-full h-full object-cover animate-ken-burns opacity-60" alt="Heritage">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0a0f1e]/40 via-[#0a0f1e]/60 to-[#0a0f1e]"></div>
+        </div>
         <div class="container mx-auto px-6 max-w-7xl relative z-10 pb-16">
             <span class="section-eyebrow">Discover Our Story</span>
             <h1 class="text-5xl md:text-7xl text-white" style="font-family:'Playfair Display',serif; font-weight:800;">Our <span class="text-champagne-gradient">Heritage</span></h1>

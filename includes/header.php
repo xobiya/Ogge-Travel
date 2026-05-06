@@ -65,9 +65,16 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="menuBtn" class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
+            <div class="md:hidden flex items-center">
+                <button id="menuBtn" class="text-white p-2 focus:outline-none transition-transform duration-300">
+                    <svg id="menuIcon" class="w-7 h-7 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg id="closeIcon" class="w-7 h-7 hidden transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <!-- Mobile Menu -->
@@ -123,8 +130,22 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
 document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
     if(menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            if (isHidden) {
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                menuBtn.classList.remove('rotate-90');
+            } else {
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                menuBtn.classList.add('rotate-90');
+            }
+        });
     }
     // Auto-scroll header
     const header = document.getElementById('mainHeader');

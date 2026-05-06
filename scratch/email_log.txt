@@ -1,0 +1,36 @@
+[2026-05-06 21:41:19] TO: feleabo02@gmail.com | SUBJECT: Booking Received #12
+BODY: We have received your booking request for package #15. Please complete payment to confirm.
+---
+[2026-05-06 21:41:19] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #12
+BODY: A new booking has been placed by user #3. Waiting for payment.
+---
+[2026-05-06 21:41:27] TO: feleabo02@gmail.com | SUBJECT: Payment Received! #12
+BODY: Your payment of ETB 55000 has been received. Your journey is now confirmed! Transaction ID: TXN_F7CEACEA74
+---
+[2026-05-06 21:42:04] TO: feleabo02@gmail.com | SUBJECT: Booking Received #13
+BODY: We have received your booking request for package #1. Please complete payment to confirm.
+---
+[2026-05-06 21:42:04] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #13
+BODY: A new booking has been placed by user #3. Waiting for payment.
+---
+[2026-05-06 21:42:08] TO: feleabo02@gmail.com | SUBJECT: Payment Received! #13
+BODY: Your payment of ETB 45000 has been received. Your journey is now confirmed! Transaction ID: TXN_AC562E493C
+---
+[2026-05-06 21:52:21] TO: feleabo02@gmail.com | SUBJECT: Booking Received #14
+BODY: We have received your booking request for package #4. Please complete payment to confirm.
+---
+[2026-05-06 21:52:21] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #14
+BODY: A new booking has been placed by user #3. Waiting for payment.
+---
+[2026-05-06 21:52:30] TO: feleabo02@gmail.com | SUBJECT: Payment Received! #14
+BODY: Your payment of ETB 26000 via Credit/Debit Card has been received. Your journey is now confirmed! Transaction ID: CARD_437C627F4A
+---
+[2026-05-06 21:55:08] TO: feleabo02@gmail.com | SUBJECT: Booking Received #15
+BODY: We have received your booking request for package #6. Please complete payment to confirm.
+---
+[2026-05-06 21:55:08] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #15
+BODY: A new booking has been placed by user #3. Waiting for payment.
+---
+[2026-05-06 21:55:16] TO: feleabo02@gmail.com | SUBJECT: Payment Received! #15
+BODY: Your payment of ETB 225000 via Stripe has been received. Your journey is now confirmed! Transaction ID: pi_3M7AE5A93521
+---

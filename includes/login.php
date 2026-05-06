@@ -35,6 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'] ?? 'user';
             
+            // Redirect admins to admin dashboard
+            if (($user['role'] ?? 'user') === 'admin') {
+                header("Location: ../admin/index.php");
+                exit();
+            }
+            
             $_SESSION['success'] = "Welcome back!";
             header("Location: ../pages/index.php");
             exit();

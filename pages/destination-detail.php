@@ -33,6 +33,11 @@ $pkg_stmt->close();
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/luxury.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #destinationMap { height: 400px; width: 100%; border-radius: 2rem; z-index: 10; }
+    </style>
 </head>
 <body class="bg-[#faf8f5] min-h-screen" style="font-family:'Inter',sans-serif;">
 
@@ -97,6 +102,26 @@ $pkg_stmt->close();
             </div>
         </div>
     </section>
+
+    <!-- ===== INTERACTIVE MAP ===== -->
+    <?php if ($destination['latitude'] && $destination['longitude']): ?>
+    <section class="py-12">
+        <div class="container mx-auto px-6 max-w-5xl reveal">
+            <div id="destinationMap" class="shadow-2xl border border-gray-100"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const map = L.map('destinationMap').setView([<?= $destination['latitude'] ?>, <?= $destination['longitude'] ?>], 13);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+                    L.marker([<?= $destination['latitude'] ?>, <?= $destination['longitude'] ?>]).addTo(map)
+                        .bindPopup('<b style="font-family:Playfair Display"><?= htmlspecialchars($destination['name']) ?></b><br>Heritage Site')
+                        .openPopup();
+                });
+            </script>
+        </div>
+    </section>
+    <?php endif; ?>
 
     <?php if ($h && !empty($h['chronicle'])): ?>
     <!-- ===== CHRONICLES & LORE ===== -->

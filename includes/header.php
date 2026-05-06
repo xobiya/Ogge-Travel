@@ -1,8 +1,10 @@
-<?php
+<?php 
 if (session_status() == PHP_SESSION_NONE) { session_start(); }
+include_once(__DIR__ . '/seo-lang.php'); 
 ?>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/luxury.css">
+<?= generateSEO($page_title ?? 'The Curated Escape', $page_desc ?? 'Experience Ethiopia like never before with OGGE Travel.') ?>
 
 <header class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent" id="mainHeader">
     <nav class="container mx-auto px-6 py-5 max-w-7xl">
@@ -20,12 +22,21 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-1">
-                <a href="../pages/index.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;">Home</a>
-                <a href="../pages/Destination.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;">Destinations</a>
-                <a href="../pages/packages.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;">Journeys</a>
-                <a href="../pages/about.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;">Heritage</a>
-                <a href="../pages/journals.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;">Journals</a>
-                <a href="../pages/contact.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;">Enquire</a>
+                <a href="../pages/index.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('home') ?></a>
+                <a href="../pages/Destination.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('destinations') ?></a>
+                <a href="../pages/packages.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('packages') ?></a>
+                <a href="../pages/about.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('explore') ?></a>
+                <a href="../pages/journals.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('journal') ?></a>
+                <a href="../pages/contact.php" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('contact') ?></a>
+                
+                <div class="w-px h-5 bg-white/20 mx-3"></div>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center gap-2 mr-4">
+                    <a href="?lang=en" class="text-[10px] font-bold <?= $lang==='en'?'text-[#c9a96e]':'text-white/40' ?> hover:text-white transition-colors">EN</a>
+                    <span class="text-[10px] text-white/10">|</span>
+                    <a href="?lang=am" class="text-[10px] font-bold <?= $lang==='am'?'text-[#c9a96e]':'text-white/40' ?> hover:text-white transition-colors">አማ</a>
+                </div>
                 
                 <div class="w-px h-5 bg-white/20 mx-3"></div>
 
@@ -62,6 +73,10 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
                 <?php else: ?>
                     <a href="../pages/Account.php" class="btn-outline ml-2 text-xs py-2 px-5" style="font-family:'Inter',sans-serif;">Sign In</a>
                 <?php endif; ?>
+
+                <button onclick="toggleGlobalSearch()" class="p-2 text-white/60 hover:text-[#c9a96e] transition-colors ml-2" id="searchToggleBtn">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -113,6 +128,29 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
     </nav>
 </header>
 
+<!-- Global Search Overlay -->
+<div id="globalSearchOverlay" class="fixed inset-0 z-[100] bg-[#0a0f1e]/98 backdrop-blur-2xl hidden opacity-0 transition-all duration-500 flex flex-col items-center justify-center p-6">
+    <button onclick="toggleGlobalSearch()" class="absolute top-10 right-10 text-white/40 hover:text-white transition-colors">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    
+    <div class="w-full max-w-3xl transform scale-95 transition-transform duration-500" id="searchContent">
+        <h2 class="text-white text-3xl md:text-5xl text-center mb-12" style="font-family:'Playfair Display',serif;">Where do you wish to <span class="text-champagne-gradient italic">escape</span>?</h2>
+        <form action="../pages/search.php" method="GET" class="relative">
+            <input type="text" name="q" placeholder="<?= $lang==='am'?'መዳረሻዎችን ወይም ጥቅሎችን ይፈልጉ...':'Search destinations or packages...' ?>" class="w-full bg-transparent border-b-2 border-white/10 text-white text-2xl md:text-4xl py-6 focus:outline-none focus:border-[#c9a96e] transition-colors placeholder:text-white/10 text-center" style="font-family:'Inter',sans-serif;" autofocus>
+            <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#c9a96e] hover:scale-110 transition-transform">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </button>
+        </form>
+        <div class="mt-12 flex flex-wrap justify-center gap-4">
+            <p class="text-white/20 text-xs font-bold uppercase tracking-widest w-full text-center mb-2">Suggested</p>
+            <a href="../pages/search.php?q=Lalibela" class="px-5 py-2 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-widest hover:border-[#c9a96e] hover:text-[#c9a96e] transition-all">Lalibela</a>
+            <a href="../pages/search.php?q=Omo" class="px-5 py-2 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-widest hover:border-[#c9a96e] hover:text-[#c9a96e] transition-all">Omo Valley</a>
+            <a href="../pages/search.php?q=Simien" class="px-5 py-2 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-widest hover:border-[#c9a96e] hover:text-[#c9a96e] transition-all">Simien Mountains</a>
+        </div>
+    </div>
+</div>
+
 <style>
     /* Header scroll states */
     #mainHeader.header-scrolled {
@@ -158,4 +196,21 @@ document.addEventListener('DOMContentLoaded', () => {
         checkScroll();
     }
 });
+
+function toggleGlobalSearch() {
+    const overlay = document.getElementById('globalSearchOverlay');
+    const content = document.getElementById('searchContent');
+    if (overlay.classList.contains('hidden')) {
+        overlay.classList.remove('hidden');
+        setTimeout(() => {
+            overlay.classList.add('opacity-100');
+            content.classList.remove('scale-95');
+            overlay.querySelector('input').focus();
+        }, 10);
+    } else {
+        overlay.classList.remove('opacity-100');
+        content.classList.add('scale-95');
+        setTimeout(() => overlay.classList.add('hidden'), 500);
+    }
+}
 </script>

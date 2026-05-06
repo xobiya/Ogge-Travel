@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/luxury.css">
     <script src="../assets/js/script.js"></script>
+    <style>
+        .lalibela-slideshow { position: absolute; inset: 0; }
+        .lalibela-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: lalibelaFade 18s infinite;
+        }
+        .lalibela-slide.slide-1 { animation-delay: 0s; }
+        .lalibela-slide.slide-2 { animation-delay: 6s; }
+        .lalibela-slide.slide-3 { animation-delay: 12s; }
+
+        @keyframes lalibelaFade {
+            0% { opacity: 0; transform: scale(1); }
+            5% { opacity: 1; transform: scale(1.03); }
+            30% { opacity: 1; transform: scale(1.06); }
+            40% { opacity: 0; transform: scale(1.06); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
 <?php include("../includes/header.php");?>
@@ -75,7 +98,11 @@
     <section class="relative bg-[#0a0f1e] overflow-hidden">
         <div class="grid lg:grid-cols-2 min-h-[500px] md:min-h-[600px]">
             <div class="relative h-72 md:h-96 lg:h-auto overflow-hidden">
-                <img src="../assets/images/lalibela-3.jpg" alt="Lalibela" class="absolute inset-0 w-full h-full object-cover animate-ken-burns opacity-70" loading="lazy">
+                <div class="lalibela-slideshow">
+                    <img src="../assets/images/lalibela.jpg" alt="Lalibela" class="lalibela-slide slide-1" loading="lazy">
+                    <img src="../assets/images/lalibela-3.jpg" alt="Lalibela" class="lalibela-slide slide-2" loading="lazy">
+                    <img src="../assets/images/lalibela2.jfif" alt="Lalibela" class="lalibela-slide slide-3" loading="lazy">
+                </div>
             </div>
             <div class="flex items-center p-10 lg:p-20 relative z-10">
                 <div>
@@ -129,7 +156,7 @@
                 <!-- Lalibela — Feature Card -->
                 <div class="editorial-card lg:row-span-2 reveal">
                     <a href="destination-detail.php?id=8" class="block relative h-full min-h-[500px] lg:min-h-full overflow-hidden">
-                        <img src="../assets/images/lalibela-3.jpg" alt="Lalibela" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                        <img src="../assets/images/lalibela.jpg" alt="Lalibela" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/30 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-10">
                             <p class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em] mb-3" style="font-family:'Inter',sans-serif;">UNESCO World Heritage</p>

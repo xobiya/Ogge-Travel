@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'] ?? '';
 
     // Prepared statement to prevent SQL Injection
-    $stmt = $db->prepare("SELECT id, email, password, role FROM users WHERE email = ?");
+    $stmt = $db->prepare("SELECT id, name, email, password, role FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($is_valid) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'] ?? 'user';
             

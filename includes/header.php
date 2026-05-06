@@ -31,10 +31,13 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
 
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="relative group cursor-pointer">
-                        <button class="flex items-center space-x-2 px-3 py-2 border border-white/20 rounded-full hover:border-[#c9a96e]/50 transition-colors">
-                            <div class="w-7 h-7 bg-[#c9a96e] rounded-full flex items-center justify-center text-[#0a0f1e] text-xs font-bold">
-                                <?= strtoupper(substr($_SESSION['user_name'] ?? 'U', 0, 1)) ?>
+                        <button class="flex items-center space-x-2 px-3 py-1.5 border border-white/20 rounded-full hover:border-[#c9a96e]/50 transition-colors bg-white/5">
+                            <div class="w-7 h-7 bg-gradient-to-br from-[#c9a96e] to-[#e8d5a8] rounded-full flex items-center justify-center text-[#0a0f1e]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                             </div>
+                            <span class="text-xs font-bold text-white uppercase tracking-wider px-1 hidden lg:block">
+                                <?= htmlspecialchars(explode(' ', $_SESSION['user_name'] ?? 'Account')[0]) ?>
+                            </span>
                             <svg class="w-3.5 h-3.5 text-white/60 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="absolute right-0 mt-3 w-52 bg-[#0a0f1e] rounded-xl shadow-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right scale-95 group-hover:scale-100 overflow-hidden z-50">
@@ -78,8 +81,23 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
                 <a href="../pages/contact.php" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Enquire</a>
                 <div class="h-px bg-white/10 my-2 mx-4"></div>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../pages/profile.php" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Dashboard</a>
-                    <a href="../includes/logout.php" class="px-5 py-3 text-red-400 text-xs font-semibold tracking-[0.15em] uppercase hover:bg-red-500/10 rounded-xl transition-colors">Sign Out</a>
+                    <div class="px-5 py-4 flex items-center gap-4 bg-white/5 rounded-xl mb-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#c9a96e] to-[#e8d5a8] rounded-full flex items-center justify-center text-[#0a0f1e]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm font-bold"><?= htmlspecialchars($_SESSION['user_name'] ?? 'Traveler') ?></p>
+                            <p class="text-white/40 text-[10px] uppercase tracking-widest">Founding Member</p>
+                        </div>
+                    </div>
+                    <a href="../pages/profile.php" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors flex items-center">
+                        <svg class="w-4 h-4 mr-3 text-[#c9a96e]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        Dashboard
+                    </a>
+                    <a href="../includes/logout.php" class="px-5 py-3 text-red-400 text-xs font-semibold tracking-[0.15em] uppercase hover:bg-red-500/10 rounded-xl transition-colors flex items-center">
+                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Sign Out
+                    </a>
                 <?php else: ?>
                     <a href="../pages/Account.php" class="mx-2 my-2 text-center py-3 border border-[#c9a96e] text-[#c9a96e] text-xs font-semibold tracking-[0.15em] uppercase rounded-full hover:bg-[#c9a96e] hover:text-[#0a0f1e] transition-all">Sign In</a>
                 <?php endif; ?>

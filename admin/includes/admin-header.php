@@ -1,7 +1,9 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
-$pending_bookings = $db->query("SELECT COUNT(*) as c FROM bookings WHERE status = 'pending'")->fetch_assoc()['c'];
-$unread_messages = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0")->fetch_assoc()['c'];
+$pending_bookings_res = $db->query("SELECT COUNT(*) as c FROM bookings WHERE status = 'pending'");
+$pending_bookings = ($pending_bookings_res) ? $pending_bookings_res->fetch_assoc()['c'] : 0;
+$unread_messages_res = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0");
+$unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()['c'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">

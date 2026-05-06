@@ -3,18 +3,22 @@ include('includes/admin-guard.php');
 $page_title = 'Dashboard';
 
 // Stats
-$total_bookings = $db->query("SELECT COUNT(*) as c FROM bookings")->fetch_assoc()['c'];
+$total_bookings_res = $db->query("SELECT COUNT(*) as c FROM bookings");
+$total_bookings = ($total_bookings_res) ? $total_bookings_res->fetch_assoc()['c'] : 0;
 $revenue_query = $db->query("SELECT COALESCE(SUM(p.price * b.travelers), 0) as r FROM bookings b JOIN packages p ON b.package_id = p.id WHERE b.status = 'confirmed'");
 $revenue = $revenue_query ? $revenue_query->fetch_assoc()['r'] : 0;
-$total_users = $db->query("SELECT COUNT(*) as c FROM users WHERE role = 'user'")->fetch_assoc()['c'];
-$total_destinations = $db->query("SELECT COUNT(*) as c FROM destinations")->fetch_assoc()['c'];
-$pending_count = $db->query("SELECT COUNT(*) as c FROM bookings WHERE status = 'pending'")->fetch_assoc()['c'];
-$unread_msgs = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0")->fetch_assoc()['c'];
+$total_users_res = $db->query("SELECT COUNT(*) as c FROM users WHERE role = 'user'");
+$total_users = ($total_users_res) ? $total_users_res->fetch_assoc()['c'] : 0;
+$total_destinations_res = $db->query("SELECT COUNT(*) as c FROM destinations");
+$total_destinations = ($total_destinations_res) ? $total_destinations_res->fetch_assoc()['c'] : 0;
+$pending_count_res = $db->query("SELECT COUNT(*) as c FROM bookings WHERE status = 'pending'");
+$pending_count = ($pending_count_res) ? $pending_count_res->fetch_assoc()['c'] : 0;
+$unread_msgs_res = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0");
+$unread_msgs = ($unread_msgs_res) ? $unread_msgs_res->fetch_assoc()['c'] : 0;
 
 // Recent Data
 $recent_bookings = $db->query("SELECT b.*, u.name as user_name, p.title as package_title, p.price FROM bookings b JOIN users u ON b.user_id = u.id JOIN packages p ON b.package_id = p.id ORDER BY b.created_at DESC LIMIT 5");
 $recent_messages = $db->query("SELECT * FROM contacts ORDER BY created_at DESC LIMIT 5");
-
 // Chart 1: Bookings by Month (Last 6 Months)
 $bookings_chart = [];
 for ($i = 5; $i >= 0; $i--) {
@@ -147,7 +151,7 @@ include('includes/admin-header.php');
             <table class="w-full">
                 <thead><tr class="bg-slate-50/50"><th class="px-8 py-4 text-left text-[0.6rem] font-black uppercase tracking-widest text-slate-400">Customer</th><th class="px-8 py-4 text-left text-[0.6rem] font-black uppercase tracking-widest text-slate-400">Package</th><th class="px-8 py-4 text-left text-[0.6rem] font-black uppercase tracking-widest text-slate-400">Status</th><th class="px-8 py-4 text-left text-[0.6rem] font-black uppercase tracking-widest text-slate-400">Time</th></tr></thead>
                 <tbody>
-                    <?php while ($b = $recent_bookings->fetch_assoc()): ?>
+                    <?php while ($recent_bookings && $b = $recent_bookings->fetch_assoc()): ?>
                     <tr class="border-b border-slate-50/50 hover:bg-slate-50/30 transition-colors">
                         <td class="px-8 py-5">
                             <div class="flex items-center gap-3">
@@ -172,7 +176,7 @@ include('includes/admin-header.php');
             <a href="contacts.php" class="text-[0.65rem] font-black uppercase tracking-wider text-champagne hover:text-champagne-dark transition-colors">View All →</a>
         </div>
         <div class="p-8 space-y-6">
-            <?php while ($m = $recent_messages->fetch_assoc()): ?>
+            <?php while ($recent_messages && $m = $recent_messages->fetch_assoc()): ?>
             <div class="flex gap-4 group cursor-pointer">
                 <div class="w-10 h-10 rounded-2xl bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-champagne/10 transition-colors">
                     <svg class="w-5 h-5 text-slate-400 group-hover:text-champagne transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>

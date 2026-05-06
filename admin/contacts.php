@@ -3,8 +3,10 @@ include('includes/admin-guard.php');
 $page_title = 'Concierge Enquiries';
 
 $messages = $db->query("SELECT * FROM contacts ORDER BY is_read ASC, created_at DESC");
-$msg_count = $db->query("SELECT COUNT(*) as c FROM contacts")->fetch_assoc()['c'];
-$unread_count = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0")->fetch_assoc()['c'];
+$msg_count_res = $db->query("SELECT COUNT(*) as c FROM contacts");
+$msg_count = ($msg_count_res) ? $msg_count_res->fetch_assoc()['c'] : 0;
+$unread_count_res = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0");
+$unread_count = ($unread_count_res) ? $unread_count_res->fetch_assoc()['c'] : 0;
 
 include('includes/admin-header.php');
 ?>
@@ -43,7 +45,7 @@ include('includes/admin-header.php');
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
-                    <?php while ($m = $messages->fetch_assoc()): ?>
+                    <?php while ($messages && $m = $messages->fetch_assoc()): ?>
                     <tr class="hover:bg-slate-50/80 transition-colors group <?= !$m['is_read'] ? 'bg-blue-50/10' : '' ?>">
                         <td class="px-8 py-6">
                             <?php if (!$m['is_read']): ?>

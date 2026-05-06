@@ -3,7 +3,8 @@ include('includes/admin-guard.php');
 $page_title = 'System Activity Logs';
 
 $page = max(1, (int)($_GET['page'] ?? 1)); $per_page = 20; $offset = ($page - 1) * $per_page;
-$total = $db->query("SELECT COUNT(*) as c FROM admin_logs")->fetch_assoc()['c'];
+$total_res = $db->query("SELECT COUNT(*) as c FROM admin_logs");
+$total = ($total_res) ? $total_res->fetch_assoc()['c'] : 0;
 $total_pages = ceil($total / $per_page);
 
 $logs = $db->query("SELECT l.*, u.name as admin_name 
@@ -29,7 +30,7 @@ include('includes/admin-header.php');
                 <th class="px-5 py-3 text-left text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">Time</th>
             </tr></thead>
             <tbody>
-                <?php while ($l = $logs->fetch_assoc()): ?>
+                <?php while ($logs && $l = $logs->fetch_assoc()): ?>
                 <tr class="border-b border-slate-50 hover:bg-slate-50/50">
                     <td class="px-5 py-3">
                         <div class="flex items-center gap-2">

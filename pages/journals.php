@@ -1,11 +1,13 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
 include("../includes/db-connect.php");
 
 // Fetch all journals
 $query = "SELECT j.*, u.name as author_name FROM journals j JOIN users u ON j.user_id = u.id ORDER BY j.created_at DESC";
 $result = $db->query($query);
 $journals = $result->fetch_all(MYSQLI_ASSOC);
+$csrfToken = ogge_csrf_token();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,19 +85,20 @@ $journals = $result->fetch_all(MYSQLI_ASSOC);
                             <p class="text-gray-400 text-sm mb-8">Did you journey with us? Add your voice to the traveler chronicles.</p>
                             
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <form action="../includes/journal-submit.php" method="POST" enctype="multipart/form-data" class="space-y-5">
+                                <form action="../includes/journal-submit.php" method="POST" enctype="multipart/form-data" class="space-y-5" novalidate>
+                                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                                     <div>
-                                        <input type="text" name="title" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm" placeholder="Title of your story" required>
+                                        <input type="text" name="title" maxlength="255" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm" placeholder="Title of your story" required>
                                     </div>
                                     <div>
-                                        <input type="text" name="location" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm" placeholder="Location (e.g., Lalibela)" required>
+                                        <input type="text" name="location" maxlength="120" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm" placeholder="Location (e.g., Lalibela)" required>
                                     </div>
                                     <div>
                                         <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Upload Photo <span class="text-gray-600 normal-case font-normal">(Optional)</span></label>
-                                        <input type="file" name="image" accept="image/jpeg, image/png, image/webp" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-[#c9a96e] file:text-[#0a0f1e] hover:file:bg-[#e8d5a8] file:transition-colors file:cursor-pointer cursor-pointer">
+                                        <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-[#c9a96e] file:text-[#0a0f1e] hover:file:bg-[#e8d5a8] file:transition-colors file:cursor-pointer cursor-pointer">
                                     </div>
                                     <div>
-                                        <textarea name="content" rows="6" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm resize-none" placeholder="Write your experience here..." required></textarea>
+                                        <textarea name="content" maxlength="10000" rows="6" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm resize-none" placeholder="Write your experience here..." required></textarea>
                                     </div>
                                     <button type="submit" class="btn-champagne w-full py-4 text-sm justify-center">Publish Story</button>
                                 </form>

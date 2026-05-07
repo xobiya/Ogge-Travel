@@ -13,6 +13,7 @@ include('includes/admin-header.php');
         <p class="text-sm text-slate-400 mb-6"><?= $pkg ? 'Update package details.' : 'Create a new travel package.' ?></p>
 
         <form method="POST" action="includes/admin-actions.php?action=save_package" class="space-y-5">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
             <?php if ($pkg): ?><input type="hidden" name="id" value="<?= $pkg['id'] ?>"><?php endif; ?>
 
             <div>

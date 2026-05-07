@@ -1,18 +1,17 @@
 <?php
-include("../includes/db-connect.php");
-session_start();
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
+require_once __DIR__ . '/../includes/db-connect.php';
 
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error'] = "Please login to book packages";
-    header("Location: Account.php");
-    exit();
+    ogge_redirect("Account.php");
 }
 
 $package_id = $_GET['package_id'] ?? null;
 if (!$package_id || !is_numeric($package_id)) {
     $_SESSION['error'] = "Invalid package selection";
-    header("Location: packages.php");
-    exit();
+    ogge_redirect("packages.php");
 }
 
 $stmt = $db->prepare("SELECT * FROM packages WHERE id = ?");
@@ -23,9 +22,9 @@ $stmt->close();
 
 if (!$package) {
     $_SESSION['error'] = "Requested package not found";
-    header("Location: packages.php");
-    exit();
+    ogge_redirect("packages.php");
 }
+$csrfToken = ogge_csrf_token();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,8 +95,8 @@ if (!$package) {
                     <div class="champagne-line mb-8"></div>
 
                     <form method="POST" action="../includes/booking.php" id="bookingForm" class="space-y-6">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                         <input type="hidden" name="package_id" value="<?= $package_id ?>">
-                        <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
                         <div>
                             <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-[0.15em]">Travel Date</label>
                             <input type="date" name="travel_date" class="w-full px-5 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] transition-all text-[#0a0f1e] font-medium" min="<?= date('Y-m-d') ?>" required>
@@ -117,7 +116,7 @@ if (!$package) {
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-[0.15em]">Special Requests <span class="text-gray-300 font-normal normal-case">(Optional)</span></label>
-                            <textarea name="special_requests" class="w-full px-5 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] transition-all text-[#0a0f1e] font-medium resize-none" rows="3" placeholder="Dietary needs, celebrations, accessibility..."></textarea>
+                            <textarea name="special_requests" maxlength="1000" class="w-full px-5 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] transition-all text-[#0a0f1e] font-medium resize-none" rows="3" placeholder="Dietary needs, celebrations, accessibility..."></textarea>
                         </div>
                         <div class="flex items-center mt-6">
                             <input type="checkbox" name="terms" id="terms" class="w-5 h-5 text-[#c9a96e] border-gray-300 rounded focus:ring-[#c9a96e] cursor-pointer" required>

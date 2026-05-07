@@ -1,23 +1,33 @@
 <?php
-session_start();
-include("../includes/db-connect.php");
-include("../includes/mail-helper.php");
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
+require_once __DIR__ . '/../includes/db-connect.php';
+require_once __DIR__ . '/../includes/mail-helper.php';
 
-$booking_id = $_GET['booking_id'] ?? null;
-if (!$booking_id) { header("Location: index.php"); exit(); }
+if (!isset($_SESSION['user_id'])) { ogge_redirect('Account.php'); }
+$booking_id = (int)($_GET['booking_id'] ?? 0);
+if ($booking_id < 1) { ogge_redirect('index.php'); }
 
-$booking = $db->query("SELECT b.*, p.title, p.price, u.email 
-    FROM bookings b 
-    JOIN packages p ON b.package_id = p.id 
+$bookingStmt = $db->prepare('SELECT b.*, p.title, p.price, u.email
+    FROM bookings b
+    JOIN packages p ON b.package_id = p.id
     JOIN users u ON b.user_id = u.id
-    WHERE b.id = " . (int)$booking_id)->fetch_assoc();
+    WHERE b.id = ? AND b.user_id = ? LIMIT 1');
+$bookingStmt->bind_param('ii', $booking_id, $_SESSION['user_id']);
+$bookingStmt->execute();
+$booking = $bookingStmt->get_result()->fetch_assoc();
+$bookingStmt->close();
 
-if (!$booking) { header("Location: index.php"); exit(); }
+if (!$booking) { ogge_flash('error', 'Booking not found.'); ogge_redirect('my-booking.php'); }
 
 $total_amount = $booking['price'] * $booking['travelers'];
 
 // Handle simulated callback
 if (isset($_POST['simulate_payment'])) {
+    if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
+        ogge_flash('error', 'Your session expired. Please try payment again.');
+        ogge_redirect('pay.php?booking_id=' . $booking_id);
+    }
     $method = $_POST['payment_method'] ?? 'chapa';
     
     // Generate gateway-specific transaction prefix
@@ -28,7 +38,8 @@ if (isset($_POST['simulate_payment'])) {
         'cbe' => 'FT_',
         'card' => 'CARD_'
     ];
-    $prefix = $prefixes[$method] ?? 'TXN_';
+    if (!array_key_exists($method, $prefixes)) { $method = 'chapa'; }
+    $prefix = $prefixes[$method];
     $tx_id = $prefix . strtoupper(substr(md5(time()), 0, 10));
     
     $method_names = [
@@ -40,7 +51,10 @@ if (isset($_POST['simulate_payment'])) {
     ];
     $method_name = $method_names[$method] ?? 'Gateway';
 
-    $db->query("UPDATE bookings SET payment_status = 'paid', transaction_id = '$tx_id', status = 'confirmed' WHERE id = " . (int)$booking_id);
+    $upd = $db->prepare("UPDATE bookings SET payment_status = 'paid', transaction_id = ?, status = 'confirmed' WHERE id = ? AND user_id = ?");
+    $upd->bind_param('sii', $tx_id, $booking_id, $_SESSION['user_id']);
+    $upd->execute();
+    $upd->close();
     
     sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via $method_name has been received. Your journey is now confirmed! Transaction ID: $tx_id");
     
@@ -48,6 +62,7 @@ if (isset($_POST['simulate_payment'])) {
     header("Location: my-booking.php");
     exit();
 }
+$csrfToken = ogge_csrf_token();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +123,7 @@ if (isset($_POST['simulate_payment'])) {
             </div>
 
             <form method="POST" class="space-y-8">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <div class="space-y-4">
                     <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Select Gateway</p>
                     

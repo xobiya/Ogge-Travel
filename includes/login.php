@@ -1,59 +1,77 @@
 <?php
-session_start();
-include('db-connect.php');
+require_once __DIR__ . '/auth-helpers.php';
+ogge_start_secure_session();
+require_once __DIR__ . '/db-connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    ogge_redirect('../pages/Account.php');
+}
 
-    // Prepared statement to prevent SQL Injection
-    $stmt = $db->prepare("SELECT id, name, email, password, role FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($user = $result->fetch_assoc()) {
-        $stored_password = $user['password'];
-        $is_valid = false;
+$_SESSION['auth_mode'] = 'login';
 
-        // Secure password verification with a legacy fallback to automatically migrate any unhashed development accounts
-        if (password_verify($password, $stored_password)) {
-            $is_valid = true;
-        } elseif ($password === $stored_password) {
-            // Legacy fallback for plain text dummy data: auto-upgrade it!
-            $new_hash = password_hash($password, PASSWORD_DEFAULT);
-            $upd = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
-            $upd->bind_param("si", $new_hash, $user['id']);
+if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
+    ogge_flash('error', 'Your session expired. Please sign in again.');
+    ogge_redirect('../pages/Account.php');
+}
+
+$email = ogge_normalize_email($_POST['email'] ?? '');
+$password = $_POST['password'] ?? '';
+
+if ($email === '' || $password === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    ogge_flash('error', 'Enter a valid email and password.');
+    ogge_redirect('../pages/Account.php');
+}
+
+if (ogge_is_login_throttled($email)) {
+    ogge_flash('error', 'Too many sign-in attempts. Please wait 15 minutes and try again.');
+    ogge_redirect('../pages/Account.php');
+}
+
+$stmt = $db->prepare('SELECT id, name, email, password, role FROM users WHERE email = ? LIMIT 1');
+$stmt->bind_param('s', $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+$stmt->close();
+
+$isValid = false;
+
+if ($user) {
+    $storedPassword = $user['password'];
+
+    if (password_verify($password, $storedPassword)) {
+        $isValid = true;
+
+        if (password_needs_rehash($storedPassword, PASSWORD_DEFAULT)) {
+            $newHash = password_hash($password, PASSWORD_DEFAULT);
+            $upd = $db->prepare('UPDATE users SET password = ? WHERE id = ?');
+            $upd->bind_param('si', $newHash, $user['id']);
             $upd->execute();
             $upd->close();
-            $is_valid = true;
         }
-
-        if ($is_valid) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['name'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_role'] = $user['role'] ?? 'user';
-            
-            // Redirect admins to admin dashboard
-            if (($user['role'] ?? 'user') === 'admin') {
-                header("Location: ../admin/index.php");
-                exit();
-            }
-            
-            $_SESSION['success'] = "Welcome back!";
-            header("Location: ../pages/index.php");
-            exit();
-        } else {
-            $_SESSION['error'] = "Invalid email or password.";
-            header("Location: ../pages/Account.php");
-            exit();
-        }
-    } else {
-        $_SESSION['error'] = "Invalid email or password.";
-        header("Location: ../pages/Account.php");
-        exit();
+    } elseif (hash_equals((string)$storedPassword, $password)) {
+        $newHash = password_hash($password, PASSWORD_DEFAULT);
+        $upd = $db->prepare('UPDATE users SET password = ? WHERE id = ?');
+        $upd->bind_param('si', $newHash, $user['id']);
+        $upd->execute();
+        $upd->close();
+        $isValid = true;
     }
-    $stmt->close();
 }
+
+if (!$isValid) {
+    ogge_record_failed_login($email);
+    ogge_flash('error', 'Invalid email or password.');
+    ogge_redirect('../pages/Account.php');
+}
+
+ogge_clear_failed_logins($email);
+ogge_sign_in_user($user);
+
+if (($_SESSION['user_role'] ?? 'user') === 'admin') {
+    ogge_redirect('../admin/index.php');
+}
+
+ogge_flash('success', 'Welcome back!');
+ogge_redirect('../pages/index.php');
 ?>

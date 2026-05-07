@@ -74,6 +74,7 @@ include('includes/admin-header.php');
         <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8">
             <h3 class="text-sm font-bold text-slate-800 mb-6">Manage Booking Status</h3>
             <form action="includes/admin-actions.php?action=update_booking_status" method="POST" class="flex flex-wrap items-center gap-4">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
                 <input type="hidden" name="id" value="<?= $booking['id'] ?>">
                 <div class="flex-1 min-w-[200px]">
                     <select name="status" class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:ring-2 focus:ring-champagne/30 focus:border-champagne outline-none transition-all">

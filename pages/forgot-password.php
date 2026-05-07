@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
+$csrfToken = ogge_csrf_token();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,10 +53,11 @@
             <h2 class="text-3xl text-white mb-2" style="font-family:'Playfair Display',serif; font-weight:800;">Reset Your <span class="text-champagne-gradient">Password</span></h2>
             <p class="text-gray-500 mb-8 text-sm">Enter your email and we will send a secure reset link.</p>
 
-            <form method="POST" action="../includes/forgot-password.php" class="space-y-6">
+            <form method="POST" action="../includes/forgot-password.php" class="space-y-6" novalidate>
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <div>
                     <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Email Address</label>
-                    <input type="email" name="email" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="you@example.com" required>
+                    <input type="email" name="email" autocomplete="email" maxlength="255" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="you@example.com" required>
                 </div>
                 <button type="submit" class="w-full py-4 bg-[#c9a96e] text-[#0a0f1e] rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-[#e8d5a8] transition-all hover:shadow-lg">Send Reset Link</button>
             </form>

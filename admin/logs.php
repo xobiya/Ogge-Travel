@@ -19,7 +19,7 @@ include('includes/admin-header.php');
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
     <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
         <h3 class="text-sm font-bold text-slate-800">Admin Activity History (<?= $total ?>)</h3>
-        <button onclick="if(confirm('Clear all logs?')) window.location.href='includes/admin-actions.php?action=clear_logs'" class="px-3 py-1.5 text-[0.65rem] font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg uppercase tracking-wider transition-colors">Clear All Logs</button>
+        <button onclick="if(confirm('Clear all logs?')) window.location.href='includes/admin-actions.php?action=clear_logs&csrf_token=<?= urlencode($admin_csrf_token) ?>'" class="px-3 py-1.5 text-[0.65rem] font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg uppercase tracking-wider transition-colors">Clear All Logs</button>
     </div>
     <div class="overflow-x-auto">
         <table class="w-full">

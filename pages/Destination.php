@@ -1,9 +1,58 @@
 <?php
 session_start();
+define('OGGE_DB_OPTIONAL', true);
 include("../includes/db-connect.php");
+
 $q = trim($_GET['search'] ?? '');
-$where = $q ? "WHERE name LIKE '%" . $db->real_escape_string($q) . "%' OR description LIKE '%" . $db->real_escape_string($q) . "%'" : "";
-$result = $db->query("SELECT * FROM destinations $where ORDER BY name ASC");
+$dbUnavailable = !($db instanceof mysqli);
+
+$fallbackDestinations = [
+    ['id' => 1, 'name' => 'Arba Minch', 'description' => 'Known for its breathtaking landscapes and the famous Nechisar National Park.', 'image_url' => '../assets/images/arbaminch.jpg'],
+    ['id' => 2, 'name' => 'Hawassa', 'description' => 'A stunning lakeside city known for its vibrant fish market and natural beauty.', 'image_url' => '../assets/images/hawassa.jpg'],
+    ['id' => 3, 'name' => 'Gonder', 'description' => 'Famous for its historical castles and being the Camelot of Africa.', 'image_url' => '../assets/images/gonder.jpg'],
+    ['id' => 4, 'name' => 'Bahirdar', 'description' => 'A beautiful city near Lake Tana and the Blue Nile Falls.', 'image_url' => '../assets/images/bahirdar.jpg'],
+    ['id' => 5, 'name' => 'Mekelle', 'description' => 'A cultural hub known for its historical significance and rock-hewn churches.', 'image_url' => '../assets/images/mekelle.jpg'],
+    ['id' => 6, 'name' => 'Aksum', 'description' => 'An ancient city famous for its obelisks and ties to the Ark of the Covenant.', 'image_url' => '../assets/images/aksum.jpg'],
+    ['id' => 7, 'name' => 'Harer', 'description' => 'A walled city known for its rich Islamic heritage and vibrant markets.', 'image_url' => '../assets/images/harer.jpg'],
+    ['id' => 8, 'name' => 'Lalibela', 'description' => 'Home to the incredible rock-hewn churches and a UNESCO World Heritage site.', 'image_url' => '../assets/images/lalibela.jpg'],
+    ['id' => 9, 'name' => 'Jimma', 'description' => 'Known as the birthplace of coffee and surrounded by lush green landscapes.', 'image_url' => '../assets/images/jimma.jpg'],
+    ['id' => 10, 'name' => 'Simien Mountains', 'description' => 'Dramatic mountain landscape with unique wildlife.', 'image_url' => '../assets/images/simien.jpg'],
+    ['id' => 11, 'name' => 'Danakil Depression', 'description' => 'One of the hottest places on Earth with alien landscapes.', 'image_url' => '../assets/images/danakil.jpg'],
+    ['id' => 12, 'name' => 'Omo Valley', 'description' => 'Cultural hub of diverse ethnic communities.', 'image_url' => '../assets/images/omo.jpg'],
+    ['id' => 13, 'name' => 'Axum', 'description' => 'Ancient city with historic obelisks.', 'image_url' => '../assets/images/aksum.jpg'],
+    ['id' => 14, 'name' => 'Addis Ababa', 'description' => 'The vibrant capital city of Ethiopia, rich in history and culture.', 'image_url' => '../assets/images/Addis ababa.jpg'],
+    ['id' => 17, 'name' => 'Tiya', 'description' => 'A UNESCO World Heritage Site with ancient stelae and archaeological significance.', 'image_url' => '../assets/images/tiya.jpg'],
+    ['id' => 25, 'name' => 'Dire Dawa', 'description' => 'A vibrant city with a mix of modern and traditional Ethiopian culture.', 'image_url' => '../assets/images/dire.jpg'],
+];
+
+$destinations = [];
+if (!$dbUnavailable) {
+    try {
+        if ($q !== '') {
+            $term = '%' . $q . '%';
+            $stmt = $db->prepare('SELECT * FROM destinations WHERE name LIKE ? OR description LIKE ? ORDER BY name ASC');
+            $stmt->bind_param('ss', $term, $term);
+        } else {
+            $stmt = $db->prepare('SELECT * FROM destinations ORDER BY name ASC');
+        }
+        $stmt->execute();
+        $destinations = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+    } catch (Throwable $exception) {
+        error_log('Destination query failed: ' . $exception->getMessage());
+        $dbUnavailable = true;
+    }
+}
+
+if ($dbUnavailable) {
+    $destinations = array_values(array_filter($fallbackDestinations, function ($destination) use ($q) {
+        if ($q === '') {
+            return true;
+        }
+
+        return stripos($destination['name'], $q) !== false || stripos($destination['description'], $q) !== false;
+    }));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +87,14 @@ $result = $db->query("SELECT * FROM destinations $where ORDER BY name ASC");
     <!-- Destinations Grid -->
     <section class="py-24 relative overflow-hidden">
         <div class="container mx-auto px-6 max-w-7xl">
-            <?php if ($result->num_rows > 0): ?>
+            <?php if ($dbUnavailable): ?>
+                <div class="mb-8 rounded-2xl border border-amber-200 bg-amber-50 px-6 py-4 text-sm text-amber-900">
+                    Live database content is temporarily unavailable, so curated destination highlights are being shown. Please check the database credentials in <code>includes/config.php</code>.
+                </div>
+            <?php endif; ?>
+            <?php if (count($destinations) > 0): ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <?php while($dest = $result->fetch_assoc()): ?>
+                <?php foreach($destinations as $dest): ?>
                 <a href="destination-detail.php?id=<?= $dest['id'] ?>" class="group block bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 reveal">
                     <div class="relative h-96 overflow-hidden">
                         <img src="<?= htmlspecialchars($dest['image_url']) ?>" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
@@ -52,7 +106,7 @@ $result = $db->query("SELECT * FROM destinations $where ORDER BY name ASC");
                         </div>
                     </div>
                 </a>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </div>
             <?php else: ?>
                 <div class="text-center py-20">

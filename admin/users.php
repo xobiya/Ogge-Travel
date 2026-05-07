@@ -40,6 +40,7 @@ include('includes/admin-header.php');
                         <?php if ($u['id'] != $admin_id): ?>
                         <div class="flex items-center justify-end gap-2">
                             <form method="POST" action="includes/admin-actions.php?action=update_user_role">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
                                 <input type="hidden" name="id" value="<?= $u['id'] ?>">
                                 <input type="hidden" name="role" value="<?= $u['role'] === 'admin' ? 'user' : 'admin' ?>">
                                 <button type="submit" class="px-3 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Make <?= $u['role'] === 'admin' ? 'User' : 'Admin' ?></button>

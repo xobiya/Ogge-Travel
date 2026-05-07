@@ -1,5 +1,6 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
+$admin_csrf_token = ogge_csrf_token();
 $pending_bookings_res = $db->query("SELECT COUNT(*) as c FROM bookings WHERE status = 'pending'");
 $pending_bookings = ($pending_bookings_res) ? $pending_bookings_res->fetch_assoc()['c'] : 0;
 $unread_messages_res = $db->query("SELECT COUNT(*) as c FROM contacts WHERE is_read = 0");

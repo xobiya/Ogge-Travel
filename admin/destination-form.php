@@ -13,6 +13,7 @@ include('includes/admin-header.php');
         <p class="text-sm text-slate-400 mb-6"><?= $dest ? 'Update destination details below.' : 'Fill in the details to add a new destination.' ?></p>
 
         <form method="POST" action="includes/admin-actions.php?action=save_destination" class="space-y-5">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
             <?php if ($dest): ?><input type="hidden" name="id" value="<?= $dest['id'] ?>"><?php endif; ?>
 
             <div>

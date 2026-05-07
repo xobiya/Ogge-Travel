@@ -51,7 +51,12 @@ OGGE Travel is a premium, full-stack travel concierge platform designed to showc
 2. **Database Configuration**:
    - Create a new database named `travel_agency` in your MySQL environment (e.g., XAMPP/WAMP).
    - Import the SQL schema located in `/Database/travel_agency.sql`.
-   - Configure database credentials with environment variables (recommended) or use the local defaults (`localhost`, `root`, empty password, `travel_agency`).
+   - Configure database credentials. If you see `Service temporarily unavailable. Please try again later.`, PHP could not connect to MySQL with the configured credentials.
+   - Option A: copy `includes/config.example.php` to `includes/config.php` and fill in your real host, username, password, and database name. `includes/config.php` is ignored by Git so secrets stay local to the server.
+     ```bash
+     cp includes/config.example.php includes/config.php
+     ```
+   - Option B: use environment variables (works well on VPS/local shells):
      ```bash
      export OGGE_DB_HOST=localhost
      export OGGE_DB_USER=root

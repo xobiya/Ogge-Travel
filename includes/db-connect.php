@@ -1,22 +1,18 @@
 <?php
 
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "travel_agency";
-$servername = "sql306.infinityfree.com";
-$username = "if0_41840865";
-$password = "VP6iMUzZ8R";
-$dbname = "if0_41840865_travel_agency";
+$servername = getenv('OGGE_DB_HOST') ?: 'localhost';
+$username = getenv('OGGE_DB_USER') ?: 'root';
+$password = getenv('OGGE_DB_PASSWORD') ?: '';
+$dbname = getenv('OGGE_DB_NAME') ?: 'travel_agency';
 
-// Create connection
-$db = new mysqli($servername, $username, $password, $dbname);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
+try {
+    $db = new mysqli($servername, $username, $password, $dbname);
+    $db->set_charset('utf8mb4');
+} catch (mysqli_sql_exception $exception) {
+    error_log('Database connection failed: ' . $exception->getMessage());
+    http_response_code(500);
+    exit('Service temporarily unavailable. Please try again later.');
 }
-
-// Optional: Set default character set
-$db->set_charset("utf8mb4");
 ?>

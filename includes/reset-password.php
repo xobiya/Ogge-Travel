@@ -1,6 +1,7 @@
 <?php
-session_start();
-include('db-connect.php');
+require_once __DIR__ . '/auth-helpers.php';
+ogge_start_secure_session();
+require_once __DIR__ . '/db-connect.php';
 
 function ensure_password_resets_table($db)
 {
@@ -20,30 +21,32 @@ function ensure_password_resets_table($db)
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../pages/forgot-password.php');
-    exit();
+    ogge_redirect('../pages/forgot-password.php');
 }
 
 $token = trim($_POST['token'] ?? '');
 $password = $_POST['password'] ?? '';
 $confirm_password = $_POST['confirm_password'] ?? '';
 
-if ($token === '' || $password === '' || $confirm_password === '') {
-    $_SESSION['error'] = 'Please fill all fields.';
-    header('Location: ../pages/reset-password.php?token=' . urlencode($token));
-    exit();
+if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
+    ogge_flash('error', 'Your session expired. Please try the reset link again.');
+    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
 }
 
-if (strlen($password) < 6) {
-    $_SESSION['error'] = 'Password must be at least 6 characters.';
-    header('Location: ../pages/reset-password.php?token=' . urlencode($token));
-    exit();
+if ($token === '' || $password === '' || $confirm_password === '') {
+    ogge_flash('error', 'Please fill all fields.');
+    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
+}
+
+$passwordError = ogge_validate_password_strength($password);
+if ($passwordError !== null) {
+    ogge_flash('error', $passwordError);
+    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
 }
 
 if ($password !== $confirm_password) {
-    $_SESSION['error'] = 'Passwords do not match.';
-    header('Location: ../pages/reset-password.php?token=' . urlencode($token));
-    exit();
+    ogge_flash('error', 'Passwords do not match.');
+    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
 }
 
 ensure_password_resets_table($db);
@@ -58,15 +61,13 @@ $reset = $result->fetch_assoc();
 $stmt->close();
 
 if (!$reset) {
-    $_SESSION['error'] = 'This reset link is invalid or expired.';
-    header('Location: ../pages/forgot-password.php');
-    exit();
+    ogge_flash('error', 'This reset link is invalid or expired.');
+    ogge_redirect('../pages/forgot-password.php');
 }
 
 if (!empty($reset['used_at']) || strtotime($reset['expires_at']) < time()) {
-    $_SESSION['error'] = 'This reset link is invalid or expired.';
-    header('Location: ../pages/forgot-password.php');
-    exit();
+    ogge_flash('error', 'This reset link is invalid or expired.');
+    ogge_redirect('../pages/forgot-password.php');
 }
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -81,7 +82,7 @@ $mark->bind_param('i', $reset['id']);
 $mark->execute();
 $mark->close();
 
-$_SESSION['success'] = 'Password updated. Please sign in.';
-header('Location: ../pages/Account.php');
-exit();
+unset($_SESSION['csrf_token']);
+ogge_flash('success', 'Password updated. Please sign in.');
+ogge_redirect('../pages/Account.php');
 ?>

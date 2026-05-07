@@ -34,3 +34,14 @@ CREATE TABLE IF NOT EXISTS `journals` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `journals_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- 4. Harden user authentication storage
+ALTER TABLE `users`
+  MODIFY `email` varchar(255) NOT NULL,
+  MODIFY `password` varchar(255) NOT NULL,
+  MODIFY `role` varchar(50) DEFAULT 'user',
+  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Email uniqueness is required for account creation race safety.
+-- The baseline schema already declares UNIQUE KEY `email` (`email`).

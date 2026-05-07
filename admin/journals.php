@@ -64,12 +64,13 @@ include('includes/admin-header.php');
                         <span class="inline-block px-2 py-1 rounded-full text-[0.62rem] font-bold <?= $j['status']==='published'?'bg-emerald-50 text-emerald-700':($j['status']==='pending'?'bg-amber-50 text-amber-700':'bg-red-50 text-red-600') ?> capitalize"><?= $j['status'] ?></span>
                     </td>
                     <td class="px-5 py-3 text-center">
-                        <a href="includes/admin-actions.php?action=toggle_journal_featured&id=<?= $j['id'] ?>" class="text-lg <?= $j['is_featured']?'text-amber-400':'text-slate-200' ?> hover:scale-110 transition-transform inline-block">★</a>
+                        <a href="includes/admin-actions.php?action=toggle_journal_featured&id=<?= $j['id'] ?>&csrf_token=<?= urlencode($admin_csrf_token) ?>" class="text-lg <?= $j['is_featured']?'text-amber-400':'text-slate-200' ?> hover:scale-110 transition-transform inline-block">★</a>
                     </td>
                     <td class="px-5 py-3 text-xs text-slate-400"><?= date('M d, Y', strtotime($j['created_at'])) ?></td>
                     <td class="px-5 py-3 text-right">
                         <div class="flex items-center justify-end gap-1.5">
                             <form method="POST" action="includes/admin-actions.php?action=update_journal_status" class="flex gap-1">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
                                 <input type="hidden" name="id" value="<?= $j['id'] ?>">
                                 <select name="status" class="px-2 py-1.5 text-xs font-semibold border border-slate-200 rounded-lg bg-slate-50 focus:outline-none">
                                     <option value="pending" <?= $j['status']==='pending'?'selected':'' ?>>Pending</option>

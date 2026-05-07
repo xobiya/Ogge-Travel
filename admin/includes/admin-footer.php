@@ -17,6 +17,19 @@
 </div>
 
 <script>
+const adminCsrfToken = <?= json_encode($admin_csrf_token ?? ogge_csrf_token()) ?>;
+function protectedAdminUrl(url) {
+    try {
+        const protectedUrl = new URL(url, window.location.href);
+        if (protectedUrl.pathname.includes('admin-actions.php') && !protectedUrl.searchParams.has('csrf_token')) {
+            protectedUrl.searchParams.set('csrf_token', adminCsrfToken);
+        }
+        return protectedUrl.pathname.split('/').pop() === 'admin-actions.php' ? protectedUrl.href : url;
+    } catch (error) {
+        const separator = url.includes('?') ? '&' : '?';
+        return url.includes('csrf_token=') ? url : url + separator + 'csrf_token=' + encodeURIComponent(adminCsrfToken);
+    }
+}
 function toggleSidebar() {
     document.getElementById('adminSidebar').classList.toggle('-translate-x-full');
     document.getElementById('adminSidebar').classList.toggle('translate-x-0');
@@ -24,7 +37,7 @@ function toggleSidebar() {
 }
 function confirmDelete(url, name) {
     document.getElementById('deleteMessage').textContent = 'Are you sure you want to delete "' + name + '"? This cannot be undone.';
-    document.getElementById('deleteConfirmBtn').href = url;
+    document.getElementById('deleteConfirmBtn').href = protectedAdminUrl(url);
     document.getElementById('deleteModal').classList.remove('hidden');
     document.getElementById('deleteModal').classList.add('flex');
 }
@@ -34,6 +47,18 @@ function closeDeleteModal() {
 }
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.toast-animate').forEach(t => setTimeout(() => t.remove(), 3500));
+    document.querySelectorAll('form[action*="admin-actions.php"]').forEach(form => {
+        if (!form.querySelector('input[name="csrf_token"]')) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'csrf_token';
+            input.value = adminCsrfToken;
+            form.appendChild(input);
+        }
+    });
+    document.querySelectorAll('a[href*="admin-actions.php"]').forEach(link => {
+        link.href = protectedAdminUrl(link.getAttribute('href'));
+    });
 });
 function previewImage(input, previewId) {
     const preview = document.getElementById(previewId);

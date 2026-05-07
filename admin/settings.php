@@ -14,6 +14,7 @@ include('includes/admin-header.php');
 
 <div class="max-w-4xl">
     <form action="includes/admin-actions.php?action=update_settings" method="POST" class="space-y-8">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
         <!-- General Settings -->
         <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
             <div class="px-8 py-6 border-b border-slate-50 bg-slate-50/30">

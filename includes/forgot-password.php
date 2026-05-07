@@ -1,6 +1,7 @@
 <?php
-session_start();
-include('db-connect.php');
+require_once __DIR__ . '/auth-helpers.php';
+ogge_start_secure_session();
+require_once __DIR__ . '/db-connect.php';
 
 function ensure_password_resets_table($db)
 {
@@ -20,19 +21,22 @@ function ensure_password_resets_table($db)
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../pages/forgot-password.php');
-    exit();
+    ogge_redirect('../pages/forgot-password.php');
 }
 
-$email = trim($_POST['email'] ?? '');
-if ($email === '') {
-    $_SESSION['error'] = 'Please enter your email address.';
-    header('Location: ../pages/forgot-password.php');
-    exit();
+if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
+    ogge_flash('error', 'Your session expired. Please request a new reset link.');
+    ogge_redirect('../pages/forgot-password.php');
+}
+
+$email = ogge_normalize_email($_POST['email'] ?? '');
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    ogge_flash('error', 'Please enter a valid email address.');
+    ogge_redirect('../pages/forgot-password.php');
 }
 
 // Always return a generic success message to avoid user enumeration
-$_SESSION['success'] = 'If an account exists for that email, a reset link has been sent.';
+ogge_flash('success', 'If an account exists for that email, a reset link has been sent.');
 
 $stmt = $db->prepare('SELECT id, name, email FROM users WHERE email = ?');
 $stmt->bind_param('s', $email);
@@ -42,8 +46,7 @@ $user = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
-    header('Location: ../pages/forgot-password.php');
-    exit();
+    ogge_redirect('../pages/forgot-password.php');
 }
 
 ensure_password_resets_table($db);
@@ -89,6 +92,5 @@ if (!$mail_sent && $is_local_host) {
     $_SESSION['reset_link'] = $reset_link;
 }
 
-header('Location: ../pages/forgot-password.php');
-exit();
+ogge_redirect('../pages/forgot-password.php');
 ?>

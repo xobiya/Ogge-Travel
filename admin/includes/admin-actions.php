@@ -6,6 +6,16 @@ include('admin-guard.php');
 
 $action = $_GET['action'] ?? '';
 $redirect = $_SERVER['HTTP_REFERER'] ?? '../admin/index.php';
+$exportActions = ['export_subscribers_csv', 'export_bookings_csv'];
+
+if (!in_array($action, $exportActions, true)) {
+    $csrfToken = $_POST['csrf_token'] ?? $_GET['csrf_token'] ?? null;
+    if (!ogge_validate_csrf($csrfToken)) {
+        $_SESSION['admin_error'] = 'Security check failed. Please try again.';
+        header('Location: ../index.php');
+        exit();
+    }
+}
 
 switch ($action) {
 
@@ -249,6 +259,7 @@ switch ($action) {
     // ===== SETTINGS =====
     case 'update_settings':
         foreach ($_POST as $key => $value) {
+            if ($key === 'csrf_token') { continue; }
             $stmt = $db->prepare("UPDATE site_settings SET setting_value=? WHERE setting_key=?");
             $stmt->bind_param("ss", $value, $key);
             $stmt->execute();
@@ -260,9 +271,9 @@ switch ($action) {
 
     // ===== MEDIA =====
     case 'delete_media':
-        $file = $_GET['file'] ?? '';
+        $file = basename($_GET['file'] ?? '');
         $path = '../../assets/images/' . $file;
-        if (!empty($file) && file_exists($path)) {
+        if (!empty($file) && file_exists($path) && is_file($path)) {
             unlink($path);
             logAdminAction($db, $admin_id, 'Deleted media file', 'media', 0, $file);
             $_SESSION['admin_success'] = "Media asset deleted.";

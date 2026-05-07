@@ -36,7 +36,7 @@ CREATE TABLE `bookings` (
   `special_requests` text DEFAULT NULL,
   `status` enum('pending','confirmed','cancelled') DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bookings`
@@ -66,7 +66,7 @@ CREATE TABLE `contacts` (
   `message` text NOT NULL,
   `is_read` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `contacts`
@@ -88,7 +88,7 @@ CREATE TABLE `destinations` (
   `description` text NOT NULL,
   `image_url` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `destinations`
@@ -136,7 +136,7 @@ CREATE TABLE `packages` (
   `image_url` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `packages`
@@ -172,7 +172,7 @@ CREATE TABLE `reviews` (
   `rating` enum('1','2','3','4','5') NOT NULL,
   `review` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,7 @@ CREATE TABLE `subscriptions` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `subscriptions`
@@ -207,7 +207,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role` varchar(50) DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Table structure for table `password_resets`
@@ -220,15 +220,15 @@ CREATE TABLE `password_resets` (
   `expires_at` datetime NOT NULL,
   `used_at` datetime DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VALUES
-(1, 'Feleke Eshetu Girma', 'eshetufeleke21@gmail.com', '1234', 'user', '2025-02-08 18:34:01'),
-(3, 'Dagim', 'feleabo02@gmail.com', '123456', 'user', '2025-02-09 11:48:02');
+(1, 'Feleke Eshetu Girma', 'eshetufeleke21@gmail.com', '$2y$12$9zIOPcnloEPPtMn0LQWmFu5QBpYN7kvnHx0BSSMo2appXWFIONOb.', 'admin', '2025-02-08 18:34:01'),
+(3, 'Dagim', 'feleabo02@gmail.com', '$2y$12$/XdtdFoD0IqBdQtfx3NEyOYNftYB3XAPjg6iU9z/QN4lw1jUklSN2', 'user', '2025-02-09 11:48:02');
 
 -- --------------------------------------------------------
 

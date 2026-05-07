@@ -3,7 +3,8 @@
  * Admin Guard — Protects all admin pages
  * Include this at the top of every admin page
  */
-if (session_status() == PHP_SESSION_NONE) { session_start(); }
+require_once __DIR__ . '/../../includes/auth-helpers.php';
+ogge_start_secure_session();
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {

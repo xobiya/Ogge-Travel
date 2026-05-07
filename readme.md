@@ -36,7 +36,7 @@ OGGE Travel is a premium, full-stack travel concierge platform designed to showc
 - **Database**: MySQL (relational schema with 10+ optimized tables)
 - **Frontend UI**: Tailwind CSS (Utility-first, modern aesthetics)
 - **Interactive Layers**: Vanilla JavaScript + Chart.js (Data visualization)
-- **Authentication**: Session-based with Secure Password Hashing (BCRYPT)
+- **Authentication**: Hardened session-based auth with CSRF tokens, login throttling, secure password hashing, and reset tokens
 
 ---
 
@@ -51,7 +51,13 @@ OGGE Travel is a premium, full-stack travel concierge platform designed to showc
 2. **Database Configuration**:
    - Create a new database named `travel_agency` in your MySQL environment (e.g., XAMPP/WAMP).
    - Import the SQL schema located in `/Database/travel_agency.sql`.
-   - Update `includes/db-connect.php` with your local credentials.
+   - Configure database credentials with environment variables (recommended) or use the local defaults (`localhost`, `root`, empty password, `travel_agency`).
+     ```bash
+     export OGGE_DB_HOST=localhost
+     export OGGE_DB_USER=root
+     export OGGE_DB_PASSWORD=''
+     export OGGE_DB_NAME=travel_agency
+     ```
 
 3. **Run Locally**:
    - Use a local PHP server:
@@ -65,7 +71,7 @@ OGGE Travel is a premium, full-stack travel concierge platform designed to showc
 ## 🔑 Admin Credentials
 - **URL**: `http://localhost:8000/admin/`
 - **Email**: `eshetufeleke21@gmail.com`
-- **Password**: `1234` *(Note: Please change after initial login)*
+- **Password**: `ChangeMe123` *(demo seed only; change after first login)*
 
 ---
 

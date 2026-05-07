@@ -66,6 +66,7 @@ include('includes/admin-header.php');
                         <div class="flex items-center justify-end gap-2">
                             <a href="booking-detail.php?id=<?= $b['id'] ?>" class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Details</a>
                             <form method="POST" action="includes/admin-actions.php?action=update_booking_status" class="flex items-center gap-1.5">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
                                 <input type="hidden" name="id" value="<?= $b['id'] ?>">
                                 <select name="status" class="px-2 py-1.5 text-xs font-semibold border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-champagne/30">
                                     <option value="pending" <?= $b['status']==='pending'?'selected':'' ?>>Pending</option>

@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
+$csrfToken = ogge_csrf_token();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,22 +36,24 @@
                     <p class="text-gray-500 mb-10">We respond to all enquiries within 24 hours.</p>
                     <div class="champagne-line mb-10"></div>
                     
-                    <form id="contactForm" action="../includes/contact-submit.php" method="POST" class="space-y-8">
+                    <form id="contactForm" action="../includes/contact-submit.php" method="POST" class="space-y-8" novalidate>
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+                        <input type="text" name="website" value="" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
                         <div>
                             <label for="name" class="block text-xs font-bold text-gray-400 mb-3 uppercase tracking-[0.15em]">Full Name</label>
-                            <input type="text" name="name" id="name" 
+                            <input type="text" name="name" maxlength="120" id="name" 
                                    class="w-full px-6 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] focus:shadow-lg transition-all text-[#0a0f1e] font-medium"
                                    placeholder="Your full name" required>
                         </div>
                         <div>
                             <label for="email" class="block text-xs font-bold text-gray-400 mb-3 uppercase tracking-[0.15em]">Email Address</label>
-                            <input type="email" name="email" id="email" 
+                            <input type="email" name="email" maxlength="255" autocomplete="email" id="email" 
                                    class="w-full px-6 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] focus:shadow-lg transition-all text-[#0a0f1e] font-medium"
                                    placeholder="you@example.com" required>
                         </div>
                         <div>
                             <label for="message" class="block text-xs font-bold text-gray-400 mb-3 uppercase tracking-[0.15em]">Your Message</label>
-                            <textarea name="message" id="message" rows="5"
+                            <textarea name="message" maxlength="3000" id="message" rows="5"
                                       class="w-full px-6 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] focus:shadow-lg transition-all text-[#0a0f1e] font-medium resize-none"
                                       placeholder="Tell us about the journey you envision..." required></textarea>
                         </div>

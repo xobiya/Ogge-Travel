@@ -1,6 +1,8 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
 $token = trim($_GET['token'] ?? '');
+$csrfToken = ogge_csrf_token();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,17 +42,18 @@ $token = trim($_GET['token'] ?? '');
                 <a href="forgot-password.php" class="w-full block text-center py-4 bg-[#c9a96e] text-[#0a0f1e] rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-[#e8d5a8] transition-all hover:shadow-lg">Request New Link</a>
             <?php else: ?>
                 <h2 class="text-3xl text-white mb-2" style="font-family:'Playfair Display',serif; font-weight:800;">Set a New <span class="text-champagne-gradient">Password</span></h2>
-                <p class="text-gray-500 mb-8 text-sm">Choose a strong password you will remember.</p>
+                <p class="text-gray-500 mb-8 text-sm">Choose a strong password with at least 8 characters, one letter, and one number.</p>
 
-                <form method="POST" action="../includes/reset-password.php" class="space-y-6">
+                <form method="POST" action="../includes/reset-password.php" class="space-y-6" novalidate>
                     <input type="hidden" name="token" value="<?= htmlspecialchars($token); ?>">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                     <div class="relative">
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">New Password</label>
-                        <input type="password" name="password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="Minimum 6 characters" required minlength="6">
+                        <input type="password" name="password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="8+ characters with a number" autocomplete="new-password" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*\d).{8,72}">
                     </div>
                     <div class="relative">
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Confirm Password</label>
-                        <input type="password" name="confirm_password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="Re-enter password" required minlength="6">
+                        <input type="password" name="confirm_password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="Re-enter password" autocomplete="new-password" required minlength="8" maxlength="72">
                     </div>
                     <button type="submit" class="w-full py-4 bg-[#c9a96e] text-[#0a0f1e] rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-[#e8d5a8] transition-all hover:shadow-lg">Update Password</button>
                 </form>

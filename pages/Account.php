@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+require_once __DIR__ . '/../includes/auth-helpers.php';
+ogge_start_secure_session();
+$authMode = $_GET['mode'] ?? ($_SESSION['auth_mode'] ?? 'login');
+$authMode = $authMode === 'register' ? 'register' : 'login';
+unset($_SESSION['auth_mode']);
+$csrfToken = ogge_csrf_token();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,14 +57,15 @@
             <div id="loginForm">
                 <h2 class="text-3xl text-white mb-2" style="font-family:'Playfair Display',serif; font-weight:800;">Welcome <span class="text-champagne-gradient">Back</span></h2>
                 <p class="text-gray-500 mb-8 text-sm">Sign in to continue your journey.</p>
-                <form method="POST" action="../includes/login.php" class="space-y-6">
+                <form method="POST" action="../includes/login.php" class="space-y-6" novalidate>
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                     <div>
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Email Address</label>
-                        <input type="email" name="email" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="you@example.com" required>
+                        <input type="email" name="email" autocomplete="email" maxlength="255" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="you@example.com" required>
                     </div>
                     <div class="relative">
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Password</label>
-                        <input type="password" name="password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="••••••••" required>
+                        <input type="password" name="password" autocomplete="current-password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="••••••••" required>
                         <button type="button" onclick="togglePassword(this)" class="absolute right-4 top-[40px] text-gray-500 hover:text-[#c9a96e] transition-colors focus:outline-none">
                             <svg class="w-5 h-5 eye-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             <svg class="w-5 h-5 eye-slash-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
@@ -73,19 +81,23 @@
             <!-- Register Form -->
             <div id="registerForm" class="hidden">
                 <h2 class="text-3xl text-white mb-2" style="font-family:'Playfair Display',serif; font-weight:800;">Begin Your <span class="text-champagne-gradient">Legacy</span></h2>
-                <p class="text-gray-500 mb-8 text-sm">Create an account to access curated journeys.</p>
-                <form method="POST" action="../includes/register.php" class="space-y-6">
+                <p class="text-gray-500 mb-4 text-sm">Create an account to access curated journeys.</p>
+                <div class="mb-8 rounded-xl border border-[#c9a96e]/20 bg-[#c9a96e]/10 p-4 text-xs text-gray-300 leading-relaxed">
+                    Use at least 8 characters with one letter and one number. We will sign you in automatically after account creation.
+                </div>
+                <form method="POST" action="../includes/register.php" class="space-y-6" novalidate>
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                     <div>
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Full Name</label>
-                        <input type="text" name="name" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="Your full name" required>
+                        <input type="text" name="name" autocomplete="name" minlength="2" maxlength="120" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="Your full name" required>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Email Address</label>
-                        <input type="email" name="email" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="you@example.com" required>
+                        <input type="email" name="email" autocomplete="email" maxlength="255" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600" placeholder="you@example.com" required>
                     </div>
                     <div class="relative">
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Password</label>
-                        <input type="password" name="password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="Minimum 6 characters" required minlength="6">
+                        <input type="password" name="password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="8+ characters with a number" autocomplete="new-password" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*\d).{8,72}">
                         <button type="button" onclick="togglePassword(this)" class="absolute right-4 top-[40px] text-gray-500 hover:text-[#c9a96e] transition-colors focus:outline-none">
                             <svg class="w-5 h-5 eye-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             <svg class="w-5 h-5 eye-slash-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
@@ -93,7 +105,7 @@
                     </div>
                     <div class="relative">
                         <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-[0.15em]">Confirm Password</label>
-                        <input type="password" name="confirm_password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="Re-enter password" required minlength="6">
+                        <input type="password" name="confirm_password" class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e]/50 transition-all text-white font-medium placeholder-gray-600 pr-12" placeholder="Re-enter password" autocomplete="new-password" required minlength="8" maxlength="72">
                         <button type="button" onclick="togglePassword(this)" class="absolute right-4 top-[40px] text-gray-500 hover:text-[#c9a96e] transition-colors focus:outline-none">
                             <svg class="w-5 h-5 eye-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             <svg class="w-5 h-5 eye-slash-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
@@ -106,6 +118,8 @@
     </div>
 
     <script>
+    const initialAuthMode = <?= json_encode($authMode) ?>;
+
     function switchTab(tab) {
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
@@ -127,6 +141,10 @@
             loginTab.classList.add('text-gray-500');
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        switchTab(initialAuthMode);
+    });
 
     function togglePassword(button) {
         const input = button.parentElement.querySelector('input');

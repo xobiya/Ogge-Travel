@@ -192,8 +192,8 @@ $csrfToken = ogge_csrf_token();
 <head>
     <meta charset="UTF-8">
     <title>Secure Payment | OGGE Travel</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.1">
-    <link rel="stylesheet" href="../assets/css/luxury.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
 </head>
 <body class="bg-[#faf8f5] min-h-screen flex items-center justify-center p-4 md:p-8" style="font-family:'Inter',sans-serif;">
     <div class="max-w-5xl w-full bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100 flex flex-col lg:flex-row">

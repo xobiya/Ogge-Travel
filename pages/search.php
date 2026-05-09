@@ -31,8 +31,8 @@ $page_title = $q ? "Search Results for '$q'" : "Discover Heritage";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.1">
-    <link rel="stylesheet" href="../assets/css/luxury.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
 </head>
 <body class="bg-[#faf8f5]" style="font-family:'Inter',sans-serif;">
     <?php include("../includes/header.php"); ?>

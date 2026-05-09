@@ -5,6 +5,9 @@
  */
 
 class ChapaHelper {
+    private const CONNECT_TIMEOUT = 10;
+    private const REQUEST_TIMEOUT = 15;
+
     private $secretKey;
     private $baseUrl;
 
@@ -55,6 +58,8 @@ class ChapaHelper {
         
         // Skip SSL verification for local development compatibility
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
+        curl_setopt($ch, CURLOPT_TIMEOUT, self::REQUEST_TIMEOUT);
         
         if ($method === 'POST') {
             curl_setopt($ch, CURLOPT_POST, 1);

@@ -29,7 +29,7 @@ if (isset($_GET['stripe_success']) && isset($_GET['session_id'])) {
     $stripe = new StripeHelper($config);
     $session = $stripe->getSession($_GET['session_id']);
     
-    if ($session && $session['payment_status'] === 'paid') {
+    if ($session && ($session['payment_status'] ?? '') === 'paid') {
         $tx_id = $session['payment_intent'] ?? $session['id'];
         
         $upd = $db->prepare("UPDATE bookings SET payment_status = 'paid', transaction_id = ?, status = 'confirmed' WHERE id = ? AND user_id = ?");
@@ -39,11 +39,10 @@ if (isset($_GET['stripe_success']) && isset($_GET['session_id'])) {
         
         sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Stripe has been received. Your journey is now confirmed! Transaction ID: $tx_id");
         
-        ogge_flash('success', "Payment successful via Stripe! Your journey is confirmed.");
-        ogge_redirect('my-booking.php');
+        ogge_redirect('payment-result.php?status=success&booking_id=' . $booking_id);
     } else {
         error_log('Stripe Verification Failed for Session: ' . ($_GET['session_id'] ?? 'none'));
-        ogge_flash('error', 'Could not verify payment. Please contact support with your booking ID.');
+        ogge_redirect('payment-result.php?status=failed&booking_id=' . $booking_id . '&reason=stripe_verify');
     }
 }
 
@@ -62,11 +61,10 @@ if (isset($_GET['chapa_success']) && isset($_GET['tx_ref'])) {
         
         sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Chapa has been received. Your journey is now confirmed! Transaction ID: $tx_id");
         
-        ogge_flash('success', "Payment successful via Chapa! Your journey is confirmed.");
-        ogge_redirect('my-booking.php');
+        ogge_redirect('payment-result.php?status=success&booking_id=' . $booking_id);
     } else {
         error_log('Chapa Verification Failed: ' . json_encode($verification));
-        ogge_flash('error', 'Could not verify Chapa payment. Please contact support.');
+        ogge_redirect('payment-result.php?status=failed&booking_id=' . $booking_id . '&reason=chapa_verify');
     }
 }
 

@@ -55,6 +55,8 @@ class ChapaHelper {
         
         // Skip SSL verification for local development compatibility
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
         
         if ($method === 'POST') {
             curl_setopt($ch, CURLOPT_POST, 1);

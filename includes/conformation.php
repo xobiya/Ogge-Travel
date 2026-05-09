@@ -22,7 +22,6 @@ unset($_SESSION['success']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Success</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
     <?php include('../includes/header.php'); ?>

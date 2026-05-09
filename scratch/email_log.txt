@@ -34,3 +34,84 @@ BODY: A new booking has been placed by user #3. Waiting for payment.
 [2026-05-06 21:55:16] TO: feleabo02@gmail.com | SUBJECT: Payment Received! #15
 BODY: Your payment of ETB 225000 via Stripe has been received. Your journey is now confirmed! Transaction ID: pi_3M7AE5A93521
 ---
+[2026-05-07 20:18:53] TO: eshefele@gmail.com | SUBJECT: Booking Received #16
+BODY: We have received your booking request for package #6. Please complete payment to confirm.
+---
+[2026-05-07 20:18:53] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #16
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:19:29] TO: eshefele@gmail.com | SUBJECT: Payment Received! #16
+BODY: Your payment of ETB 90000 via Chapa has been received. Your journey is now confirmed! Transaction ID: CHAP_6746E35E91
+---
+[2026-05-07 20:22:07] TO: eshefele@gmail.com | SUBJECT: Booking Received #17
+BODY: We have received your booking request for package #1. Please complete payment to confirm.
+---
+[2026-05-07 20:22:07] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #17
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:29:14] TO: eshefele@gmail.com | SUBJECT: Payment Received! #17
+BODY: Your payment of ETB 30000 via Stripe has been received. Your journey is now confirmed! Transaction ID: pi_3TUWfaCcauvd7D6b0IhfaYXj
+---
+[2026-05-07 20:29:49] TO: eshefele@gmail.com | SUBJECT: Booking Received #18
+BODY: We have received your booking request for package #4. Please complete payment to confirm.
+---
+[2026-05-07 20:29:49] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #18
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:30:05] TO: eshefele@gmail.com | SUBJECT: Payment Received! #18
+BODY: Your payment of ETB 13000 via Credit/Debit Card has been received. Your journey is now confirmed! Transaction ID: CARD_CC31F509E2
+---
+[2026-05-07 20:42:01] TO: eshefele@gmail.com | SUBJECT: Booking Received #19
+BODY: We have received your booking request for package #4. Please complete payment to confirm.
+---
+[2026-05-07 20:42:01] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #19
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:43:40] TO: eshefele@gmail.com | SUBJECT: Booking Received #20
+BODY: We have received your booking request for package #4. Please complete payment to confirm.
+---
+[2026-05-07 20:43:40] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #20
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:47:30] TO: eshefele@gmail.com | SUBJECT: Booking Received #21
+BODY: We have received your booking request for package #4. Please complete payment to confirm.
+---
+[2026-05-07 20:47:30] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #21
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:51:58] TO: eshefele@gmail.com | SUBJECT: Booking Received #22
+BODY: We have received your booking request for package #4. Please complete payment to confirm.
+---
+[2026-05-07 20:51:58] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #22
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:53:01] TO: eshefele@gmail.com | SUBJECT: Booking Received #23
+BODY: We have received your booking request for package #5. Please complete payment to confirm.
+---
+[2026-05-07 20:53:01] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #23
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:55:03] TO: eshefele@gmail.com | SUBJECT: Booking Received #24
+BODY: We have received your booking request for package #5. Please complete payment to confirm.
+---
+[2026-05-07 20:55:03] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #24
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:57:50] TO: eshefele@gmail.com | SUBJECT: Booking Received #25
+BODY: We have received your booking request for package #5. Please complete payment to confirm.
+---
+[2026-05-07 20:57:50] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #25
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 20:59:20] TO: eshefele@gmail.com | SUBJECT: Booking Received #26
+BODY: We have received your booking request for package #5. Please complete payment to confirm.
+---
+[2026-05-07 20:59:20] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #26
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---
+[2026-05-07 21:08:32] TO: eshefele@gmail.com | SUBJECT: Booking Received #27
+BODY: We have received your booking request for package #1. Please complete payment to confirm.
+---
+[2026-05-07 21:08:32] TO: admin@oggetravel.com | SUBJECT: New Booking Alert #27
+BODY: A new booking has been placed by user #5. Waiting for payment.
+---

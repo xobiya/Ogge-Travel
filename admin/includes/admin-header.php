@@ -12,19 +12,7 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page_title ?? 'Admin') ?> — OGGE Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    champagne: { DEFAULT: '#c9a96e', light: '#e8d5a8', dark: '#a88b4a' },
-                    sidebar: { DEFAULT: '#0f172a', hover: '#1e293b' }
-                }
-            }
-        }
-    }
-    </script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }

@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
 include_once(__DIR__ . '/seo-lang.php'); 
 ?>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/luxury.css">
+<link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
 <?= generateSEO($page_title ?? 'The Curated Escape', $page_desc ?? 'Experience Ethiopia like never before with OGGE Travel.') ?>
 
 <header class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent" id="mainHeader">

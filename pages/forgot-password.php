@@ -9,8 +9,8 @@ $csrfToken = ogge_csrf_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password | OGGE Travel</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.1">
-    <link rel="stylesheet" href="../assets/css/luxury.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
 </head>
 <body class="bg-[#0a0f1e] min-h-screen flex flex-col" style="font-family:'Inter',sans-serif;">
 

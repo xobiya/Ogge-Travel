@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OGGE Travel | The Curated Escape</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.1">
-    <link rel="stylesheet" href="../assets/css/luxury.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
     <script src="../assets/js/script.js"></script>
     <style>
         .lalibela-slideshow { position: absolute; inset: 0; }

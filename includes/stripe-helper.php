@@ -5,6 +5,9 @@
  */
 
 class StripeHelper {
+    private const CONNECT_TIMEOUT = 10;
+    private const REQUEST_TIMEOUT = 15;
+
     private $secretKey;
     private $baseUrl;
 
@@ -60,8 +63,8 @@ class StripeHelper {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERPWD, $this->secretKey . ':');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
+        curl_setopt($ch, CURLOPT_TIMEOUT, self::REQUEST_TIMEOUT);
         
         if ($method === 'POST') {
             curl_setopt($ch, CURLOPT_POST, 1);

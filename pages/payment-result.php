@@ -33,6 +33,8 @@ $total_amount  = $booking['price'] * $booking['travelers'];
 $booking_ref   = str_pad($booking_id, 3, '0', STR_PAD_LEFT);
 $tx_id         = htmlspecialchars($booking['transaction_id'] ?? '');
 $is_success    = ($status === 'success');
+$support_email = $config['support_email'] ?? 'support@oggetravel.com';
+$current_year  = date('Y');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -199,7 +201,7 @@ $is_success    = ($status === 'success');
                         </li>
                         <li class="flex items-start gap-2 text-amber-800 text-sm">
                             <svg class="w-4 h-4 mt-0.5 shrink-0 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            If funds were deducted, email us at <a href="mailto:support@oggetravel.com" class="underline font-semibold">support@oggetravel.com</a> with booking reference <strong>#<?= $booking_ref ?></strong>.
+                            If funds were deducted, email us at <a href="mailto:<?= htmlspecialchars($support_email) ?>" class="underline font-semibold"><?= htmlspecialchars($support_email) ?></a> with booking reference <strong>#<?= $booking_ref ?></strong>.
                         </li>
                         <li class="flex items-start gap-2 text-amber-800 text-sm">
                             <svg class="w-4 h-4 mt-0.5 shrink-0 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
@@ -227,7 +229,7 @@ $is_success    = ($status === 'success');
         <!-- Footer note -->
         <p class="text-center text-[0.6rem] text-slate-400 uppercase tracking-widest font-bold mt-6 flex items-center justify-center gap-1.5">
             <svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
-            Secured by 256-bit SSL &mdash; OGGE Travel &copy; <?= date('Y') ?>
+            Secured by 256-bit SSL &mdash; OGGE Travel &copy; <?= $current_year ?>
         </p>
 
     </div>

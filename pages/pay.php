@@ -22,6 +22,22 @@ if (!$booking) { ogge_flash('error', 'Booking not found.'); ogge_redirect('my-bo
 
 $total_amount = $booking['price'] * $booking['travelers'];
 
+// Handle Stripe success redirect: ?stripe_success=1&session_id=...
+if (isset($_GET['stripe_success']) && (int)$_GET['stripe_success'] === 1) {
+    $session_id = preg_replace('/[^A-Za-z0-9_\-]/', '', $_GET['session_id'] ?? '');
+    $tx_id = $session_id ?: ('STRIPE_' . strtoupper(substr(md5(time()), 0, 10)));
+
+    $upd = $db->prepare("UPDATE bookings SET payment_status = 'paid', transaction_id = ?, status = 'confirmed' WHERE id = ? AND user_id = ? AND payment_status != 'paid'");
+    $upd->bind_param('sii', $tx_id, $booking_id, $_SESSION['user_id']);
+    $upd->execute();
+    $upd->close();
+
+    sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Stripe has been received. Your journey is now confirmed! Transaction ID: $tx_id");
+
+    ogge_flash('success', 'Payment successful via Stripe! Your journey is confirmed.');
+    ogge_redirect('my-booking.php');
+}
+
 // Handle simulated callback
 if (isset($_POST['simulate_payment'])) {
     if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {

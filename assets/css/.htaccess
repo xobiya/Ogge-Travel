@@ -1,0 +1,5 @@
+AddType text/css .css
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 0 seconds"
+</IfModule>

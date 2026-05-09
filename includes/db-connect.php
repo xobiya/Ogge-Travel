@@ -1,7 +1,9 @@
 <?php
 
 $config = [];
+// $configFile = __DIR__ . '/config.example.php';
 $configFile = __DIR__ . '/config.php';
+
 
 if (is_file($configFile)) {
     $loadedConfig = require $configFile;

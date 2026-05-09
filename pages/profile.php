@@ -23,9 +23,8 @@ $stmt->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Private Dashboard | OGGE Travel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/luxury.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
 </head>
 <body class="bg-[#0a0f1e] min-h-screen grain-overlay" style="font-family:'Inter',sans-serif;">
     <?php include('../includes/header.php'); ?>

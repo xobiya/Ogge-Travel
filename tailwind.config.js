@@ -1,11 +1,11 @@
 module.exports = {
   content: [
-    './src/**/*.{html,js,php}',
-    './*.{html,js,php}',
-    './pages/**/*.{html,js,php}',
-    './admin/**/*.{html,js,php}',
-    './includes/**/*.{html,js,php}',
-    './components/**/*.{html,js,php}'
+    'src/**/*.{html,js,php}',
+    '*.{html,js,php}',
+    'pages/**/*.{html,js,php}',
+    'admin/**/*.{html,js,php}',
+    'includes/**/*.{html,js,php}',
+    'components/**/*.{html,js,php}'
   ],
   theme: {
     extend: {

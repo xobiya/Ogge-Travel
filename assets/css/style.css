@@ -2079,7 +2079,7 @@ video {
 }
 
 .bg-\[url\(\'\.\.\/assets\/images\/hero-luxury\.png\'\)\] {
-  background-image: url('../assets/images/hero-luxury.png');
+  background-image: url('../images/hero-luxury.png');
 }
 
 .bg-gradient-to-b {

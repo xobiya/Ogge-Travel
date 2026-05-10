@@ -27,7 +27,7 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
         .enhanced-img {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             filter: saturate(1.1) contrast(1.05);
-        }
+        
         .enhanced-img:hover {
             transform: scale(1.08);
             filter: saturate(1.2) contrast(1.1);

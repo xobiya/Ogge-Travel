@@ -25,7 +25,7 @@ $result = mysqli_query($db, $query);
 
     <!-- Page Header -->
     <section class="relative h-[60vh] flex items-center overflow-hidden bg-[#0a0f1e]">
-        <div class="absolute inset-0 bg-[url('../assets/images/hero-luxury.png')] bg-cover bg-center opacity-20 scale-110 animate-ken-burns"></div>
+        <div class="absolute inset-0 bg-[url('../images/hero-luxury.png')] bg-cover bg-center opacity-20 scale-110 animate-ken-burns"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-[#0a0f1e]/80 via-[#0a0f1e]/90 to-[#0a0f1e]"></div>
         <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center">
             <span class="section-eyebrow">Handcrafted Experiences</span>
@@ -93,4 +93,3 @@ $result = mysqli_query($db, $query);
     <?php include("../includes/footer.php"); ?>
 </body>
 </html>
-?>

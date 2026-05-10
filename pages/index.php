@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OGGE Travel | The Curated Escape</title>
     <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
-    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
-    <script src="../assets/js/script.js"></script>
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.3">
+    <script src="../assets/js/script.js?v=1.3"></script>
     <style>
         .lalibela-slideshow { position: absolute; inset: 0; }
         .lalibela-slide {
@@ -35,7 +35,6 @@
 <body class="bg-gray-100">
 <?php include("../includes/header.php");?>
 
-
     <!-- ============================================ -->
     <!-- CINEMATIC HERO SECTION -->
     <!-- ============================================ -->
@@ -51,32 +50,30 @@
         <div class="relative h-full flex flex-col justify-center pt-20">
             <div class="container mx-auto px-6 max-w-7xl relative z-10">
                 <div class="max-w-4xl">
-                    <span class="section-eyebrow reveal">The Land of Origins — የመነሻ ምድር</span>
-                    <h1 class="text-4xl sm:text-5xl md:text-8xl text-white mb-6 leading-tight reveal" style="font-family:'Playfair Display',serif; font-weight:800;">
-                        Discover the <span class="text-champagne-gradient">Cradle</span> of Humanity
+                    <span class="section-eyebrow text-white animate-fade-up" style="animation-delay: 0.2s;">The Land of Origins — የመነሻ ምድር</span>
+                    <h1 class="text-5xl sm:text-6xl md:text-8xl text-white mb-6 leading-tight animate-fade-up" style="font-family:'Playfair Display',serif; font-weight:800; animation-delay: 0.4s;">
+                        Discover the <span class="shimmer-text">Cradle</span> of Humanity
                     </h1>
                     
-                    <p class="text-xl md:text-2xl text-gray-300 mb-10 reveal" style="font-family:'Inter',sans-serif; max-w-2xl;">
+                    <p class="text-xl md:text-2xl text-gray-300 mb-10 animate-fade-up" style="font-family:'Inter',sans-serif; max-w-2xl; animation-delay: 0.6s;">
                         A curated collection of extraordinary experiences across Ethiopia's ancient wonders and breathtaking landscapes.
                     </p>
     
                     <!-- Metrics -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mb-12 reveal">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mb-12 animate-fade-up" style="animation-delay: 0.8s;">
                         <div class="border-l border-[#c9a96e]/30 pl-4">
-                            <p class="text-3xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">9+</p>
+                            <p class="text-4xl font-bold text-[#c9a96e] reveal" style="font-family:'Playfair Display',serif;" data-counter="9">0</p>
                             <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">UNESCO Sites</p>
                         </div>
                         <div class="border-l border-[#c9a96e]/30 pl-4">
-                            <p class="text-3xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">80+</p>
+                            <p class="text-4xl font-bold text-[#c9a96e] reveal" style="font-family:'Playfair Display',serif;" data-counter="80">0</p>
                             <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Ethnic Groups</p>
                         </div>
                         <div class="border-l border-[#c9a96e]/30 pl-4">
-                            <p class="text-3xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">3000+</p>
+                            <p class="text-4xl font-bold text-[#c9a96e] reveal" style="font-family:'Playfair Display',serif;" data-counter="3000">0</p>
                             <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Years of History</p>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -89,46 +86,44 @@
         </div>
     </section>
 
-   
-
     <!-- ============================================ -->
     <!-- DESTINATION OF THE SEASON — Cinematic Spotlight -->
     <!-- ============================================ -->
     <section class="relative bg-[#0a0f1e] overflow-hidden">
         <div class="grid lg:grid-cols-2 min-h-[500px] md:min-h-[600px]">
-            <div class="relative h-72 md:h-96 lg:h-auto overflow-hidden">
+            <div class="relative h-72 md:h-96 lg:h-auto overflow-hidden reveal-left">
                 <div class="lalibela-slideshow">
                     <img src="../assets/images/lalibela.jpg" alt="Lalibela" class="lalibela-slide slide-1" loading="lazy">
                     <img src="../assets/images/lalibela-3.jpg" alt="Lalibela" class="lalibela-slide slide-2" loading="lazy">
                     <img src="../assets/images/lalibela2.jfif" alt="Lalibela" class="lalibela-slide slide-3" loading="lazy">
                 </div>
             </div>
-            <div class="flex items-center p-10 lg:p-20 relative z-10">
+            <div class="flex items-center p-10 lg:p-20 relative z-10 reveal-right">
                 <div>
-                    <span class="section-eyebrow reveal">Destination of the Season</span>
-                    <h2 class="text-4xl lg:text-6xl text-white mb-8 leading-[1.1] reveal" style="font-family:'Playfair Display',serif; font-weight:800;">
-                        This Season,<br>Discover <span class="text-champagne-gradient">Lalibela</span>
+                    <span class="section-eyebrow">Destination of the Season</span>
+                    <h2 class="text-4xl lg:text-6xl text-white mb-8 leading-[1.1]" style="font-family:'Playfair Display',serif; font-weight:800;">
+                        This Season,<br>Discover <span class="shimmer-text">Lalibela</span>
                     </h2>
-                    <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg reveal" style="font-family:'Inter',sans-serif;">
+                    <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg" style="font-family:'Inter',sans-serif;">
                         Walk the corridors of rock-hewn churches carved eight centuries ago by hands that believed they were building a New Jerusalem. Lalibela doesn't belong to history — it <em style="font-family:'Cormorant Garamond',serif; font-size:1.2em;">is</em> history, still breathing.
                     </p>
-                    <div class="flex flex-wrap gap-6 mb-10 reveal">
+                    <div class="flex flex-wrap gap-6 mb-10">
                         <div class="text-center">
-                            <p class="text-2xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">11</p>
+                            <p class="text-3xl font-bold text-[#c9a96e] reveal" style="font-family:'Playfair Display',serif;" data-counter="11">0</p>
                             <p class="text-xs text-gray-500 uppercase tracking-widest mt-1" style="font-family:'Inter',sans-serif;">Rock Churches</p>
                         </div>
                         <div class="w-px bg-white/10"></div>
                         <div class="text-center">
-                            <p class="text-2xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">1978</p>
+                            <p class="text-3xl font-bold text-[#c9a96e] reveal" style="font-family:'Playfair Display',serif;" data-counter="1978">0</p>
                             <p class="text-xs text-gray-500 uppercase tracking-widest mt-1" style="font-family:'Inter',sans-serif;">UNESCO Listed</p>
                         </div>
                         <div class="w-px bg-white/10"></div>
                         <div class="text-center">
-                            <p class="text-2xl font-bold text-[#c9a96e]" style="font-family:'Playfair Display',serif;">2,500m</p>
-                            <p class="text-xs text-gray-500 uppercase tracking-widest mt-1" style="font-family:'Inter',sans-serif;">Altitude</p>
+                            <p class="text-3xl font-bold text-[#c9a96e] reveal" style="font-family:'Playfair Display',serif;" data-counter="2500">0</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-widest mt-1" style="font-family:'Inter',sans-serif;">Altitude (m)</p>
                         </div>
                     </div>
-                    <a href="destination-detail.php?id=8" class="btn-outline reveal">
+                    <a href="destination-detail.php?id=8" class="btn-outline">
                         Begin Your Pilgrimage
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
@@ -151,68 +146,68 @@
             </div>
 
             <!-- Magazine Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" data-stagger>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" data-stagger>
                 <!-- Lalibela — Feature Card -->
                 <div class="editorial-card lg:row-span-2 reveal">
-                    <a href="destination-detail.php?id=8" class="block relative h-full min-h-[500px] lg:min-h-full overflow-hidden">
+                    <a href="destination-detail.php?id=8" class="block relative h-full min-h-[500px] lg:min-h-full">
                         <img src="../assets/images/lalibela.jpg" alt="Lalibela" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-10">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
                             <p class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em] mb-3" style="font-family:'Inter',sans-serif;">UNESCO World Heritage</p>
-                            <h3 class="text-3xl lg:text-4xl text-white mb-3" style="font-family:'Playfair Display',serif; font-weight:700;">Lalibela</h3>
-                            <p class="text-gray-400 italic text-lg" style="font-family:'Cormorant Garamond',serif;">The 12th Century Rock-Hewn Churches</p>
+                            <h3 class="text-4xl text-white mb-3" style="font-family:'Playfair Display',serif; font-weight:700;">Lalibela</h3>
+                            <p class="text-gray-300 italic text-lg" style="font-family:'Cormorant Garamond',serif;">The 12th Century Rock-Hewn Churches</p>
                         </div>
                     </a>
                 </div>
 
                 <!-- Simien Mountains -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=10" class="block relative h-72 overflow-hidden">
+                    <a href="destination-detail.php?id=10" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/AdobeStock_178835854_Preview.jpeg" alt="Simien Mountains" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
                             <p class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em] mb-2" style="font-family:'Inter',sans-serif;">Highland Trekking</p>
                             <h3 class="text-2xl text-white mb-1" style="font-family:'Playfair Display',serif; font-weight:700;">Simien Mountains</h3>
-                            <p class="text-gray-400 italic" style="font-family:'Cormorant Garamond',serif;">Home of the Gelada Baboons</p>
+                            <p class="text-gray-300 italic" style="font-family:'Cormorant Garamond',serif;">Home of the Gelada Baboons</p>
                         </div>
                     </a>
                 </div>
 
                 <!-- Danakil -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=11" class="block relative h-72 overflow-hidden">
+                    <a href="destination-detail.php?id=11" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/OIP (1).jpg" alt="Danakil Depression" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
                             <p class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em] mb-2" style="font-family:'Inter',sans-serif;">Geological Wonder</p>
                             <h3 class="text-2xl text-white mb-1" style="font-family:'Playfair Display',serif; font-weight:700;">Danakil Depression</h3>
-                            <p class="text-gray-400 italic" style="font-family:'Cormorant Garamond',serif;">The Hottest Place on Earth</p>
+                            <p class="text-gray-300 italic" style="font-family:'Cormorant Garamond',serif;">The Hottest Place on Earth</p>
                         </div>
                     </a>
                 </div>
 
                 <!-- Omo Valley -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=12" class="block relative h-72 overflow-hidden">
+                    <a href="destination-detail.php?id=12" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/omo-cultural.jpg" alt="Omo Valley" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
                             <p class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em] mb-2" style="font-family:'Inter',sans-serif;">Cultural Immersion</p>
                             <h3 class="text-2xl text-white mb-1" style="font-family:'Playfair Display',serif; font-weight:700;">Omo Valley</h3>
-                            <p class="text-gray-400 italic" style="font-family:'Cormorant Garamond',serif;">A living museum of humanity</p>
+                            <p class="text-gray-300 italic" style="font-family:'Cormorant Garamond',serif;">A living museum of humanity</p>
                         </div>
                     </a>
                 </div>
 
                 <!-- Gondar -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=3" class="block relative h-72 overflow-hidden">
+                    <a href="destination-detail.php?id=3" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/gonder.jpg" alt="Gondar" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
                             <p class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em] mb-2" style="font-family:'Inter',sans-serif;">Royal Heritage</p>
                             <h3 class="text-2xl text-white mb-1" style="font-family:'Playfair Display',serif; font-weight:700;">Gondar</h3>
-                            <p class="text-gray-400 italic" style="font-family:'Cormorant Garamond',serif;">The Camelot of Africa</p>
+                            <p class="text-gray-300 italic" style="font-family:'Cormorant Garamond',serif;">The Camelot of Africa</p>
                         </div>
                     </a>
                 </div>
@@ -333,36 +328,35 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- THE LEGACY GALLERY — New Additions -->
+    <!-- BESPOKE CONCIERGE — Premium CTA -->
     <!-- ============================================ -->
-    <section class="bg-[#0a0f1e] py-24 relative overflow-hidden">
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-navy-950">
+            <div class="absolute inset-0 opacity-20 grain-overlay"></div>
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-champagne/10 to-transparent"></div>
+        </div>
         <div class="container mx-auto px-6 max-w-7xl relative z-10">
-            <div class="text-center mb-16 reveal">
-                <span class="section-eyebrow">The Collective</span>
-                <h2 class="text-4xl md:text-6xl text-white mb-6" style="font-family:'Playfair Display',serif; font-weight:800;">Visual <span class="text-champagne-gradient">Legacies</span></h2>
-                <p class="text-gray-500 max-w-2xl mx-auto text-lg">A curated glimpse into the extraordinary moments captured by our private explorers.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="editorial-card h-[400px] reveal">
-                    <img src="../assets/images/Ancient book.jpg" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors"></div>
-                    <div class="absolute bottom-6 left-6">
-                        <p class="text-white text-xs font-bold uppercase tracking-widest">Ancient Chronicles</p>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-left">
+                    <span class="section-eyebrow">The OGGE Experience</span>
+                    <h2 class="text-4xl md:text-6xl text-white mb-8" style="font-family:'Playfair Display',serif; font-weight:800;">
+                        Your Vision,<br><span class="shimmer-text">Our Curation</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed" style="font-family:'Inter',sans-serif;">
+                        Beyond our curated routes lies a world of infinite possibilities. Our private concierge service designs bespoke journeys tailored to your exact desires — from private helicopter transfers over the Danakil to candlelit dinners in ancient ruins.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <a href="contact.php" class="btn-champagne">Speak to a Specialist</a>
+                        <a href="about.php" class="btn-outline">Explore Our Legacy</a>
                     </div>
                 </div>
-                <div class="editorial-card h-[400px] reveal">
-                    <img src="../assets/images/Axum simien.jpg" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors"></div>
-                    <div class="absolute bottom-6 left-6">
-                        <p class="text-white text-xs font-bold uppercase tracking-widest">Highland Spires</p>
+                <div class="relative reveal-right">
+                    <div class="aspect-[4/5] rounded-2xl overflow-hidden">
+                        <img src="../assets/images/aksum.jpg" alt="Bespoke Experience" class="w-full h-full object-cover animate-ken-burns">
                     </div>
-                </div>
-                <div class="editorial-card h-[400px] reveal">
-                    <img src="../assets/images/Dallo deser.jpg" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors"></div>
-                    <div class="absolute bottom-6 left-6">
-                        <p class="text-white text-xs font-bold uppercase tracking-widest">Alien Landscapes</p>
+                    <div class="absolute -bottom-10 -left-10 glass-luxury p-8 rounded-xl max-w-xs hidden md:block animate-float">
+                        <p class="text-navy-950 font-serif text-xl italic mb-2">"Unparalleled service."</p>
+                        <p class="text-gray-500 text-sm">We provide 24/7 private support for every guest, ensuring a seamless journey through the heart of Ethiopia.</p>
                     </div>
                 </div>
             </div>
@@ -393,6 +387,6 @@
     <!-- Footer -->
     <?php include("../includes/footer.php");?>
 
-    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/script.js?v=1.3"></script>
 </body>
 </html>

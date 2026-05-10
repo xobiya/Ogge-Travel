@@ -68,7 +68,7 @@ if ($dbUnavailable) {
 
     <!-- Page Header -->
     <section class="relative h-[60vh] flex items-center overflow-hidden bg-[#0a0f1e]">
-        <div class="absolute inset-0 bg-[url('../assets/images/hero-luxury.png')] bg-cover bg-center opacity-30 animate-ken-burns"></div>
+        <div class="absolute inset-0 bg-[url('../images/hero-luxury.png')] bg-cover bg-center opacity-30 animate-ken-burns"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#0a0f1e] via-[#0a0f1e]/80 to-transparent"></div>
         <div class="container mx-auto px-6 max-w-7xl relative z-10">
             <span class="section-eyebrow">Explore Ethiopia — ኢትዮጵያን ያስሱ</span>

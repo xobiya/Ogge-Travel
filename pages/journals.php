@@ -48,7 +48,7 @@ $csrfToken = ogge_csrf_token();
                         <article class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-gray-100 reveal group">
                             <?php if (!empty($j['image_url'])): ?>
                             <div class="relative h-72 overflow-hidden">
-                                <img src="<?= htmlspecialchars($j['image_url']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="">
+                                <img src="<?= htmlspecialchars($j['image_url']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="" onerror="this.src='../assets/images/lalibela.jpg'">
                             </div>
                             <?php endif; ?>
                             <div class="p-10">

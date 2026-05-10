@@ -32,117 +32,234 @@ $csrfToken = ogge_csrf_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seal Your Journey | <?= htmlspecialchars($package['title']) ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
-    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.3">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.3">
+    <script src="../assets/js/script.js?v=1.3"></script>
+    <style>
+        .booking-gradient {
+            background: radial-gradient(circle at top right, rgba(182, 145, 80, 0.05), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(10, 15, 30, 0.02), transparent 40%);
+        }
+        .form-input-luxury {
+            @apply w-full px-6 py-5 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:border-[#b69150] transition-all text-[#0a0f1e] font-medium shadow-sm;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.6) sepia(1) saturate(5) hue-rotate(10deg);
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-[#faf8f5]" style="font-family:'Inter',sans-serif;">
+<body class="bg-[#faf8f5] booking-gradient">
     <?php include('../includes/header.php'); ?>
+    
+    <!-- Dark Header Spacer for Fixed Nav -->
+    <div class="h-20 md:h-24 bg-[#0a0f1e]"></div>
 
-    <!-- Page Header -->
-    <section class="relative h-[40vh] flex items-end overflow-hidden bg-[#0a0f1e]">
-        <img src="<?= htmlspecialchars($package['image_url']) ?>" class="absolute inset-0 w-full h-full object-cover opacity-30" loading="eager">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/60 to-[#0a0f1e]/30"></div>
-        <div class="container mx-auto px-6 max-w-7xl relative z-10 pb-16">
-            <span class="section-eyebrow">Secure Your Reservation</span>
-            <h1 class="text-4xl md:text-6xl text-white" style="font-family:'Playfair Display',serif; font-weight:800;"><?= htmlspecialchars($package['title']) ?></h1>
+    <!-- Cinematic Header -->
+    <section class="hero-section relative h-[50vh] flex items-end overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="<?= htmlspecialchars($package['image_url']) ?>" class="w-full h-full object-cover animate-ken-burns" onerror="this.src='../assets/images/default.jpg'">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#0a0f1e]/60 to-[#0a0f1e]/30"></div>
+        </div>
+        <div class="container mx-auto px-6 max-w-7xl relative z-10 pb-24">
+            <div class="max-w-3xl reveal-left">
+                <span class="section-eyebrow text-white">The Curated Escape</span>
+                <h1 class="text-4xl md:text-7xl text-white mb-4" style="font-family:'Playfair Display',serif; font-weight:800;"><?= htmlspecialchars($package['title']) ?></h1>
+                <p class="text-white/80 text-lg md:text-xl font-light italic" style="font-family:'Cormorant Garamond',serif;">Your journey towards extraordinary begins here.</p>
+            </div>
         </div>
     </section>
 
-    <div class="container mx-auto px-6 py-16 max-w-7xl">
+    <main class="container mx-auto px-6 pt-16 relative z-20 pb-24 max-w-7xl">
         <?php if (isset($_SESSION['error'])): ?>
-            <div class="mb-8 max-w-4xl mx-auto bg-red-500/10 border border-red-500/20 text-red-600 px-6 py-4 rounded-2xl flex items-center">
-                <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span class="font-semibold text-sm"><?= htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></span>
+            <div class="mb-10 max-w-5xl mx-auto glass-luxury border-red-500/20 text-red-600 px-8 py-5 rounded-2xl flex items-center animate-fade-up">
+                <svg class="w-6 h-6 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span class="font-medium"><?= htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></span>
             </div>
         <?php endif; ?>
 
-        <div class="flex flex-col lg:flex-row gap-10">
-            <!-- Package Details -->
-            <div class="lg:w-1/2">
-                <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-gray-100">
-                    <div class="relative h-72">
-                        <img src="<?= htmlspecialchars($package['image_url']) ?>" class="w-full h-full object-cover" onerror="this.src='../assets/images/default.jpg'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent"></div>
-                        <div class="absolute top-6 left-6 bg-[#c9a96e] text-[#0a0f1e] font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider"><?= htmlspecialchars($package['duration']) ?></div>
-                    </div>
+        <div class="flex flex-col lg:flex-row gap-12 items-start">
+            <!-- Left Side: Summary & Trust -->
+            <div class="lg:w-5/12 space-y-8 reveal-left">
+                <!-- Summary Card -->
+                <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-navy-950/5 overflow-hidden border border-gray-100">
                     <div class="p-10">
-                        <div class="mb-8 pb-8 border-b border-gray-100">
-                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Price Per Person</p>
-                            <p class="text-4xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:800;">ETB <?= number_format($package['price'], 2) ?></p>
-                        </div>
-                        <div class="mb-8">
-                            <h3 class="text-xl mb-4 text-[#0a0f1e]" style="font-family:'Playfair Display',serif; font-weight:700;">Journey Overview</h3>
-                            <p class="text-gray-500 leading-relaxed"><?= htmlspecialchars($package['description']) ?></p>
-                        </div>
-                        <div class="bg-[#faf8f5] rounded-2xl p-6 border border-[#e2ddd5]">
-                            <h3 class="text-sm font-bold text-[#0a0f1e] mb-4 uppercase tracking-wider">Premium Inclusions</h3>
-                            <ul class="space-y-3">
-                                <li class="flex items-center text-gray-600 text-sm"><div class="w-5 h-5 rounded-full bg-[#c9a96e]/10 flex items-center justify-center mr-3 shrink-0"><svg class="w-3 h-3 text-[#c9a96e]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>Luxury accommodations</li>
-                                <li class="flex items-center text-gray-600 text-sm"><div class="w-5 h-5 rounded-full bg-[#c9a96e]/10 flex items-center justify-center mr-3 shrink-0"><svg class="w-3 h-3 text-[#c9a96e]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>Expert local guide</li>
-                                <li class="flex items-center text-gray-600 text-sm"><div class="w-5 h-5 rounded-full bg-[#c9a96e]/10 flex items-center justify-center mr-3 shrink-0"><svg class="w-3 h-3 text-[#c9a96e]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>24/7 Concierge support</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Booking Form -->
-            <div class="lg:w-1/2">
-                <div class="bg-white rounded-[2rem] p-10 shadow-xl sticky top-28 border border-gray-100">
-                    <h2 class="text-3xl text-[#0a0f1e] mb-2" style="font-family:'Playfair Display',serif; font-weight:800;">Seal Your Journey</h2>
-                    <p class="text-gray-500 mb-8">Our concierge will reach out within 24 hours to personalize your itinerary.</p>
-                    <div class="champagne-line mb-8"></div>
-
-                    <form method="POST" action="../includes/booking.php" id="bookingForm" class="space-y-6">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
-                        <input type="hidden" name="package_id" value="<?= $package_id ?>">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-[0.15em]">Travel Date</label>
-                            <input type="date" name="travel_date" class="w-full px-5 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] transition-all text-[#0a0f1e] font-medium" min="<?= date('Y-m-d') ?>" required>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-[0.15em]">Number of Travelers</label>
-                            <select name="travelers" class="w-full px-5 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] transition-all text-[#0a0f1e] font-medium appearance-none" required>
-                                <option value="">Select party size...</option>
-                                <?php for ($i = 1; $i <= 10; $i++): ?>
-                                    <option value="<?= $i ?>"><?= $i ?> Traveler<?= $i > 1 ? 's' : '' ?></option>
-                                <?php endfor; ?>
-                            </select>
-                            <div class="mt-4 p-4 bg-[#c9a96e]/10 rounded-xl border border-[#c9a96e]/20 flex justify-between items-center hidden" id="totalPriceBox">
-                                <span class="font-bold text-gray-700 text-sm">Total Investment:</span>
-                                <span class="font-bold text-xl text-[#c9a96e]" id="totalPriceDisplay" style="font-family:'Playfair Display',serif;"></span>
+                        <div class="flex items-center justify-between mb-8">
+                            <div>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-1">Package Reference</p>
+                                <p class="text-navy-950 font-medium font-mono text-xs">OGGE-<?= str_pad($package_id, 4, '0', STR_PAD_LEFT) ?></p>
+                            </div>
+                            <div class="bg-champagne/10 text-champagne px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                                <?= htmlspecialchars($package['duration']) ?>
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-[0.15em]">Special Requests <span class="text-gray-300 font-normal normal-case">(Optional)</span></label>
-                            <textarea name="special_requests" maxlength="1000" class="w-full px-5 py-4 bg-[#faf8f5] border border-[#e2ddd5] rounded-xl focus:outline-none focus:border-[#c9a96e] transition-all text-[#0a0f1e] font-medium resize-none" rows="3" placeholder="Dietary needs, celebrations, accessibility..."></textarea>
+
+                        <h3 class="text-2xl text-navy-950 mb-6" style="font-family:'Playfair Display',serif; font-weight:700;">Journey Highlights</h3>
+                        <p class="text-gray-500 leading-relaxed mb-8 italic" style="font-family:'Cormorant Garamond',serif; font-size:1.15rem;">
+                            "<?= htmlspecialchars(substr($package['description'], 0, 150)) ?>..."
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-navy-950 flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5 text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-navy-950 uppercase tracking-wider mb-1">Elite Lodging</h4>
+                                    <p class="text-xs text-gray-500">Hand-picked boutique hotels & lodges.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-navy-950 flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5 text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-navy-950 uppercase tracking-wider mb-1">Private Guide</h4>
+                                    <p class="text-xs text-gray-500">Multi-lingual historian accompanying you.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center mt-6">
-                            <input type="checkbox" name="terms" id="terms" class="w-5 h-5 text-[#c9a96e] border-gray-300 rounded focus:ring-[#c9a96e] cursor-pointer" required>
-                            <label for="terms" class="ml-3 text-sm text-gray-500 cursor-pointer">I agree to the <a href="#" class="text-[#c9a96e] font-bold underline">terms and conditions</a></label>
+
+                        <div class="mt-12 pt-8 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Investment per guest</span>
+                            <span class="text-3xl text-champagne" style="font-family:'Playfair Display',serif; font-weight:800;">ETB <?= number_format($package['price'], 0) ?></span>
                         </div>
-                        <button type="submit" class="btn-dark w-full py-5 text-base mt-4">
-                            Seal Your Journey
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </button>
-                    </form>
+                    </div>
+                </div>
+
+                <!-- Trust Pilot Mockup -->
+                <div class="glass-luxury p-8 rounded-3xl border-white/40">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex gap-1 text-champagne">
+                            <?php for($i=0;$i<5;$i++): ?><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><?php endfor; ?>
+                        </div>
+                        <span class="text-navy-950 font-bold text-xs uppercase tracking-widest">Exceptional</span>
+                    </div>
+                    <p class="text-gray-500 text-sm italic mb-4">"The attention to detail was beyond anything I've experienced in luxury travel. Truly bespoke."</p>
+                    <p class="text-navy-950 text-[10px] font-bold uppercase tracking-widest">— Julian R., Zurich</p>
                 </div>
             </div>
+
+            <!-- Right Side: Booking Form -->
+            <div class="lg:w-7/12 reveal-right">
+                <div class="bg-white rounded-[2.5rem] p-12 shadow-2xl shadow-navy-950/5 border border-gray-100">
+                    <div class="mb-12">
+                        <h2 class="text-4xl text-navy-950 mb-3" style="font-family:'Playfair Display',serif; font-weight:800;">Initiate Your Escape</h2>
+                        <p class="text-gray-400">Complete the details below to begin your personalized journey curation.</p>
+                        <div class="w-20 h-1 bg-champagne mt-6"></div>
+                    </div>
+
+                    <form method="POST" action="../includes/booking.php" id="bookingForm" class="space-y-8">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+                        <input type="hidden" name="package_id" value="<?= $package_id ?>">
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="group">
+                                <label class="block text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-[0.2em] group-focus-within:text-champagne transition-colors">Desired Departure</label>
+                                <input type="date" name="travel_date" 
+                                       class="w-full px-6 py-5 bg-[#faf8f5] border border-gray-100 rounded-2xl focus:outline-none focus:border-champagne focus:bg-white transition-all text-navy-950 font-medium shadow-sm" 
+                                       min="<?= date('Y-m-d') ?>" required>
+                            </div>
+                            <div class="group">
+                                <label class="block text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-[0.2em] group-focus-within:text-champagne transition-colors">Number of Guests</label>
+                                <div class="relative">
+                                    <input type="number" name="travelers" min="1" max="50" placeholder="e.g. 2"
+                                           class="w-full px-6 py-5 bg-[#faf8f5] border border-gray-100 rounded-2xl focus:outline-none focus:border-champagne focus:bg-white transition-all text-navy-950 font-medium shadow-sm" 
+                                           required>
+                                    <div class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label class="block text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-[0.2em] group-focus-within:text-champagne transition-colors">Bespoke Requests</label>
+                            <textarea name="special_requests" maxlength="1000" 
+                                      class="w-full px-6 py-5 bg-[#faf8f5] border border-gray-100 rounded-2xl focus:outline-none focus:border-champagne focus:bg-white transition-all text-navy-950 font-medium shadow-sm resize-none" 
+                                      rows="4" placeholder="Any specific requirements, dietary preferences, or celebratory milestones?"></textarea>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="bg-white border-2 border-champagne/10 rounded-3xl p-8 transition-all duration-500 opacity-0 transform translate-y-4 pointer-events-none" id="pricePanel">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <p class="text-champagne text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Estimated Total Investment</p>
+                                    <p class="text-3xl text-navy-950" id="totalPriceDisplay" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 0.00</p>
+                                </div>
+                                <div class="text-left md:text-right">
+                                    <p class="text-gray-400 text-[10px] uppercase tracking-widest">Fully inclusive of</p>
+                                    <p class="text-navy-950/60 text-xs mt-1">VAT, Luxury Transport & Private Guiding</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-6">
+                            <div class="flex items-center">
+                            <div class="flex items-start">
+                                <label class="luxury-checkbox-wrapper">
+                                    <input type="checkbox" name="terms" id="terms" required>
+                                    <span class="luxury-checkbox-box"></span>
+                                </label>
+                                <div class="ml-4 text-sm">
+                                    <label for="terms" class="text-gray-500 cursor-pointer">
+                                        I agree to the <a href="#" class="text-navy-950 font-bold hover:text-champagne transition-colors underline underline-offset-4 relative z-20">Luxury Booking Protocol</a>.
+                                    </label>
+                                </div>
+                            </div>
+                            </div>
+
+                            <button type="submit" class="btn-dark w-full py-6 text-lg group overflow-hidden relative">
+                                <span class="relative z-10 flex items-center justify-center">
+                                    Finalize Reservation
+                                    <svg class="w-5 h-5 ml-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <p class="text-center mt-8 text-gray-400 text-xs uppercase tracking-widest">Secure 256-bit Encrypted Reservation System</p>
+            </div>
         </div>
-    </div>
+    </main>
 
     <?php include('../includes/footer.php'); ?>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const price = <?= $package['price']; ?>;
-            const sel = document.querySelector('select[name="travelers"]');
-            const box = document.getElementById('totalPriceBox');
-            const disp = document.getElementById('totalPriceDisplay');
-            sel.addEventListener('change', function() {
-                if (this.value) {
-                    disp.textContent = "ETB " + (price * this.value).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
-                    box.classList.remove('hidden');
-                } else { box.classList.add('hidden'); }
+            const price = <?= (float)$package['price']; ?>;
+            const inputTravelers = document.querySelector('input[name="travelers"]');
+            const pricePanel = document.getElementById('pricePanel');
+            const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+
+            const updatePrice = () => {
+                const val = parseInt(inputTravelers.value);
+                if (val > 0) {
+                    const total = price * val;
+                    totalPriceDisplay.textContent = "ETB " + total.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0});
+                    
+                    pricePanel.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    pricePanel.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    pricePanel.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    pricePanel.classList.remove('opacity-100', 'translate-y-0');
+                }
+            };
+
+            inputTravelers.addEventListener('input', updatePrice);
+            inputTravelers.addEventListener('change', updatePrice);
+
+            // Smooth reveal for form elements
+            document.querySelectorAll('.group').forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                el.style.transition = `all 0.5s ease-out ${0.1 * index}s`;
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100);
             });
         });
     </script>

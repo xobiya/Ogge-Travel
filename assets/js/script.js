@@ -1,65 +1,104 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    // === Custom Cursor (Subtle) ===
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor hidden md:block';
+    document.body.appendChild(cursor);
 
-    // Counter animation logic and other utilities will go here.
-    // (Mobile menu logic is now handled in includes/header.php for enhanced transitions)
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
 
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-                entry.target.classList.add('visible');
-            }
-        });
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
 
-    const counterData = [
-        { selector: '#unesco-counter', value: 9 },
-        { selector: '#ethnic-counter', value: 80 },
-        { selector: '#history-counter', value: 3000 }
-    ];
+    const animateCursor = () => {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        requestAnimationFrame(animateCursor);
+    };
+    animateCursor();
+
+    const interactiveElements = document.querySelectorAll('a, button, .editorial-card');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // === Scroll Progress ===
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + "%";
+    }, { passive: true });
+
+    // === Intersection Observer ===
+    const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                if (entry.target.hasAttribute('data-counter')) {
+                    const targetValue = parseInt(entry.target.getAttribute('data-counter'));
+                    animateCounter(entry.target, targetValue);
+                }
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, [data-counter]').forEach(el => {
+        revealObserver.observe(el);
+    });
 
     const animateCounter = (element, targetValue) => {
-        if (!element) return;
+        if (!element || element.classList.contains('counted')) return;
+        element.classList.add('counted');
+        
         const duration = 2000;
         const startTime = performance.now();
-        const initialValue = 0;
 
         const updateCounter = (currentTime) => {
             const elapsedTime = currentTime - startTime;
             const progress = Math.min(elapsedTime / duration, 1);
-            const currentValue = Math.floor(initialValue + (targetValue - initialValue) * progress);
+            const easeProgress = 1 - Math.pow(1 - progress, 4);
+            const currentValue = Math.floor(targetValue * easeProgress);
 
-            element.textContent = currentValue;
+            element.textContent = currentValue.toLocaleString() + (targetValue >= 1000 ? '+' : (targetValue >= 9 ? '+' : ''));
 
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                element.textContent = targetValue + '+';
-            }
+            if (progress < 1) requestAnimationFrame(updateCounter);
+            else element.textContent = targetValue.toLocaleString() + (targetValue >= 9 ? '+' : '');
         };
-
         requestAnimationFrame(updateCounter);
     };
 
-    counterData.forEach(counter => {
-        const element = document.querySelector(counter.selector);
-        if (element) animateCounter(element, counter.value);
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '') return;
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
     });
-// Simple search function for packages
+});
+
 function searchPackages() {
-    // Get input values
     var search = document.getElementById('searchInput').value;
     var date = document.getElementById('dateInput').value;
     var travelers = document.getElementById('travelersInput').value;
-
-    // Change button text to show loading
-    var button = document.querySelector('.bg-amber-600');
-    button.innerHTML = 'Searching...';
-
-    // Redirect to packages page with search parameters
+    var button = document.querySelector('.bg-amber-600') || document.querySelector('.btn-champagne');
+    if(button) button.innerHTML = 'Searching...';
     window.location.href = 'packages.php?search=' + search + '&date=' + date + '&travelers=' + travelers;
-}});
+}

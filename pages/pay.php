@@ -24,7 +24,58 @@ if (!$booking) { ogge_flash('error', 'Booking not found.'); ogge_redirect('my-bo
 
 $total_amount = $booking['price'] * $booking['travelers'];
 
-// Handle payment processing logic (keeping existing backend logic)
+// Handle Stripe Success Callback
+if (isset($_GET['stripe_success']) && isset($_GET['session_id'])) {
+    $stripe = new StripeHelper($config);
+    $session = $stripe->getSession($_GET['session_id']);
+    
+    if ($session && $session['payment_status'] === 'paid') {
+        $tx_id = $session['payment_intent'] ?? $session['id'];
+        
+        $upd = $db->prepare("UPDATE bookings SET payment_status = 'paid', transaction_id = ?, status = 'confirmed' WHERE id = ? AND user_id = ?");
+        $upd->bind_param('sii', $tx_id, $booking_id, $_SESSION['user_id']);
+        $upd->execute();
+        $upd->close();
+        
+        sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Stripe has been received. Your journey is now confirmed! Transaction ID: $tx_id");
+        
+        ogge_flash('success', "Payment successful via Stripe! Your journey is confirmed.");
+        ogge_redirect('my-booking.php');
+    } else {
+        error_log('Stripe Verification Failed for Session: ' . ($_GET['session_id'] ?? 'none'));
+        ogge_flash('error', 'Could not verify payment. Please contact support with your booking ID.');
+    }
+}
+
+// Handle Chapa Success Callback
+if (isset($_GET['chapa_success']) && isset($_GET['tx_ref'])) {
+    $chapa = new ChapaHelper($config);
+    $verification = $chapa->verifyTransaction($_GET['tx_ref']);
+    
+    if ($verification && ($verification['status'] === 'success' || ($verification['data']['status'] ?? '') === 'success')) {
+        $tx_id = $_GET['tx_ref'];
+        
+        $upd = $db->prepare("UPDATE bookings SET payment_status = 'paid', transaction_id = ?, status = 'confirmed' WHERE id = ? AND user_id = ?");
+        $upd->bind_param('sii', $tx_id, $booking_id, $_SESSION['user_id']);
+        $upd->execute();
+        $upd->close();
+        
+        sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Chapa has been received. Your journey is now confirmed! Transaction ID: $tx_id");
+        
+        ogge_flash('success', "Payment successful via Chapa! Your journey is confirmed.");
+        ogge_redirect('my-booking.php');
+    } else {
+        error_log('Chapa Verification Failed: ' . json_encode($verification));
+        ogge_flash('error', 'Could not verify Chapa payment. Please contact support.');
+    }
+}
+
+// Handle Stripe Cancel
+if (isset($_GET['stripe_cancel'])) {
+    ogge_flash('warning', 'Payment was cancelled. You can try again.');
+}
+
+// Handle payment processing
 if (isset($_POST['process_payment'])) {
     if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
         ogge_flash('error', 'Your session expired. Please try payment again.');

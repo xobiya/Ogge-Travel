@@ -13,7 +13,14 @@ function sendAdminNotification($subject, $message) {
     
     // For now, we log this to a file as a 'Sent Email' simulation
     $log = "[" . date('Y-m-d H:i:s') . "] TO: $to | SUBJECT: $subject\nBODY: $message\n---\n";
-    file_put_contents(__DIR__ . '/../scratch/email_log.txt', $log, FILE_APPEND);
+    $logFile = __DIR__ . '/../scratch/email_log.txt';
+    $logDir = dirname($logFile);
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0755, true);
+    }
+    if (is_writable($logDir)) {
+        file_put_contents($logFile, $log, FILE_APPEND);
+    }
 }
 
 function sendCustomerNotification($to, $subject, $message) {
@@ -22,6 +29,13 @@ function sendCustomerNotification($to, $subject, $message) {
     // mail($to, $subject, $message, $headers);
     
     $log = "[" . date('Y-m-d H:i:s') . "] TO: $to | SUBJECT: $subject\nBODY: $message\n---\n";
-    file_put_contents(__DIR__ . '/../scratch/email_log.txt', $log, FILE_APPEND);
+    $logFile = __DIR__ . '/../scratch/email_log.txt';
+    $logDir = dirname($logFile);
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0755, true);
+    }
+    if (is_writable($logDir)) {
+        file_put_contents($logFile, $log, FILE_APPEND);
+    }
 }
 ?>

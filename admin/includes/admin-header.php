@@ -13,7 +13,8 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page_title ?? 'Admin') ?> — OGGE Admin</title>
     <?php
-    $base_path = trim((string) BASE_URL, '/');
+    $base_url_value = defined('BASE_URL') ? BASE_URL : '';
+    $base_path = trim($base_url_value, '/');
     $admin_base_href = $base_path === '' ? '/admin/' : '/' . $base_path . '/admin/';
     $asset_base_href = $base_path === '' ? '' : '/' . $base_path;
     ?>

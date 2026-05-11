@@ -42,47 +42,65 @@ $result = mysqli_query($db, $query);
         </div>
     </section>
 
-    <!-- Packages -->
-    <section class="py-24">
-        <div class="container mx-auto px-6 max-w-6xl">
+    <!-- Journeys Grid -->
+    <section class="py-24 bg-[#faf8f5]">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="reveal">
+                    <span class="text-champagne-gradient text-[10px] font-bold uppercase tracking-[0.4em] block mb-2">Our Collection</span>
+                    <h2 class="text-4xl md:text-6xl text-navy-950" style="font-family:'Playfair Display',serif; font-weight:800;">Curated <span class="italic">Itineraries</span></h2>
+                </div>
+                <div class="flex items-center gap-6 reveal">
+                    <div class="text-right">
+                        <p class="text-navy-950 font-bold text-sm">6 Journeys Available</p>
+                        <p class="text-gray-400 text-[10px] uppercase tracking-widest mt-1">Found across 8 destinations</p>
+                    </div>
+                    <div class="h-12 w-px bg-gray-200"></div>
+                    <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-navy-950 hover:bg-navy-950 hover:text-white transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    </button>
+                </div>
+            </div>
+
             <?php if (mysqli_num_rows($result) > 0): ?>
-            <div class="space-y-16">
-                <?php $first = true; while($package = mysqli_fetch_assoc($result)): ?>
-                <div class="bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-slate-100 reveal group">
-                    <div class="grid md:grid-cols-5">
-                        <div class="md:col-span-2 relative h-80 md:h-auto overflow-hidden">
-                            <img src="<?= htmlspecialchars($package['image_url']) ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
-                            <?php if($first): ?>
-                            <div class="absolute top-6 left-6 bg-champagne text-slate-900 px-4 py-1.5 rounded-xl text-[0.6rem] font-black uppercase tracking-widest shadow-xl">Editor's Selection</div>
-                            <?php $first = false; endif; ?>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <?php while($package = mysqli_fetch_assoc($result)): ?>
+                <div class="group bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 transition-all duration-700 hover:shadow-[0_40px_80px_rgba(10,15,30,0.08)] hover:translate-y-[-10px] reveal">
+                    <div class="relative h-[400px] overflow-hidden">
+                        <img src="<?= htmlspecialchars($package['image_url']) ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/80 via-transparent to-transparent"></div>
+                        
+                        <div class="absolute top-8 left-8">
+                            <span class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest"><?= htmlspecialchars($package['duration']) ?></span>
                         </div>
-                        <div class="md:col-span-3 p-10 lg:p-16 flex flex-col justify-center">
-                            <div class="flex items-center gap-4 mb-4">
-                                <span class="text-champagne text-[0.6rem] font-bold uppercase tracking-[0.3em]"><?= htmlspecialchars($package['destination_name']) ?></span>
-                                <span class="w-8 h-px bg-slate-100"></span>
-                                <span class="text-slate-400 text-[0.6rem] font-bold uppercase tracking-[0.2em]"><?= htmlspecialchars($package['duration']) ?></span>
-                            </div>
-                            <h3 class="text-3xl lg:text-4xl text-slate-800 mb-6" style="font-family:'Playfair Display',serif; font-weight:700;"><?= htmlspecialchars($package['title']) ?></h3>
-                            <p class="text-slate-500 leading-relaxed mb-10 text-lg font-light"><?= htmlspecialchars($package['description']) ?></p>
-                            <div class="flex items-center justify-between">
-                                <div class="bg-slate-50 px-6 py-4 rounded-2xl">
-                                    <p class="text-slate-400 text-[0.6rem] uppercase tracking-widest mb-1 font-bold">Investment</p>
-                                    <div class="flex items-baseline gap-3">
-                                        <p class="text-2xl text-slate-800 font-black" style="font-family:'Playfair Display',serif;">ETB <?= number_format($package['price']) ?></p>
-                                        <p class="text-xs text-slate-400 font-medium tracking-tight">~$<?= number_format($package['price'] / 120, 0) ?> USD</p>
-                                    </div>
+
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <span class="text-[#c9a96e] text-[10px] font-bold uppercase tracking-[0.3em] block mb-2"><?= htmlspecialchars($package['destination_name']) ?></span>
+                            <h3 class="text-3xl text-white mb-2" style="font-family:'Playfair Display',serif; font-weight:700;"><?= htmlspecialchars($package['title']) ?></h3>
+                        </div>
+                    </div>
+                    
+                    <div class="p-10">
+                        <p class="text-gray-500 leading-relaxed mb-8 line-clamp-2 text-base font-light"><?= htmlspecialchars($package['description']) ?></p>
+                        
+                        <div class="flex items-center justify-between pt-8 border-t border-gray-50">
+                            <div>
+                                <p class="text-gray-400 text-[9px] uppercase tracking-widest mb-1 font-bold">Investment</p>
+                                <div class="flex items-baseline gap-3">
+                                    <span class="text-2xl text-navy-950 font-black" style="font-family:'Playfair Display',serif;">ETB <?= number_format($package['price']) ?></span>
+                                    <span class="text-[11px] text-gray-400 font-medium">~$<?= number_format($package['price'] / 120, 0) ?> USD</span>
                                 </div>
-                                <a href="<?= BASE_URL ?>/booking?package_id=<?= $package['id'] ?>" class="px-8 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-champagne hover:text-slate-900 transition-all shadow-lg hover:shadow-champagne/20 active:scale-95">
-                                    Book Journey
-                                </a>
                             </div>
+                            <a href="<?= BASE_URL ?>/booking?package_id=<?= $package['id'] ?>" class="h-14 px-8 bg-navy-950 text-white text-[10px] font-bold uppercase tracking-widest rounded-2xl flex items-center justify-center transition-all hover:bg-[#c9a96e] hover:text-navy-950 active:scale-95">
+                                Book Journey
+                            </a>
                         </div>
                     </div>
                 </div>
                 <?php endwhile; ?>
             </div>
             <?php else: ?>
+                <!-- Empty state kept same -->
                 <div class="text-center py-24 bg-white rounded-[4rem] border border-slate-50 shadow-sm">
                     <div class="text-5xl mb-6">🏜️</div>
                     <h3 class="text-2xl font-bold text-slate-800" style="font-family:'Playfair Display'">No journeys match your search</h3>
@@ -90,6 +108,9 @@ $result = mysqli_query($db, $query);
                     <a href="<?= BASE_URL ?>/packages" class="mt-8 inline-block text-champagne font-bold underline decoration-2 underline-offset-4">Reset Atlas</a>
                 </div>
             <?php endif; ?>
+        </div>
+    </section>
+
         </div>
     </section>
 

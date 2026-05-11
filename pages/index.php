@@ -244,21 +244,21 @@
                         </div>
                         <div class="md:col-span-3 p-8 lg:p-12 flex flex-col justify-center">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em]" style="font-family:'Inter',sans-serif;">7 Days / 6 Nights</span>
+                                <span class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em]" style="font-family:'Inter',sans-serif;">12 Days / 11 Nights</span>
                                 <span class="w-1 h-1 rounded-full bg-[#c9a96e]/40"></span>
                                 <span class="text-gray-500 text-xs font-semibold uppercase tracking-[0.2em]" style="font-family:'Inter',sans-serif;">Signature Journey</span>
                             </div>
-                            <h3 class="text-2xl lg:text-3xl text-white mb-4" style="font-family:'Playfair Display',serif; font-weight:700;">Historical Route Journey</h3>
+                            <h3 class="text-2xl lg:text-3xl text-white mb-4" style="font-family:'Playfair Display',serif; font-weight:700;">Historical Route Odyssey</h3>
                             <p class="text-gray-400 leading-relaxed mb-6" style="font-family:'Inter',sans-serif;">
-                                Traverse the ancient kingdoms of Axum, Gondar, and Lalibela — walking the same paths as emperors and pilgrims across millennia. Private sunrise access to the rock churches included.
+                                Traverse the ancient kingdoms of Axum, Gondar, and Lalibela — walking the same paths as emperors and pilgrims across millennia. Private sunrise access included.
                             </p>
                             <div class="flex items-end justify-between">
                                 <div>
                                     <p class="text-gray-600 text-[10px] uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">Investment</p>
-                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 185,000</p>
-                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,542 USD</p>
+                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 285,000</p>
+                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$2,375 USD</p>
                                 </div>
-                                <a href="/booking?package_id=15" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=30" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -278,15 +278,15 @@
                             </div>
                             <h3 class="text-2xl lg:text-3xl text-white mb-4" style="font-family:'Playfair Display',serif; font-weight:700;">Simien Mountains Trek</h3>
                             <p class="text-gray-400 leading-relaxed mb-6" style="font-family:'Inter',sans-serif;">
-                                Trek through Africa's most dramatic mountain range at 4,533 meters. Camp under constellations, wake to Gelada baboons descending the cliffs, and summit Ras Dashen.
+                                Trek through Africa's most dramatic mountain range at 4,533 meters. Camp under constellations, wake to Gelada baboons, and summit Ras Dashen.
                             </p>
                             <div class="flex items-end justify-between">
                                 <div>
                                     <p class="text-gray-600 text-[10px] uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">Investment</p>
-                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 115,000</p>
-                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$958 USD</p>
+                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 135,000</p>
+                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,125 USD</p>
                                 </div>
-                                <a href="/booking?package_id=11" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=7" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -300,21 +300,21 @@
                         </div>
                         <div class="md:col-span-3 p-8 lg:p-12 flex flex-col justify-center">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em]" style="font-family:'Inter',sans-serif;">3 Days / 2 Nights</span>
+                                <span class="text-[#c9a96e] text-xs font-semibold uppercase tracking-[0.2em]" style="font-family:'Inter',sans-serif;">6 Days / 5 Nights</span>
                                 <span class="w-1 h-1 rounded-full bg-[#c9a96e]/40"></span>
                                 <span class="text-gray-500 text-xs font-semibold uppercase tracking-[0.2em]" style="font-family:'Inter',sans-serif;">Cultural</span>
                             </div>
-                            <h3 class="text-2xl lg:text-3xl text-white mb-4" style="font-family:'Playfair Display',serif; font-weight:700;">Omo Valley Culture</h3>
+                            <h3 class="text-2xl lg:text-3xl text-white mb-4" style="font-family:'Playfair Display',serif; font-weight:700;">Tribes of the South</h3>
                             <p class="text-gray-400 leading-relaxed mb-6" style="font-family:'Inter',sans-serif;">
-                                Witness the Hamer bull-jumping ceremony, sit with Mursi elders, and discover body-painting traditions that have endured for 195,000 years in the cradle of humankind.
+                                Witness the Hamer bull-jumping ceremony, sit with Mursi elders, and discover body-painting traditions that have endured in the cradle of humankind.
                             </p>
                             <div class="flex items-end justify-between">
                                 <div>
                                     <p class="text-gray-600 text-[10px] uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">Investment</p>
-                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 195,000</p>
-                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,625 USD</p>
+                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 185,000</p>
+                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,542 USD</p>
                                 </div>
-                                <a href="/booking?package_id=13" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=11" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>

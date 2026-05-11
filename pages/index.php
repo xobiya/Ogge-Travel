@@ -123,7 +123,7 @@
                             <p class="text-xs text-gray-500 uppercase tracking-widest mt-1" style="font-family:'Inter',sans-serif;">Altitude (m)</p>
                         </div>
                     </div>
-                    <a href="destination-detail.php?id=8" class="btn-outline">
+                    <a href="/destination-detail?id=8" class="btn-outline">
                         Begin Your Pilgrimage
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
@@ -149,7 +149,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" data-stagger>
                 <!-- Lalibela — Feature Card -->
                 <div class="editorial-card lg:row-span-2 reveal">
-                    <a href="destination-detail.php?id=8" class="block relative h-full min-h-[500px] lg:min-h-full">
+                    <a href="/destination-detail?id=8" class="block relative h-full min-h-[500px] lg:min-h-full">
                         <img src="../assets/images/lalibela.jpg" alt="Lalibela" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                         <div class="card-overlay"></div>
                         <div class="card-content">
@@ -162,7 +162,7 @@
 
                 <!-- Simien Mountains -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=10" class="block relative h-80 overflow-hidden">
+                    <a href="/destination-detail?id=10" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/AdobeStock_178835854_Preview.jpeg" alt="Simien Mountains" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                         <div class="card-overlay"></div>
                         <div class="card-content">
@@ -175,7 +175,7 @@
 
                 <!-- Danakil -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=11" class="block relative h-80 overflow-hidden">
+                    <a href="/destination-detail?id=11" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/OIP (1).jpg" alt="Danakil Depression" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                         <div class="card-overlay"></div>
                         <div class="card-content">
@@ -188,7 +188,7 @@
 
                 <!-- Omo Valley -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=12" class="block relative h-80 overflow-hidden">
+                    <a href="/destination-detail?id=12" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/omo-cultural.jpg" alt="Omo Valley" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                         <div class="card-overlay"></div>
                         <div class="card-content">
@@ -201,7 +201,7 @@
 
                 <!-- Gondar -->
                 <div class="editorial-card reveal">
-                    <a href="destination-detail.php?id=3" class="block relative h-80 overflow-hidden">
+                    <a href="/destination-detail?id=3" class="block relative h-80 overflow-hidden">
                         <img src="../assets/images/gonder.jpg" alt="Gondar" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                         <div class="card-overlay"></div>
                         <div class="card-content">
@@ -214,7 +214,7 @@
             </div>
 
             <div class="text-center reveal">
-                <a href="Destination.php" class="btn-dark">
+                <a href="/destinations" class="btn-dark">
                     View All Destinations
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
@@ -257,7 +257,7 @@
                                     <p class="text-gray-600 text-xs uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">From</p>
                                     <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 45,000</p>
                                 </div>
-                                <a href="book.php?package_id=15" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=15" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                                     <p class="text-gray-600 text-xs uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">From</p>
                                     <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 32,000</p>
                                 </div>
-                                <a href="book.php?package_id=11" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=11" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -311,7 +311,7 @@
                                     <p class="text-gray-600 text-xs uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">From</p>
                                     <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 28,000</p>
                                 </div>
-                                <a href="book.php?package_id=13" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=13" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -319,7 +319,7 @@
             </div>
 
             <div class="text-center mt-14 reveal">
-                <a href="packages.php" class="btn-champagne">
+                <a href="/packages" class="btn-champagne">
                     Browse All Journeys
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
@@ -346,8 +346,8 @@
                         Beyond our curated routes lies a world of infinite possibilities. Our private concierge service designs bespoke journeys tailored to your exact desires — from private helicopter transfers over the Danakil to candlelit dinners in ancient ruins.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-6">
-                        <a href="contact.php" class="btn-champagne">Speak to a Specialist</a>
-                        <a href="about.php" class="btn-outline">Explore Our Legacy</a>
+                        <a href="/contact" class="btn-champagne">Speak to a Specialist</a>
+                        <a href="/about" class="btn-outline">Explore Our Legacy</a>
                     </div>
                 </div>
                 <div class="relative reveal-right">

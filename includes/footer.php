@@ -37,10 +37,10 @@
             <div class="lg:col-span-2">
                 <h4 class="text-white text-xs font-bold uppercase tracking-[0.2em] mb-6">Navigate</h4>
                 <ul class="space-y-4 text-sm">
-                    <li><a href="../pages/about.php" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Our Heritage</a></li>
-                    <li><a href="../pages/Destination.php" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Destinations</a></li>
-                    <li><a href="../pages/packages.php" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Curated Journeys</a></li>
-                    <li><a href="../pages/contact.php" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Private Enquiries</a></li>
+                    <li><a href="/about" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Our Heritage</a></li>
+                    <li><a href="/destinations" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Destinations</a></li>
+                    <li><a href="/packages" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Curated Journeys</a></li>
+                    <li><a href="/contact" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Private Enquiries</a></li>
                 </ul>
             </div>
 
@@ -48,10 +48,10 @@
             <div class="lg:col-span-3">
                 <h4 class="text-white text-xs font-bold uppercase tracking-[0.2em] mb-6">Iconic Places</h4>
                 <ul class="space-y-4 text-sm">
-                    <li><a href="../pages/destination-detail.php?id=8" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Lalibela Rock Churches</a></li>
-                    <li><a href="../pages/destination-detail.php?id=6" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Ancient Kingdom of Axum</a></li>
-                    <li><a href="../pages/destination-detail.php?id=10" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Simien Mountains Trek</a></li>
-                    <li><a href="../pages/destination-detail.php?id=11" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Danakil Depression</a></li>
+                    <li><a href="/destination-detail?id=8" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Lalibela Rock Churches</a></li>
+                    <li><a href="/destination-detail?id=6" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Ancient Kingdom of Axum</a></li>
+                    <li><a href="/destination-detail?id=10" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Simien Mountains Trek</a></li>
+                    <li><a href="/destination-detail?id=11" class="text-gray-500 hover:text-[#c9a96e] transition-colors">Danakil Depression</a></li>
                 </ul>
             </div>
 

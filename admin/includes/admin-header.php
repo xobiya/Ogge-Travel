@@ -12,7 +12,8 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page_title ?? 'Admin') ?> — OGGE Admin</title>
-    <base href="<?= htmlspecialchars((BASE_URL === '' ? '/admin/' : BASE_URL . '/admin/'), ENT_QUOTES, 'UTF-8') ?>">
+    <?php $admin_base_href = '/' . ltrim(trim((string) BASE_URL, '/') . '/admin/', '/'); ?>
+    <base href="<?= htmlspecialchars($admin_base_href, ENT_QUOTES, 'UTF-8') ?>">
     <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
     <style>

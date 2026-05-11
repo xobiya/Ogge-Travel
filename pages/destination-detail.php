@@ -16,10 +16,9 @@ if (!$destination) { header("Location: Destination.php"); exit(); }
 // Fetch heritage data
 $h = $heritage[$destination['name']] ?? null;
 
-// Fetch related packages
-$pkg_stmt = $db->prepare("SELECT * FROM packages WHERE title LIKE ? OR description LIKE ? LIMIT 3");
-$search_term = '%' . $destination['name'] . '%';
-$pkg_stmt->bind_param("ss", $search_term, $search_term);
+// Fetch related packages for this specific destination
+$pkg_stmt = $db->prepare("SELECT * FROM packages WHERE destination_id = ? ORDER BY title ASC");
+$pkg_stmt->bind_param("i", $id);
 $pkg_stmt->execute();
 $packages = $pkg_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $pkg_stmt->close();
@@ -233,9 +232,14 @@ $pkg_stmt->close();
                             <h4 class="text-xl text-white" style="font-family:'Playfair Display',serif; font-weight:700;"><?= htmlspecialchars($pkg['title']) ?></h4>
                         </div>
                     </div>
-                    <div class="p-6 flex justify-between items-center border-t border-gray-100">
-                        <p class="text-xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB <?= number_format($pkg['price']) ?></p>
-                        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider"><?= htmlspecialchars($pkg['duration']) ?></span>
+                    <div class="p-6 border-t border-gray-100">
+                        <div class="flex justify-between items-center mb-6">
+                            <p class="text-xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB <?= number_format($pkg['price']) ?></p>
+                            <span class="text-gray-400 text-[10px] font-bold uppercase tracking-wider"><?= htmlspecialchars($pkg['duration']) ?></span>
+                        </div>
+                        <div class="w-full h-12 rounded-xl flex items-center justify-center transition-all group-hover:bg-[#c9a96e]" style="background-color: #000 !important; color: #fff !important; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+                            <span style="color: #ffffff !important;">Book Journey</span>
+                        </div>
                     </div>
                 </a>
                 <?php endforeach; ?>

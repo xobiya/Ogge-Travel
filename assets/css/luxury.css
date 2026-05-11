@@ -180,29 +180,32 @@ body {
 .btn-champagne:hover {
     background: var(--champagne-light);
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(201, 169, 110, 0.3);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.875rem 2rem;
+    padding: 0.875rem 2.25rem;
     font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.8rem;
+    font-weight: 700;
+    font-size: 0.75rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--champagne);
-    background: transparent;
-    border: 1.5px solid var(--champagne);
-    border-radius: 9999px;
+    color: #ffffff;
+    background: #000000;
+    border: 1px solid var(--champagne);
+    border-radius: 0.75rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 .btn-outline:hover {
     background: var(--champagne);
     color: var(--navy-950);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(182, 145, 80, 0.4);
 }
 
 .btn-dark {
@@ -214,8 +217,8 @@ body {
     font-weight: 700;
     font-size: 0.9rem;
     letter-spacing: 0.05em;
-    color: #fff;
-    background: var(--navy-950);
+    color: #ffffff;
+    background: #000000;
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 0.75rem;
     cursor: pointer;
@@ -505,4 +508,53 @@ body {
 }
 .luxury-checkbox-wrapper input:checked ~ .luxury-checkbox-box:after {
     display: block;
+}
+
+/* ============================================================
+   GLOBAL CTA BUTTON OVERRIDE — Black Background, White Text
+   Fixes Tailwind build gaps on bg-black / text-white utilities
+   ============================================================ */
+
+/* Covers all booking, explore, and journey CTA anchors/buttons */
+a[href*="booking"],
+a[href*="packages"],
+a[href*="destinations"],
+a[href*="destination-detail"],
+button[type="submit"] {
+    text-decoration: none;
+}
+
+/* Force visibility: black bg, white text on all .btn-dark instances */
+.btn-dark,
+.btn-dark:link,
+.btn-dark:visited {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+.btn-dark:hover {
+    background-color: #c9a96e !important;
+    color: #0a0f1e !important;
+}
+
+/* Any flex div acting as a "Book Journey" / "Explore" button */
+.cta-book-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+.cta-book-btn:hover {
+    background-color: #c9a96e !important;
+    color: #000000 !important;
 }

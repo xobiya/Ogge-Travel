@@ -209,7 +209,7 @@ $csrfToken = ogge_csrf_token();
                             </div>
                             </div>
 
-                            <button type="submit" class="btn-dark w-full py-6 text-lg group overflow-hidden relative">
+                            <button type="submit" class="w-full py-6 text-lg group overflow-hidden relative rounded-2xl transition-all hover:bg-[#c9a96e] hover:text-[#0a0f1e]" style="background-color: #000000 !important; color: #ffffff !important; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(255,255,255,0.1);">
                                 <span class="relative z-10 flex items-center justify-center">
                                     Finalize Reservation
                                     <svg class="w-5 h-5 ml-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>

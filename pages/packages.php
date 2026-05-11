@@ -52,8 +52,8 @@ $result = mysqli_query($db, $query);
                 </div>
                 <div class="flex items-center gap-6 reveal">
                     <div class="text-right">
-                        <p class="text-navy-950 font-bold text-sm">6 Journeys Available</p>
-                        <p class="text-gray-400 text-[10px] uppercase tracking-widest mt-1">Found across 8 destinations</p>
+                        <p class="text-navy-950 font-bold text-sm"><?= mysqli_num_rows($result) ?> Journeys Available</p>
+                        <p class="text-gray-400 text-[10px] uppercase tracking-widest mt-1">Discover the heritage of Ethiopia</p>
                     </div>
                     <div class="h-12 w-px bg-gray-200"></div>
                     <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-navy-950 hover:bg-navy-950 hover:text-white transition-all">
@@ -91,8 +91,10 @@ $result = mysqli_query($db, $query);
                                     <span class="text-[11px] text-gray-400 font-medium">~$<?= number_format($package['price'] / 120, 0) ?> USD</span>
                                 </div>
                             </div>
-                            <a href="<?= BASE_URL ?>/booking?package_id=<?= $package['id'] ?>" class="h-14 px-8 bg-navy-950 text-white text-[10px] font-bold uppercase tracking-widest rounded-2xl flex items-center justify-center transition-all hover:bg-[#c9a96e] hover:text-navy-950 active:scale-95">
-                                Book Journey
+                            <a href="<?= BASE_URL ?>/booking?package_id=<?= $package['id'] ?>" 
+                               class="h-14 px-10 rounded-2xl flex items-center justify-center transition-all hover:bg-[#c9a96e] active:scale-95 shadow-xl" 
+                               style="background-color: #000 !important; color: #fff !important; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; min-width: 180px;">
+                                <span style="color: #ffffff !important; opacity: 1 !important;">Book Journey</span>
                             </a>
                         </div>
                     </div>
@@ -100,7 +102,6 @@ $result = mysqli_query($db, $query);
                 <?php endwhile; ?>
             </div>
             <?php else: ?>
-                <!-- Empty state kept same -->
                 <div class="text-center py-24 bg-white rounded-[4rem] border border-slate-50 shadow-sm">
                     <div class="text-5xl mb-6">🏜️</div>
                     <h3 class="text-2xl font-bold text-slate-800" style="font-family:'Playfair Display'">No journeys match your search</h3>
@@ -108,9 +109,6 @@ $result = mysqli_query($db, $query);
                     <a href="<?= BASE_URL ?>/packages" class="mt-8 inline-block text-champagne font-bold underline decoration-2 underline-offset-4">Reset Atlas</a>
                 </div>
             <?php endif; ?>
-        </div>
-    </section>
-
         </div>
     </section>
 

@@ -99,12 +99,12 @@ $csrfToken = ogge_csrf_token();
                                     <div>
                                         <textarea name="content" maxlength="10000" rows="6" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#c9a96e] transition-colors text-white placeholder-gray-500 text-sm resize-none" placeholder="Write your experience here..." required></textarea>
                                     </div>
-                                    <button type="submit" class="btn-champagne w-full py-4 text-sm justify-center">Publish Story</button>
+                                    <button type="submit" class="w-full py-4 bg-black text-white border border-white/10 rounded-xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-[#c9a96e] hover:text-black transition-all shadow-xl">Publish Story</button>
                                 </form>
                             <?php else: ?>
                                 <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
                                     <p class="text-gray-300 text-sm mb-4">Please sign in to share your journey.</p>
-                                    <a href="Account.php" class="btn-outline text-xs py-2 px-6">Sign In</a>
+                                    <a href="Account.php" class="inline-flex items-center justify-center px-8 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-[#c9a96e] hover:text-black transition-all">Sign In</a>
                                 </div>
                             <?php endif; ?>
                         </div>

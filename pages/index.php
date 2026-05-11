@@ -258,7 +258,7 @@
                                     <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 285,000</p>
                                     <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$2,375 USD</p>
                                 </div>
-                                <a href="/booking?package_id=30" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=30" class="inline-flex items-center justify-center px-8 py-3 rounded-xl transition-all hover:bg-[#c9a96e]" style="background-color: #000 !important; color: #fff !important; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@
                                     <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 135,000</p>
                                     <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,125 USD</p>
                                 </div>
-                                <a href="/booking?package_id=7" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=7" class="inline-flex items-center justify-center px-8 py-3 rounded-xl transition-all hover:bg-[#c9a96e]" style="background-color: #000 !important; color: #fff !important; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -314,7 +314,7 @@
                                     <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 185,000</p>
                                     <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,542 USD</p>
                                 </div>
-                                <a href="/booking?package_id=11" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
+                                <a href="/booking?package_id=11" class="inline-flex items-center justify-center px-8 py-3 rounded-xl transition-all hover:bg-[#c9a96e]" style="background-color: #000 !important; color: #fff !important; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Request Itinerary →</a>
                             </div>
                         </div>
                     </div>
@@ -322,9 +322,9 @@
             </div>
 
             <div class="text-center mt-14 reveal">
-                <a href="/packages" class="btn-champagne">
+                <a href="/packages" class="inline-flex items-center justify-center px-10 py-5 rounded-2xl transition-all hover:bg-[#c9a96e] shadow-2xl" style="background-color: #000 !important; color: #fff !important; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em;">
                     Browse All Journeys
-                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <svg class="w-4 h-4 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
             </div>
         </div>

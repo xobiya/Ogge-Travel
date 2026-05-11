@@ -31,10 +31,10 @@ if (!$dbUnavailable) {
     try {
         if ($q !== '') {
             $term = '%' . $q . '%';
-            $stmt = $db->prepare('SELECT * FROM destinations WHERE name LIKE ? OR description LIKE ? ORDER BY name ASC');
+            $stmt = $db->prepare('SELECT d.*, (SELECT COUNT(*) FROM packages p WHERE p.destination_id = d.id) as package_count FROM destinations d WHERE d.name LIKE ? OR d.description LIKE ? ORDER BY d.name ASC');
             $stmt->bind_param('ss', $term, $term);
         } else {
-            $stmt = $db->prepare('SELECT * FROM destinations ORDER BY name ASC');
+            $stmt = $db->prepare('SELECT d.*, (SELECT COUNT(*) FROM packages p WHERE p.destination_id = d.id) as package_count FROM destinations d ORDER BY d.name ASC');
         }
         $stmt->execute();
         $destinations = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -79,7 +79,7 @@ if ($dbUnavailable) {
             <div class="mt-12 max-w-2xl">
                 <form method="GET" class="relative group">
                     <input type="text" name="search" value="<?= htmlspecialchars($q) ?>" placeholder="Search destinations..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-[#c9a96e] transition-all backdrop-blur-sm">
-                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 bg-[#c9a96e] text-[#0a0f1e] px-6 py-2 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-[#b8985d] transition-colors">Find</button>
+                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white px-8 py-3 rounded-xl font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-[#c9a96e] hover:text-black transition-all shadow-xl">Find Destination</button>
                 </form>
             </div>
         </div>
@@ -101,9 +101,15 @@ if ($dbUnavailable) {
                         <img src="<?= htmlspecialchars($dest['image_url']) ?>" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent opacity-60"></div>
                         <div class="absolute bottom-8 left-8 right-8">
-                            <span class="text-[#c9a96e] text-[0.6rem] font-bold uppercase tracking-[0.3em] mb-2 block">Heritage Site</span>
-                            <h3 class="text-3xl text-white font-bold mb-4" style="font-family:'Playfair Display'"><?= htmlspecialchars($dest['name']) ?></h3>
-                            <div class="champagne-line w-0 group-hover:w-full transition-all duration-500"></div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-[#c9a96e] text-[0.6rem] font-bold uppercase tracking-[0.3em]">Heritage Site</span>
+                                <span class="w-1 h-1 rounded-full bg-white/40"></span>
+                                <span class="text-white text-[0.6rem] font-bold uppercase tracking-[0.3em]"><?= $dest['package_count'] ?? 0 ?> Journeys</span>
+                            </div>
+                            <h3 class="text-3xl text-white font-bold mb-6" style="font-family:'Playfair Display'"><?= htmlspecialchars($dest['name']) ?></h3>
+                            <div class="w-full h-12 rounded-xl flex items-center justify-center transition-all group-hover:bg-[#c9a96e]" style="background-color: rgba(0,0,0,0.8) !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.1); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; backdrop-filter: blur(8px);">
+                                <span style="color: #ffffff !important;">Explore Destination</span>
+                            </div>
                         </div>
                     </div>
                 </a>

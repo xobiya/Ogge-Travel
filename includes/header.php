@@ -72,7 +72,7 @@ include_once(__DIR__ . '/seo-lang.php');
                         </div>
                     </div>
                 <?php else: ?>
-                    <a href="/account" class="btn-outline ml-2 text-xs py-2 px-5" style="font-family:'Inter',sans-serif;">Sign In</a>
+                    <a href="/account" class="ml-4 px-6 py-2 rounded-lg transition-all hover:bg-[#c9a96e] hover:text-[#0a0f1e]" style="background-color: #000000 !important; color: #ffffff !important; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(255,255,255,0.1);">Sign In</a>
                 <?php endif; ?>
 
                 <button onclick="toggleGlobalSearch()" class="p-2 text-white/60 hover:text-[#c9a96e] transition-colors ml-2" id="searchToggleBtn">

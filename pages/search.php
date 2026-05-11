@@ -47,7 +47,7 @@ $page_title = $q ? "Search Results for '$q'" : "Discover Heritage";
             <div class="max-w-2xl mx-auto mt-8">
                 <form method="GET" class="relative">
                     <input type="text" name="q" placeholder="Where do you wish to go?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-[#c9a96e] transition-all">
-                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 bg-[#c9a96e] text-[#0a0f1e] px-6 py-2 rounded-xl font-bold">Search</button>
+                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white px-8 py-3 rounded-xl font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-[#c9a96e] hover:text-black transition-all">Search</button>
                 </form>
             </div>
             <?php endif; ?>
@@ -98,9 +98,14 @@ $page_title = $q ? "Search Results for '$q'" : "Discover Heritage";
                     <div class="p-8">
                         <p class="text-[0.6rem] font-bold text-[#c9a96e] uppercase tracking-widest mb-2"><?= htmlspecialchars($pkg['destination_name']) ?></p>
                         <h4 class="text-lg font-bold text-slate-800 mb-4" style="font-family:'Playfair Display'"><?= htmlspecialchars($pkg['title']) ?></h4>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-50">
-                            <span class="text-lg font-black text-slate-800">ETB <?= number_format($pkg['price']) ?></span>
-                            <span class="text-[#c9a96e] text-xs font-bold uppercase tracking-widest">Book Now →</span>
+                        <div class="flex items-center justify-between pt-6 border-t border-slate-50 gap-4">
+                            <div class="shrink-0">
+                                <p class="text-xs font-black text-slate-800">ETB <?= number_format($pkg['price']) ?></p>
+                                <p class="text-[8px] text-gray-400 uppercase tracking-tighter">~$<?= number_format($pkg['price']/120, 0) ?> USD</p>
+                            </div>
+                            <div class="flex-grow h-10 rounded-lg flex items-center justify-center transition-all group-hover:bg-[#c9a96e]" style="background-color: #000 !important; color: #fff !important; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+                                <span style="color: #ffffff !important;">Book Now</span>
+                            </div>
                         </div>
                     </div>
                 </a>

@@ -254,8 +254,9 @@
                             </p>
                             <div class="flex items-end justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-xs uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">From</p>
-                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 45,000</p>
+                                    <p class="text-gray-600 text-[10px] uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">Investment</p>
+                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 185,000</p>
+                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,542 USD</p>
                                 </div>
                                 <a href="/booking?package_id=15" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
@@ -281,8 +282,9 @@
                             </p>
                             <div class="flex items-end justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-xs uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">From</p>
-                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 32,000</p>
+                                    <p class="text-gray-600 text-[10px] uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">Investment</p>
+                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 115,000</p>
+                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$958 USD</p>
                                 </div>
                                 <a href="/booking?package_id=11" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>
@@ -308,8 +310,9 @@
                             </p>
                             <div class="flex items-end justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-xs uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">From</p>
-                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 28,000</p>
+                                    <p class="text-gray-600 text-[10px] uppercase tracking-wider mb-1" style="font-family:'Inter',sans-serif;">Investment</p>
+                                    <p class="text-2xl text-[#c9a96e]" style="font-family:'Playfair Display',serif; font-weight:700;">ETB 195,000</p>
+                                    <p class="text-gray-500 text-[10px] font-medium mt-0.5">~$1,625 USD</p>
                                 </div>
                                 <a href="/booking?package_id=13" class="btn-outline text-xs py-2.5 px-6">Request Itinerary →</a>
                             </div>

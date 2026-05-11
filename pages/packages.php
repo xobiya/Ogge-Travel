@@ -66,9 +66,12 @@ $result = mysqli_query($db, $query);
                             <h3 class="text-3xl lg:text-4xl text-slate-800 mb-6" style="font-family:'Playfair Display',serif; font-weight:700;"><?= htmlspecialchars($package['title']) ?></h3>
                             <p class="text-slate-500 leading-relaxed mb-10 text-lg font-light"><?= htmlspecialchars($package['description']) ?></p>
                             <div class="flex items-center justify-between">
-                                <div class="bg-slate-50 px-6 py-3 rounded-2xl">
-                                    <p class="text-slate-400 text-[0.5rem] uppercase tracking-widest mb-1 font-bold">Starting At</p>
-                                    <p class="text-2xl text-slate-800 font-black" style="font-family:'Playfair Display',serif;">ETB <?= number_format($package['price']) ?></p>
+                                <div class="bg-slate-50 px-6 py-4 rounded-2xl">
+                                    <p class="text-slate-400 text-[0.6rem] uppercase tracking-widest mb-1 font-bold">Investment</p>
+                                    <div class="flex items-baseline gap-3">
+                                        <p class="text-2xl text-slate-800 font-black" style="font-family:'Playfair Display',serif;">ETB <?= number_format($package['price']) ?></p>
+                                        <p class="text-xs text-slate-400 font-medium tracking-tight">~$<?= number_format($package['price'] / 120, 0) ?> USD</p>
+                                    </div>
                                 </div>
                                 <a href="<?= BASE_URL ?>/booking?package_id=<?= $package['id'] ?>" class="px-8 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-champagne hover:text-slate-900 transition-all shadow-lg hover:shadow-champagne/20 active:scale-95">
                                     Book Journey

@@ -14,9 +14,9 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
     <title><?= htmlspecialchars($page_title ?? 'Admin') ?> — OGGE Admin</title>
     <?php
     $base_url_value = defined('BASE_URL') ? BASE_URL : '';
-    $base_path = trim($base_url_value, '/');
-    $admin_base_href = $base_path === '' ? '/admin/' : '/' . $base_path . '/admin/';
+    $base_path = ltrim(rtrim($base_url_value, '/'), '/');
     $asset_base_href = $base_path === '' ? '' : '/' . $base_path;
+    $admin_base_href = $asset_base_href . '/admin/';
     ?>
     <base href="<?= htmlspecialchars($admin_base_href, ENT_QUOTES, 'UTF-8') ?>">
     <link rel="stylesheet" href="<?= htmlspecialchars($asset_base_href . '/assets/css/style.css?v=1.2', ENT_QUOTES, 'UTF-8') ?>">

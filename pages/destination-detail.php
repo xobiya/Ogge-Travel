@@ -32,12 +32,8 @@ $pkg_stmt->close();
     <title><?= htmlspecialchars($destination['name']) ?> — The Heritage Suite | OGGE Travel</title>
     <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
     <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        #destinationMap { height: 400px; width: 100%; border-radius: 2rem; z-index: 10; }
-    </style>
 </head>
+
 <body class="bg-[#faf8f5] min-h-screen" style="font-family:'Inter',sans-serif;">
 
     <?php include('../includes/header.php'); ?>
@@ -102,25 +98,35 @@ $pkg_stmt->close();
         </div>
     </section>
 
-    <!-- ===== INTERACTIVE MAP ===== -->
-    <?php if ($destination['latitude'] && $destination['longitude']): ?>
+    <!-- ===== INTERACTIVE GOOGLE MAP ===== -->
     <section class="py-12">
         <div class="container mx-auto px-6 max-w-5xl reveal">
-            <div id="destinationMap" class="shadow-2xl border border-gray-100"></div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const map = L.map('destinationMap').setView([<?= $destination['latitude'] ?>, <?= $destination['longitude'] ?>], 13);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
-                    L.marker([<?= $destination['latitude'] ?>, <?= $destination['longitude'] ?>]).addTo(map)
-                        .bindPopup('<b style="font-family:Playfair Display"><?= htmlspecialchars($destination['name']) ?></b><br>Heritage Site')
-                        .openPopup();
-                });
-            </script>
+            <div class="bg-white p-4 rounded-[2.5rem] shadow-2xl border border-gray-100 overflow-hidden">
+                <div class="h-[400px] md:h-[550px] rounded-[1.8rem] overflow-hidden">
+
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: contrast(1.1) brightness(0.9);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=<?= urlencode($destination['name'] . ', Ethiopia') ?>&zoom=12">
+                    </iframe>
+                    <!-- Fallback if no API key is provided: use the standard search embed -->
+                    <script>
+                        // Check if the iframe failed to load or has the placeholder key
+                        const iframe = document.querySelector('iframe');
+                        if (iframe.src.includes('YOUR_API_KEY')) {
+                            iframe.src = "https://maps.google.com/maps?q=<?= urlencode($destination['name'] . ', Ethiopia') ?>&t=&z=13&ie=UTF8&iwloc=&output=embed";
+                        }
+                    </script>
+                </div>
+            </div>
+            <p class="text-center text-gray-400 text-xs mt-6 uppercase tracking-widest font-bold">Discover the surroundings of <?= htmlspecialchars($destination['name']) ?></p>
         </div>
     </section>
-    <?php endif; ?>
+
 
     <?php if ($h && !empty($h['chronicle'])): ?>
     <!-- ===== CHRONICLES & LORE ===== -->
@@ -219,7 +225,7 @@ $pkg_stmt->close();
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-stagger>
                 <?php foreach($packages as $pkg): ?>
-                <a href="book.php?package_id=<?= $pkg['id'] ?>" class="editorial-card block reveal">
+                <a href="<?= BASE_URL ?>/booking?package_id=<?= $pkg['id'] ?>" class="editorial-card block reveal">
                     <div class="h-56 overflow-hidden relative">
                         <img src="<?= htmlspecialchars($pkg['image_url']) ?>" class="w-full h-full object-cover" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/80 to-transparent"></div>

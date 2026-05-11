@@ -7,23 +7,24 @@ $q = trim($_GET['search'] ?? '');
 $dbUnavailable = !($db instanceof mysqli);
 
 $fallbackDestinations = [
-    ['id' => 1, 'name' => 'Arba Minch', 'description' => 'Known for its breathtaking landscapes and the famous Nechisar National Park.', 'image_url' => '../assets/images/arbaminch.jpg'],
-    ['id' => 2, 'name' => 'Hawassa', 'description' => 'A stunning lakeside city known for its vibrant fish market and natural beauty.', 'image_url' => '../assets/images/hawassa.jpg'],
-    ['id' => 3, 'name' => 'Gonder', 'description' => 'Famous for its historical castles and being the Camelot of Africa.', 'image_url' => '../assets/images/gonder.jpg'],
-    ['id' => 4, 'name' => 'Bahirdar', 'description' => 'A beautiful city near Lake Tana and the Blue Nile Falls.', 'image_url' => '../assets/images/bahirdar.jpg'],
-    ['id' => 5, 'name' => 'Mekelle', 'description' => 'A cultural hub known for its historical significance and rock-hewn churches.', 'image_url' => '../assets/images/mekelle.jpg'],
-    ['id' => 6, 'name' => 'Aksum', 'description' => 'An ancient city famous for its obelisks and ties to the Ark of the Covenant.', 'image_url' => '../assets/images/aksum.jpg'],
-    ['id' => 7, 'name' => 'Harer', 'description' => 'A walled city known for its rich Islamic heritage and vibrant markets.', 'image_url' => '../assets/images/harer.jpg'],
-    ['id' => 8, 'name' => 'Lalibela', 'description' => 'Home to the incredible rock-hewn churches and a UNESCO World Heritage site.', 'image_url' => '../assets/images/lalibela.jpg'],
-    ['id' => 9, 'name' => 'Jimma', 'description' => 'Known as the birthplace of coffee and surrounded by lush green landscapes.', 'image_url' => '../assets/images/jimma.jpg'],
-    ['id' => 10, 'name' => 'Simien Mountains', 'description' => 'Dramatic mountain landscape with unique wildlife.', 'image_url' => '../assets/images/simien.jpg'],
-    ['id' => 11, 'name' => 'Danakil Depression', 'description' => 'One of the hottest places on Earth with alien landscapes.', 'image_url' => '../assets/images/danakil.jpg'],
-    ['id' => 12, 'name' => 'Omo Valley', 'description' => 'Cultural hub of diverse ethnic communities.', 'image_url' => '../assets/images/omo.jpg'],
-    ['id' => 13, 'name' => 'Axum', 'description' => 'Ancient city with historic obelisks.', 'image_url' => '../assets/images/aksum.jpg'],
-    ['id' => 14, 'name' => 'Addis Ababa', 'description' => 'The vibrant capital city of Ethiopia, rich in history and culture.', 'image_url' => '../assets/images/Addis ababa.jpg'],
-    ['id' => 17, 'name' => 'Tiya', 'description' => 'A UNESCO World Heritage Site with ancient stelae and archaeological significance.', 'image_url' => '../assets/images/tiya.jpg'],
-    ['id' => 25, 'name' => 'Dire Dawa', 'description' => 'A vibrant city with a mix of modern and traditional Ethiopian culture.', 'image_url' => '../assets/images/dire.jpg'],
+    ['id' => 1, 'name' => 'Arba Minch', 'description' => 'Known for its breathtaking landscapes and the famous Nechisar National Park.', 'image_url' => BASE_URL . '/assets/images/arbaminch.jpg'],
+    ['id' => 2, 'name' => 'Hawassa', 'description' => 'A stunning lakeside city known for its vibrant fish market and natural beauty.', 'image_url' => BASE_URL . '/assets/images/hawassa.jpg'],
+    ['id' => 3, 'name' => 'Gonder', 'description' => 'Famous for its historical castles and being the Camelot of Africa.', 'image_url' => BASE_URL . '/assets/images/gonder.jpg'],
+    ['id' => 4, 'name' => 'Bahirdar', 'description' => 'A beautiful city near Lake Tana and the Blue Nile Falls.', 'image_url' => BASE_URL . '/assets/images/bahirdar.jpg'],
+    ['id' => 5, 'name' => 'Mekelle', 'description' => 'A cultural hub known for its historical significance and rock-hewn churches.', 'image_url' => BASE_URL . '/assets/images/mekelle.jpg'],
+    ['id' => 6, 'name' => 'Aksum', 'description' => 'An ancient city famous for its obelisks and ties to the Ark of the Covenant.', 'image_url' => BASE_URL . '/assets/images/aksum.jpg'],
+    ['id' => 7, 'name' => 'Harer', 'description' => 'A walled city known for its rich Islamic heritage and vibrant markets.', 'image_url' => BASE_URL . '/assets/images/harer.jpg'],
+    ['id' => 8, 'name' => 'Lalibela', 'description' => 'Home to the incredible rock-hewn churches and a UNESCO World Heritage site.', 'image_url' => BASE_URL . '/assets/images/lalibela.jpg'],
+    ['id' => 9, 'name' => 'Jimma', 'description' => 'Known as the birthplace of coffee and surrounded by lush green landscapes.', 'image_url' => BASE_URL . '/assets/images/jimma.jpg'],
+    ['id' => 10, 'name' => 'Simien Mountains', 'description' => 'Dramatic mountain landscape with unique wildlife.', 'image_url' => BASE_URL . '/assets/images/simien.jpg'],
+    ['id' => 11, 'name' => 'Danakil Depression', 'description' => 'One of the hottest places on Earth with alien landscapes.', 'image_url' => BASE_URL . '/assets/images/danakil.jpg'],
+    ['id' => 12, 'name' => 'Omo Valley', 'description' => 'Cultural hub of diverse ethnic communities.', 'image_url' => BASE_URL . '/assets/images/omo.jpg'],
+    ['id' => 13, 'name' => 'Axum', 'description' => 'Ancient city with historic obelisks.', 'image_url' => BASE_URL . '/assets/images/aksum.jpg'],
+    ['id' => 14, 'name' => 'Addis Ababa', 'description' => 'The vibrant capital city of Ethiopia, rich in history and culture.', 'image_url' => BASE_URL . '/assets/images/Addis ababa.jpg'],
+    ['id' => 17, 'name' => 'Tiya', 'description' => 'A UNESCO World Heritage Site with ancient stelae and archaeological significance.', 'image_url' => BASE_URL . '/assets/images/tiya.jpg'],
+    ['id' => 25, 'name' => 'Dire Dawa', 'description' => 'A vibrant city with a mix of modern and traditional Ethiopian culture.', 'image_url' => BASE_URL . '/assets/images/dire.jpg'],
 ];
+
 
 $destinations = [];
 if (!$dbUnavailable) {
@@ -95,7 +96,7 @@ if ($dbUnavailable) {
             <?php if (count($destinations) > 0): ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <?php foreach($destinations as $dest): ?>
-                <a href="destination-detail.php?id=<?= $dest['id'] ?>" class="group block bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 reveal">
+                <a href="<?= BASE_URL ?>/destination-detail?id=<?= $dest['id'] ?>" class="group block bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 reveal">
                     <div class="relative h-96 overflow-hidden">
                         <img src="<?= htmlspecialchars($dest['image_url']) ?>" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent opacity-60"></div>
@@ -111,7 +112,7 @@ if ($dbUnavailable) {
             <?php else: ?>
                 <div class="text-center py-20">
                     <p class="text-slate-400">No destinations found for "<?= htmlspecialchars($q) ?>"</p>
-                    <a href="Destination.php" class="text-[#c9a96e] font-bold underline mt-4 inline-block">Clear Search</a>
+                    <a href="<?= BASE_URL ?>/destinations" class="text-[#c9a96e] font-bold underline mt-4 inline-block">Clear Search</a>
                 </div>
             <?php endif; ?>
         </div>

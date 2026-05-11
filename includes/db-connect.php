@@ -83,4 +83,18 @@ try {
     exit('Service temporarily unavailable. Please try again later.');
 }
 
-?>
+// --- BASE_URL CALCULATION ---
+if (!defined('BASE_URL')) {
+    $script_name = $_SERVER['SCRIPT_NAME'];
+    $base_dir = str_replace('\\', '/', dirname($script_name));
+    if ($base_dir === '/') {
+        $base_dir = '';
+    }
+    // Remove subfolders to get the project root
+    $base_dir = preg_replace('/\/includes$/', '', $base_dir);
+    $base_dir = preg_replace('/\/admin$/', '', $base_dir);
+    $base_dir = preg_replace('/\/pages$/', '', $base_dir);
+    
+    define('BASE_URL', rtrim($base_dir, '/'));
+}
+?>

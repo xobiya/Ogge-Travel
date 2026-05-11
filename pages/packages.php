@@ -70,7 +70,7 @@ $result = mysqli_query($db, $query);
                                     <p class="text-slate-400 text-[0.5rem] uppercase tracking-widest mb-1 font-bold">Starting At</p>
                                     <p class="text-2xl text-slate-800 font-black" style="font-family:'Playfair Display',serif;">ETB <?= number_format($package['price']) ?></p>
                                 </div>
-                                <a href="book.php?package_id=<?= $package['id'] ?>" class="px-8 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-champagne hover:text-slate-900 transition-all shadow-lg hover:shadow-champagne/20 active:scale-95">
+                                <a href="<?= BASE_URL ?>/booking?package_id=<?= $package['id'] ?>" class="px-8 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-champagne hover:text-slate-900 transition-all shadow-lg hover:shadow-champagne/20 active:scale-95">
                                     Book Journey
                                 </a>
                             </div>
@@ -84,7 +84,7 @@ $result = mysqli_query($db, $query);
                     <div class="text-5xl mb-6">🏜️</div>
                     <h3 class="text-2xl font-bold text-slate-800" style="font-family:'Playfair Display'">No journeys match your search</h3>
                     <p class="text-slate-400 mt-2">Our concierge is mapping new routes every day. Try another term.</p>
-                    <a href="packages.php" class="mt-8 inline-block text-champagne font-bold underline decoration-2 underline-offset-4">Reset Atlas</a>
+                    <a href="<?= BASE_URL ?>/packages" class="mt-8 inline-block text-champagne font-bold underline decoration-2 underline-offset-4">Reset Atlas</a>
                 </div>
             <?php endif; ?>
         </div>

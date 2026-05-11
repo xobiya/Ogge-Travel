@@ -41,7 +41,7 @@ $result = $db->query($query);
                             <span class="text-2xl font-bold text-blue-600">ETB <?php echo number_format($package['price'], 2); ?></span>
                             <span class="text-sm text-gray-500">per person</span>
                         </div>
-                        <a href="book.php?package_id=<?php echo $package['id']; ?>" 
+                        <a href="<?= BASE_URL ?>/booking?package_id=<?php echo $package['id']; ?>" 
                            class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors block text-center">
                             Book Now
                         </a>

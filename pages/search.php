@@ -71,7 +71,7 @@ $page_title = $q ? "Search Results for '$q'" : "Discover Heritage";
             <h2 class="text-2xl text-slate-800 mb-8" style="font-family:'Playfair Display'; font-weight:800;">Destinations (<?= count($destinations) ?>)</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <?php foreach($destinations as $dest): ?>
-                <a href="destination-detail.php?id=<?= $dest['id'] ?>" class="group block bg-white rounded-[2rem] overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100">
+                <a href="<?= BASE_URL ?>/destination-detail?id=<?= $dest['id'] ?>" class="group block bg-white rounded-[2rem] overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100">
                     <div class="relative h-60">
                         <img src="<?= htmlspecialchars($dest['image_url']) ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/80 via-transparent to-transparent"></div>
@@ -90,7 +90,7 @@ $page_title = $q ? "Search Results for '$q'" : "Discover Heritage";
             <h2 class="text-2xl text-slate-800 mb-8" style="font-family:'Playfair Display'; font-weight:800;">Travel Packages (<?= count($packages) ?>)</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <?php foreach($packages as $pkg): ?>
-                <a href="book.php?package_id=<?= $pkg['id'] ?>" class="bg-white rounded-[2rem] overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 block">
+                <a href="<?= BASE_URL ?>/booking?package_id=<?= $pkg['id'] ?>" class="bg-white rounded-[2rem] overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 block">
                     <div class="h-56 relative">
                         <img src="<?= htmlspecialchars($pkg['image_url']) ?>" class="w-full h-full object-cover">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase text-slate-800 tracking-widest"><?= htmlspecialchars($pkg['duration']) ?></div>

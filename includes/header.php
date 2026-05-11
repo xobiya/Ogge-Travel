@@ -10,7 +10,7 @@ include_once(__DIR__ . '/seo-lang.php');
     <nav class="container mx-auto px-6 py-5 max-w-7xl">
         <div class="flex justify-between items-center">
             <!-- Logo -->
-            <a href="/" class="flex items-center space-x-3 group">
+            <a href="<?= BASE_URL ?>/" class="flex items-center space-x-3 group">
                 <div class="w-10 h-10 bg-gradient-to-br from-[#c9a96e] to-[#e8d5a8] rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                     <svg class="w-5 h-5 text-[#0a0f1e]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
@@ -22,12 +22,13 @@ include_once(__DIR__ . '/seo-lang.php');
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-1">
-                <a href="/home" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('home') ?></a>
-                <a href="/destinations" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('destinations') ?></a>
-                <a href="/packages" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('packages') ?></a>
-                <a href="/about" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('explore') ?></a>
-                <a href="/journal" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('journal') ?></a>
-                <a href="/contact" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('contact') ?></a>
+                <a href="<?= BASE_URL ?>/home" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('home') ?></a>
+                <a href="<?= BASE_URL ?>/destinations" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('destinations') ?></a>
+                <a href="<?= BASE_URL ?>/packages" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('packages') ?></a>
+                <a href="<?= BASE_URL ?>/about" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('explore') ?></a>
+                <a href="<?= BASE_URL ?>/journal" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('journal') ?></a>
+                <a href="<?= BASE_URL ?>/contact" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('contact') ?></a>
+
                 
                 <div class="w-px h-5 bg-white/20 mx-3"></div>
 
@@ -96,11 +97,11 @@ include_once(__DIR__ . '/seo-lang.php');
         <div id="mobileMenu" class="md:hidden hidden mt-4 bg-[#0a0f1e] rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
             <div class="flex flex-col p-4 space-y-1" style="font-family:'Inter',sans-serif;">
                 <a href="/home" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Home</a>
-                <a href="/destinations" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Destinations</a>
-                <a href="/packages" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Journeys</a>
-                <a href="/about" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Heritage</a>
-                <a href="/journal" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Journals</a>
-                <a href="/contact" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Enquire</a>
+                <a href="<?= BASE_URL ?>/destinations" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Destinations</a>
+                <a href="<?= BASE_URL ?>/packages" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Journeys</a>
+                <a href="<?= BASE_URL ?>/about" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Heritage</a>
+                <a href="<?= BASE_URL ?>/journal" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Journals</a>
+                <a href="<?= BASE_URL ?>/contact" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Enquire</a>
                 <div class="h-px bg-white/10 my-2 mx-4"></div>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="px-5 py-4 flex items-center gap-4 bg-white/5 rounded-xl mb-2">
@@ -112,16 +113,16 @@ include_once(__DIR__ . '/seo-lang.php');
                             <p class="text-white/40 text-[10px] uppercase tracking-widest">Founding Member</p>
                         </div>
                     </div>
-                    <a href="/profile" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors flex items-center">
+                    <a href="<?= BASE_URL ?>/profile" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors flex items-center">
                         <svg class="w-4 h-4 mr-3 text-[#c9a96e]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         Dashboard
                     </a>
-                    <a href="../includes/logout.php" class="px-5 py-3 text-red-400 text-xs font-semibold tracking-[0.15em] uppercase hover:bg-red-500/10 rounded-xl transition-colors flex items-center">
+                    <a href="<?= BASE_URL ?>/logout" class="px-5 py-3 text-red-400 text-xs font-semibold tracking-[0.15em] uppercase hover:bg-red-500/10 rounded-xl transition-colors flex items-center">
                         <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                         Sign Out
                     </a>
                 <?php else: ?>
-                    <a href="/account" class="mx-2 my-2 text-center py-3 border border-[#c9a96e] text-[#c9a96e] text-xs font-semibold tracking-[0.15em] uppercase rounded-full hover:bg-[#c9a96e] hover:text-[#0a0f1e] transition-all">Sign In</a>
+                    <a href="<?= BASE_URL ?>/account" class="mx-2 my-2 text-center py-3 border border-[#c9a96e] text-[#c9a96e] text-xs font-semibold tracking-[0.15em] uppercase rounded-full hover:bg-[#c9a96e] hover:text-[#0a0f1e] transition-all">Sign In</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -136,7 +137,7 @@ include_once(__DIR__ . '/seo-lang.php');
     
     <div class="w-full max-w-3xl transform scale-95 transition-transform duration-500" id="searchContent">
         <h2 class="text-white text-3xl md:text-5xl text-center mb-12" style="font-family:'Playfair Display',serif;">Where do you wish to <span class="text-champagne-gradient italic">escape</span>?</h2>
-        <form action="/search" method="GET" class="relative">
+        <form action="<?= BASE_URL ?>/search" method="GET" class="relative">
             <input type="text" name="q" placeholder="<?= $lang==='am'?'መዳረሻዎችን ወይም ጥቅሎችን ይፈልጉ...':'Search destinations or packages...' ?>" class="w-full bg-transparent border-b-2 border-white/10 text-white text-2xl md:text-4xl py-6 focus:outline-none focus:border-[#c9a96e] transition-colors placeholder:text-white/10 text-center" style="font-family:'Inter',sans-serif;" autofocus>
             <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#c9a96e] hover:scale-110 transition-transform">
                 <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

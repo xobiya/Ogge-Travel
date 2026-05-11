@@ -19,13 +19,13 @@ $csrfToken = ogge_csrf_token();
 
     <!-- Minimal header -->
     <div class="p-6 flex justify-between items-center max-w-7xl mx-auto w-full">
-        <a href="index.php" class="flex items-center gap-3">
+        <a href="<?= BASE_URL ?>/" class="flex items-center gap-3">
             <div class="w-9 h-9 bg-gradient-to-br from-[#c9a96e] to-[#e8d5a8] rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-[#0a0f1e]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
             <span class="text-xl text-white tracking-wide" style="font-family:'Playfair Display',serif; font-weight:700;">OGGE <span class="text-[#c9a96e]">Travel</span></span>
         </a>
-        <a href="index.php" class="text-gray-500 text-xs font-semibold uppercase tracking-wider hover:text-[#c9a96e] transition-colors">← Back Home</a>
+        <a href="<?= BASE_URL ?>/" class="text-gray-500 text-xs font-semibold uppercase tracking-wider hover:text-[#c9a96e] transition-colors">← Back Home</a>
     </div>
 
     <!-- Auth Forms -->
@@ -71,7 +71,7 @@ $csrfToken = ogge_csrf_token();
                         </button>
                     </div>
                     <div class="text-right">
-                        <a href="forgot-password.php" class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 hover:text-[#c9a96e]">Forgot password?</a>
+                        <a href="<?= BASE_URL ?>/forgot-password" class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 hover:text-[#c9a96e]">Forgot password?</a>
                     </div>
                     <button type="submit" class="w-full py-4 bg-[#c9a96e] text-[#0a0f1e] rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-[#e8d5a8] transition-all hover:shadow-lg">Sign In</button>
                 </form>

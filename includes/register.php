@@ -4,14 +4,14 @@ ogge_start_secure_session();
 require_once __DIR__ . '/db-connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 $_SESSION['auth_mode'] = 'register';
 
 if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
     ogge_flash('error', 'Your session expired. Please try creating your account again.');
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 $name = trim(preg_replace('/\s+/', ' ', $_POST['name'] ?? ''));
@@ -54,7 +54,7 @@ $stmt->store_result();
 if ($stmt->num_rows > 0) {
     $stmt->close();
     ogge_flash('error', 'An account with this email already exists. Please sign in or reset your password.');
-    ogge_redirect('../pages/Account.php?mode=login');
+    ogge_redirect(BASE_URL . '/account?mode=login');
 }
 $stmt->close();
 
@@ -74,7 +74,7 @@ try {
         'role' => $role,
     ]);
     ogge_flash('success', 'Your account is ready. Welcome to OGGE Travel!');
-    ogge_redirect('../pages/profile.php');
+    ogge_redirect(BASE_URL . '/profile');
 } catch (mysqli_sql_exception $exception) {
     $stmt->close();
     error_log('Registration failed: ' . $exception->getMessage());

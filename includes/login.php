@@ -4,7 +4,7 @@ ogge_start_secure_session();
 require_once __DIR__ . '/db-connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    ogge_redirect('../pages/Account.php');
+    ogge_redirect(BASE_URL . '/account');
 }
 
 $_SESSION['auth_mode'] = 'login';
@@ -69,9 +69,9 @@ ogge_clear_failed_logins($email);
 ogge_sign_in_user($user);
 
 if (($_SESSION['user_role'] ?? 'user') === 'admin') {
-    ogge_redirect('../admin/index.php');
+    ogge_redirect(BASE_URL . '/admin');
 }
 
 ogge_flash('success', 'Welcome back!');
-ogge_redirect('../pages/index.php');
+ogge_redirect(BASE_URL . '/');
 ?>

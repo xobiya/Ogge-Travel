@@ -87,7 +87,7 @@
             <div class="champagne-line-center"></div>
             <h2 class="text-3xl md:text-5xl mt-8 mb-6 text-[#0a0f1e]" style="font-family:'Playfair Display',serif; font-weight:800;">Begin Your <span class="text-champagne-gradient">Story</span> With Us</h2>
             <p class="text-gray-500 text-lg mb-10">The next chapter of your life is waiting in the highlands and valleys of Ethiopia.</p>
-            <a href="packages.php" class="btn-champagne">
+            <a href="<?= BASE_URL ?>/packages" class="btn-champagne">
                 Explore Curated Journeys
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>

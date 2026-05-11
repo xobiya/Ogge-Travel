@@ -4,7 +4,7 @@ ogge_start_secure_session();
 require_once __DIR__ . '/../includes/db-connect.php';
 
 if (!isset($_SESSION['user_id'])) { 
-    ogge_redirect('Account.php'); 
+    ogge_redirect(BASE_URL . '/account'); 
 }
 
 $user_id = $_SESSION['user_id'];
@@ -43,7 +43,7 @@ $result = $stmt->get_result();
                 </div>
                 <h2 class="text-3xl text-navy-950 mb-4" style="font-family:'Playfair Display',serif; font-weight:700;">A Blank Canvas</h2>
                 <p class="text-gray-400 mb-10 max-w-md mx-auto">Your travel story hasn't begun. Let us curate your first masterpiece in the heart of Ethiopia.</p>
-                <a href="packages.php" class="btn-champagne">Explore Collections</a>
+                <a href="<?= BASE_URL ?>/packages" class="btn-champagne">Explore Collections</a>
             </div>
         <?php else: ?>
             <div class="space-y-8">

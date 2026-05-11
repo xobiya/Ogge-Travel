@@ -2,7 +2,7 @@
 session_start();
 include("../includes/db-connect.php");
 
-if (!isset($_SESSION['user_id'])) { header("Location: Account.php"); exit(); }
+if (!isset($_SESSION['user_id'])) { header("Location: " . BASE_URL . "/account"); exit(); }
 
 $user_id = $_SESSION['user_id'];
 $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
@@ -44,11 +44,11 @@ $stmt->close();
                     </h1>
                 </div>
                 <div class="flex gap-4">
-                    <a href="edit-profile.php" class="btn-outline px-6 py-3 text-xs flex items-center bg-[#0a0f1e] hover:bg-[#c9a96e] hover:text-[#0a0f1e] hover:border-[#c9a96e] transition-colors">
+                    <a href="<?= BASE_URL ?>/edit-profile" class="btn-outline px-6 py-3 text-xs flex items-center bg-[#0a0f1e] hover:bg-[#c9a96e] hover:text-[#0a0f1e] hover:border-[#c9a96e] transition-colors">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                         Edit Profile
                     </a>
-                    <a href="../includes/logout.php" class="px-6 py-3 text-xs text-white border border-white/20 rounded-full uppercase tracking-wider font-bold hover:bg-white/10 transition-colors flex items-center">
+                    <a href="<?= BASE_URL ?>/logout" class="px-6 py-3 text-xs text-white border border-white/20 rounded-full uppercase tracking-wider font-bold hover:bg-white/10 transition-colors flex items-center">
                         Sign Out
                     </a>
                 </div>
@@ -121,7 +121,7 @@ $stmt->close();
                             </div>
                             <h3 class="text-2xl text-white mb-3" style="font-family:'Playfair Display',serif; font-weight:700;">No adventures yet</h3>
                             <p class="text-gray-400 mb-10 max-w-sm mx-auto text-sm leading-relaxed">Your journey folio is currently empty. The extraordinary awaits.</p>
-                            <a href="packages.php" class="btn-champagne">
+                            <a href="<?= BASE_URL ?>/packages" class="btn-champagne">
                                 Discover the Extraordinary
                                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>

@@ -114,12 +114,18 @@ $csrfToken = ogge_csrf_token();
             </div>
 
             <!-- Map -->
-            <div class="mt-16 bg-white p-4 rounded-[2rem] shadow-xl border border-gray-100 reveal">
-                <div class="overflow-hidden rounded-[1.5rem] h-[350px]">
+            <div class="mt-16 bg-white p-6 rounded-[3rem] shadow-2xl border border-gray-100 reveal overflow-hidden">
+                <div class="overflow-hidden rounded-[2.2rem] h-[400px] md:h-[550px]">
+
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.755681924928!2d37.56395031532617!3d6.022330193548352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85f5a9e5e5b7%3A0x1f1b9b9b9b9b9b9b!2sArba%20Minch%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1633021234567!5m2!1sen!2sus" 
-                            width="100%" height="100%" style="border:0; filter: grayscale(20%) contrast(1.1);" allowfullscreen="" loading="lazy"></iframe>
+                            width="100%" height="100%" style="border:0; filter: grayscale(10%) contrast(1.2) brightness(0.95);" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="mt-6 flex items-center justify-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#c9a96e] animate-pulse"></div>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">Ogge Travel Headquarters — Arba Minch, Ethiopia</p>
                 </div>
             </div>
+
         </div>
     </section>
 

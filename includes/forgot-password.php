@@ -21,18 +21,18 @@ function ensure_password_resets_table($db)
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
     ogge_flash('error', 'Your session expired. Please request a new reset link.');
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 $email = ogge_normalize_email($_POST['email'] ?? '');
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     ogge_flash('error', 'Please enter a valid email address.');
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 // Always return a generic success message to avoid user enumeration
@@ -46,7 +46,7 @@ $user = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 ensure_password_resets_table($db);
@@ -66,16 +66,10 @@ $ins->execute();
 $ins->close();
 
 $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$basePath = '';
-if (isset($_SERVER['REQUEST_URI'])) {
-    $dir = rtrim(dirname($_SERVER['REQUEST_URI']), '/');
-    if (str_ends_with($dir, '/includes')) {
-        $dir = substr($dir, 0, -9);
-    }
-    $basePath = $dir;
-}
-$reset_link = $scheme . '://' . $host . $basePath . '/pages/reset-password.php?token=' . urlencode($token);
+$reset_link = $scheme . '://' . $host . BASE_URL . '/reset-password?token=' . urlencode($token);
+
 
 $subject = 'Reset your OGGE Travel password';
 $message = "Hi " . $user['name'] . ",\n\n";
@@ -92,5 +86,5 @@ if (!$mail_sent && $is_local_host) {
     $_SESSION['reset_link'] = $reset_link;
 }
 
-ogge_redirect('../pages/forgot-password.php');
+ogge_redirect(BASE_URL . '/forgot-password');
 ?>

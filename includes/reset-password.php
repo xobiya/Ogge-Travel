@@ -21,7 +21,7 @@ function ensure_password_resets_table($db)
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 $token = trim($_POST['token'] ?? '');
@@ -30,23 +30,23 @@ $confirm_password = $_POST['confirm_password'] ?? '';
 
 if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
     ogge_flash('error', 'Your session expired. Please try the reset link again.');
-    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
+    ogge_redirect(BASE_URL . '/reset-password?token=' . urlencode($token));
 }
 
 if ($token === '' || $password === '' || $confirm_password === '') {
     ogge_flash('error', 'Please fill all fields.');
-    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
+    ogge_redirect(BASE_URL . '/reset-password?token=' . urlencode($token));
 }
 
 $passwordError = ogge_validate_password_strength($password);
 if ($passwordError !== null) {
     ogge_flash('error', $passwordError);
-    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
+    ogge_redirect(BASE_URL . '/reset-password?token=' . urlencode($token));
 }
 
 if ($password !== $confirm_password) {
     ogge_flash('error', 'Passwords do not match.');
-    ogge_redirect('../pages/reset-password.php?token=' . urlencode($token));
+    ogge_redirect(BASE_URL . '/reset-password?token=' . urlencode($token));
 }
 
 ensure_password_resets_table($db);
@@ -62,12 +62,12 @@ $stmt->close();
 
 if (!$reset) {
     ogge_flash('error', 'This reset link is invalid or expired.');
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 if (!empty($reset['used_at']) || strtotime($reset['expires_at']) < time()) {
     ogge_flash('error', 'This reset link is invalid or expired.');
-    ogge_redirect('../pages/forgot-password.php');
+    ogge_redirect(BASE_URL . '/forgot-password');
 }
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -84,5 +84,5 @@ $mark->close();
 
 unset($_SESSION['csrf_token']);
 ogge_flash('success', 'Password updated. Please sign in.');
-ogge_redirect('../pages/Account.php');
+ogge_redirect(BASE_URL . '/account');
 ?>

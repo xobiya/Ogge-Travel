@@ -66,7 +66,7 @@ $result = $stmt->get_result();
                                 <?= htmlspecialchars($booking['status']) ?>
                             </div>
                         </div>
-                        <div class="md:col-span-8 p-10 lg:p-14 flex flex-col justify-center">
+                        <div class="md:col-span-8 p-6 sm:p-10 lg:p-14 flex flex-col justify-center">
                             <div class="flex flex-wrap items-center gap-4 mb-3">
                                 <p class="text-champagne text-[10px] font-bold uppercase tracking-[0.2em]"><?= htmlspecialchars($booking['duration'] ?? '') ?></p>
                                 <span class="w-1 h-1 rounded-full bg-gray-200"></span>
@@ -75,7 +75,7 @@ $result = $stmt->get_result();
                             
                             <h3 class="text-3xl lg:text-4xl text-navy-950 mb-8" style="font-family:'Playfair Display',serif; font-weight:800;"><?= htmlspecialchars($booking['title']) ?></h3>
                             
-                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
                                 <div class="space-y-1">
                                     <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Reserved On</p>
                                     <p class="text-sm text-navy-950 font-semibold"><?= date('M j, Y', strtotime($booking['created_at'])) ?></p>

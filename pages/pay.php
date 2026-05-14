@@ -149,11 +149,11 @@ $csrfToken = ogge_csrf_token();
     </style>
 </head>
 <body class="bg-[#faf8f5] min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-6xl w-full bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row min-h-[550px]">
+    <div class="max-w-6xl w-full bg-white rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row min-h-[550px]">
 
         
         <!-- Left: Summary Panel -->
-        <div class="lg:w-[45%] bg-[#0a0f1e] relative p-10 text-white flex flex-col overflow-hidden">
+        <div class="lg:w-[45%] bg-[#0a0f1e] relative p-8 sm:p-10 text-white flex flex-col overflow-hidden">
             <div class="absolute inset-0 opacity-10">
                 <img src="<?= htmlspecialchars($booking['image_url'] ?? '../assets/images/historical.jpg') ?>" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] to-transparent"></div>
@@ -205,7 +205,7 @@ $csrfToken = ogge_csrf_token();
         </div>
 
         <!-- Right: Payment Methods Panel -->
-        <div class="lg:w-[55%] p-10 flex flex-col justify-center">
+        <div class="lg:w-[55%] p-6 sm:p-10 flex flex-col justify-center">
             
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="mb-6 p-4 bg-red-50 border border-red-100 text-red-700 rounded-2xl flex items-center gap-3 animate-fade-up">

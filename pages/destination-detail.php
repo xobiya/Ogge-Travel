@@ -163,7 +163,7 @@ $pkg_stmt->close();
             
             <div class="scroll-strip pb-4">
                 <?php foreach($h['insider_tips'] as $tip): ?>
-                <div class="w-[340px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-[#c9a96e]/30 transition-all reveal">
+                <div class="w-[85vw] sm:w-[340px] max-w-full shrink-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#c9a96e]/30 transition-all reveal">
                     <div class="text-4xl mb-5"><?= $tip['icon'] ?></div>
                     <h4 class="text-xl text-white mb-3" style="font-family:'Playfair Display',serif; font-weight:700;"><?= htmlspecialchars($tip['title']) ?></h4>
                     <p class="text-gray-400 text-sm leading-relaxed" style="font-family:'Inter',sans-serif;"><?= htmlspecialchars($tip['desc']) ?></p>

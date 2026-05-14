@@ -82,8 +82,8 @@ $csrfToken = ogge_csrf_token();
             <!-- Left Side: Summary & Trust -->
             <div class="lg:w-5/12 space-y-8 reveal-left">
                 <!-- Summary Card -->
-                <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-navy-950/5 overflow-hidden border border-gray-100">
-                    <div class="p-10">
+                <div class="bg-white rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl shadow-navy-950/5 overflow-hidden border border-gray-100">
+                    <div class="p-6 sm:p-10">
                         <div class="flex items-center justify-between mb-8">
                             <div>
                                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-1">Package Reference</p>
@@ -142,7 +142,7 @@ $csrfToken = ogge_csrf_token();
 
             <!-- Right Side: Booking Form -->
             <div class="lg:w-7/12 reveal-right">
-                <div class="bg-white rounded-[2.5rem] p-12 shadow-2xl shadow-navy-950/5 border border-gray-100">
+                <div class="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-12 shadow-2xl shadow-navy-950/5 border border-gray-100">
                     <div class="mb-12">
                         <h2 class="text-4xl text-navy-950 mb-3" style="font-family:'Playfair Display',serif; font-weight:800;">Initiate Your Escape</h2>
                         <p class="text-gray-400">Complete the details below to begin your personalized journey curation.</p>
@@ -153,7 +153,7 @@ $csrfToken = ogge_csrf_token();
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                         <input type="hidden" name="package_id" value="<?= $package_id ?>">
 
-                        <div class="grid md:grid-cols-2 gap-8">
+                        <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
                             <div class="group">
                                 <label class="block text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-[0.2em] group-focus-within:text-champagne transition-colors">Desired Departure</label>
                                 <input type="date" name="travel_date" 

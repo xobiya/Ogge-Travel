@@ -40,14 +40,14 @@ $page_title = $q ? "Search Results for '$q'" : "Discover Heritage";
     <section class="pt-32 pb-20 bg-[#0a0f1e] text-center">
         <div class="container mx-auto px-6">
             <span class="section-eyebrow">Search Intelligence</span>
-            <h1 class="text-4xl md:text-6xl text-white mt-4" style="font-family:'Playfair Display',serif; font-weight:800;">
+            <h1 class="text-3xl sm:text-4xl md:text-6xl text-white mt-4" style="font-family:'Playfair Display',serif; font-weight:800;">
                 <?= $q ? 'Results for <span class="text-champagne-gradient">"' . htmlspecialchars($q) . '"</span>' : 'Discover Your Next <span class="text-champagne-gradient">Escape</span>' ?>
             </h1>
             <?php if (!$q): ?>
             <div class="max-w-2xl mx-auto mt-8">
                 <form method="GET" class="relative">
-                    <input type="text" name="q" placeholder="Where do you wish to go?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-[#c9a96e] transition-all">
-                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white px-8 py-3 rounded-xl font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-[#c9a96e] hover:text-black transition-all">Search</button>
+                    <input type="text" name="q" placeholder="Where do you wish to go?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 sm:px-8 py-4 sm:py-5 pr-[100px] sm:pr-[120px] text-sm sm:text-base text-white focus:outline-none focus:border-[#c9a96e] transition-all">
+                    <button type="submit" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black text-white px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold uppercase text-[9px] sm:text-[10px] tracking-[0.2em] hover:bg-[#c9a96e] hover:text-black transition-all">Search</button>
                 </form>
             </div>
             <?php endif; ?>

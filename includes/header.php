@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) { session_start(); }
 include_once(__DIR__ . '/seo-lang.php'); 
 ?>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/luxury.css?v=1.2">
+<link rel="stylesheet" href="/assets/css/luxury.css?v=1.4">
 <?= generateSEO($page_title ?? 'The Curated Escape', $page_desc ?? 'Experience Ethiopia like never before with OGGE Travel.') ?>
 
 <header class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent" id="mainHeader">
@@ -21,7 +21,7 @@ include_once(__DIR__ . '/seo-lang.php');
             </a>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-1">
+            <div class="hidden lg:flex items-center space-x-1">
                 <a href="<?= BASE_URL ?>/home" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('home') ?></a>
                 <a href="<?= BASE_URL ?>/destinations" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('destinations') ?></a>
                 <a href="<?= BASE_URL ?>/packages" class="nav-link px-4 py-2 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:text-[#c9a96e] transition-colors" style="font-family:'Inter',sans-serif;"><?= __t('packages') ?></a>
@@ -81,7 +81,7 @@ include_once(__DIR__ . '/seo-lang.php');
             </div>
 
             <!-- Mobile Menu Button -->
-            <div class="md:hidden flex items-center">
+            <div class="lg:hidden flex items-center">
                 <button id="menuBtn" class="text-white p-2 focus:outline-none transition-transform duration-300">
                     <svg id="menuIcon" class="w-7 h-7 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -94,7 +94,7 @@ include_once(__DIR__ . '/seo-lang.php');
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden hidden mt-4 bg-[#0a0f1e] rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+        <div id="mobileMenu" class="lg:hidden hidden mt-4 bg-[#0a0f1e]/95 backdrop-blur-xl rounded-2xl border border-[#c9a96e]/20 shadow-2xl overflow-hidden">
             <div class="flex flex-col p-4 space-y-1" style="font-family:'Inter',sans-serif;">
                 <a href="/home" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Home</a>
                 <a href="<?= BASE_URL ?>/destinations" class="px-5 py-3 text-white/80 text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#c9a96e] hover:bg-white/5 rounded-xl transition-colors">Destinations</a>
@@ -155,14 +155,15 @@ include_once(__DIR__ . '/seo-lang.php');
 <style>
     /* Header scroll states */
     #mainHeader.header-scrolled {
-        background: rgba(10, 15, 30, 0.95) !important;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+        background: rgba(10, 15, 30, 0.85) !important;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
         padding-top: 0; padding-bottom: 0;
     }
     #mainHeader.header-scrolled nav { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-    .header-scrolled .header-logo-text { color: #fff; }
+    .header-scrolled .header-logo-text { color: #fff; text-shadow: 0 2px 10px rgba(201, 169, 110, 0.2); }
 </style>
 
 <script>

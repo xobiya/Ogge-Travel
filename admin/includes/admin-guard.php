@@ -4,17 +4,17 @@
  * Include this at the top of every admin page
  */
 require_once __DIR__ . '/../../includes/auth-helpers.php';
+require_once __DIR__ . '/../../includes/db-connect.php';
 ogge_start_secure_session();
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error'] = "Please login to access the admin panel.";
-    header("Location: ../pages/Account.php");
+    header("Location: " . BASE_URL . "/account");
     exit();
 }
 
 // Verify admin role from database (don't trust session alone)
-include_once(__DIR__ . '/../../includes/db-connect.php');
 $guard_stmt = $db->prepare("SELECT role FROM users WHERE id = ?");
 $guard_stmt->bind_param("i", $_SESSION['user_id']);
 $guard_stmt->execute();
@@ -23,7 +23,7 @@ $guard_stmt->close();
 
 if (!$guard_result || $guard_result['role'] !== 'admin') {
     $_SESSION['error'] = "You do not have permission to access this area.";
-    header("Location: ../pages/index.php");
+    header("Location: " . BASE_URL . "/");
     exit();
 }
 

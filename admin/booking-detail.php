@@ -10,7 +10,7 @@ $booking = $db->query("SELECT b.*, u.name as user_name, u.email as user_email, p
     WHERE b.id = " . (int)$id)->fetch_assoc();
 
 if (!$booking) {
-    header("Location: bookings.php");
+    header("Location: " . BASE_URL . "/admin/bookings");
     exit();
 }
 
@@ -107,7 +107,7 @@ include('includes/admin-header.php');
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     Send Email
                 </a>
-                <a href="users.php?search=<?= urlencode($booking['user_email']) ?>" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl border border-slate-100 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">
+                <a href="<?= BASE_URL ?>/admin/users?search=<?= urlencode($booking['user_email']) ?>" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl border border-slate-100 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                     View User History
                 </a>

@@ -5,13 +5,13 @@ require_once __DIR__ . '/../includes/db-connect.php';
 
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error'] = "Please login to book packages";
-    ogge_redirect("Account.php");
+    ogge_redirect(BASE_URL . "/account");
 }
 
 $package_id = $_GET['package_id'] ?? null;
 if (!$package_id || !is_numeric($package_id)) {
     $_SESSION['error'] = "Invalid package selection";
-    ogge_redirect("packages.php");
+    ogge_redirect(BASE_URL . "/packages");
 }
 
 $stmt = $db->prepare("SELECT * FROM packages WHERE id = ?");
@@ -22,7 +22,7 @@ $stmt->close();
 
 if (!$package) {
     $_SESSION['error'] = "Requested package not found";
-    ogge_redirect("packages.php");
+    ogge_redirect(BASE_URL . "/packages");
 }
 $csrfToken = ogge_csrf_token();
 ?>
@@ -32,8 +32,8 @@ $csrfToken = ogge_csrf_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seal Your Journey | <?= htmlspecialchars($package['title']) ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.3">
-    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.3">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.4">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.4">
     <script src="../assets/js/script.js?v=1.3"></script>
     <style>
         .booking-gradient {

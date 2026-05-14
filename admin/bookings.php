@@ -64,7 +64,7 @@ include('includes/admin-header.php');
                     <td class="px-5 py-3"><span class="inline-block px-2.5 py-1 rounded-full text-[0.68rem] font-semibold <?= $b['status']==='confirmed' ? 'bg-emerald-50 text-emerald-700' : ($b['status']==='pending' ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-600') ?>"><?= $b['status'] ?></span></td>
                     <td class="px-5 py-3 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <a href="booking-detail.php?id=<?= $b['id'] ?>" class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Details</a>
+                            <a href="<?= BASE_URL ?>/admin/booking-detail?id=<?= $b['id'] ?>" class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Details</a>
                             <form method="POST" action="includes/admin-actions.php?action=update_booking_status" class="flex items-center gap-1.5">
                                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($admin_csrf_token) ?>">
                                 <input type="hidden" name="id" value="<?= $b['id'] ?>">

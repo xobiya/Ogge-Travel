@@ -22,28 +22,28 @@ $role = 'user';
 
 if ($name === '' || $email === '' || $password === '' || $confirmPassword === '') {
     ogge_flash('error', 'Please fill all fields.');
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 if (strlen($name) < 2 || strlen($name) > 120) {
     ogge_flash('error', 'Full name must be between 2 and 120 characters.');
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 255) {
     ogge_flash('error', 'Please enter a valid email address.');
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 if ($password !== $confirmPassword) {
     ogge_flash('error', 'Passwords do not match.');
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 $passwordError = ogge_validate_password_strength($password);
 if ($passwordError !== null) {
     ogge_flash('error', $passwordError);
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 
 $stmt = $db->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
@@ -79,6 +79,6 @@ try {
     $stmt->close();
     error_log('Registration failed: ' . $exception->getMessage());
     ogge_flash('error', 'Registration failed. Please try again.');
-    ogge_redirect('../pages/Account.php?mode=register');
+    ogge_redirect(BASE_URL . '/account?mode=register');
 }
 ?>

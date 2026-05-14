@@ -11,6 +11,14 @@ ini_set('display_errors', 1);
 // Include database and shared configuration (defines BASE_URL)
 require_once __DIR__ . '/includes/db-connect.php';
 
+// If running via PHP's built-in web server, serve existing static files as-is
+if (php_sapi_name() === 'cli-server') {
+    $requested_file = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    if (is_file($requested_file) && file_exists($requested_file) && !str_ends_with($requested_file, '.php')) {
+        return false;
+    }
+}
+
 // Get the request path and strip query strings
 $request_uri = $_SERVER['REQUEST_URI'];
 
@@ -67,8 +75,9 @@ if (isset($routes[$url])) {
 }
 
 // Special handling for Admin routes
-if (strpos($url, 'admin') === 0) {
-    $admin_url = trim(substr($url, 5), '/'); // Strip 'admin'
+if ($url === 'admin' || strpos($url, 'admin/') === 0) {
+    $admin_url = $url === 'admin' ? '' : substr($url, 6); // Strip 'admin/'
+    $admin_url = trim($admin_url, '/');
     $admin_file = $admin_url === '' ? 'index.php' : $admin_url;
     if (substr($admin_file, -4) !== '.php') $admin_file .= '.php';
     

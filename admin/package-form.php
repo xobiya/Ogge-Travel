@@ -1,7 +1,7 @@
 <?php
 include('includes/admin-guard.php');
 $id = $_GET['id'] ?? null; $pkg = null;
-if ($id) { $stmt = $db->prepare("SELECT * FROM packages WHERE id = ?"); $stmt->bind_param("i", $id); $stmt->execute(); $pkg = $stmt->get_result()->fetch_assoc(); $stmt->close(); if (!$pkg) { header("Location: packages.php"); exit(); } }
+if ($id) { $stmt = $db->prepare("SELECT * FROM packages WHERE id = ?"); $stmt->bind_param("i", $id); $stmt->execute(); $pkg = $stmt->get_result()->fetch_assoc(); $stmt->close(); if (!$pkg) { header("Location: " . BASE_URL . "/admin/packages"); exit(); } }
 $destinations = $db->query("SELECT id, name FROM destinations ORDER BY name ASC");
 $page_title = $pkg ? 'Edit Package' : 'Add Package';
 include('includes/admin-header.php');
@@ -48,7 +48,7 @@ include('includes/admin-header.php');
             </div>
             <div class="flex gap-3 pt-2">
                 <button type="submit" class="px-6 py-2.5 text-sm font-bold text-slate-800 bg-champagne hover:bg-champagne-light rounded-xl transition-colors"><?= $pkg ? 'Update' : 'Create' ?> Package</button>
-                <a href="packages.php" class="px-6 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors">Cancel</a>
+                <a href="<?= BASE_URL ?>/admin/packages" class="px-6 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors">Cancel</a>
             </div>
         </form>
     </div>

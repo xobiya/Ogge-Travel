@@ -5,14 +5,14 @@
 include('admin-guard.php');
 
 $action = $_GET['action'] ?? '';
-$redirect = $_SERVER['HTTP_REFERER'] ?? '../admin/index.php';
+$redirect = $_SERVER['HTTP_REFERER'] ?? (BASE_URL . '/admin');
 $exportActions = ['export_subscribers_csv', 'export_bookings_csv'];
 
 if (!in_array($action, $exportActions, true)) {
     $csrfToken = $_POST['csrf_token'] ?? $_GET['csrf_token'] ?? null;
     if (!ogge_validate_csrf($csrfToken)) {
         $_SESSION['admin_error'] = 'Security check failed. Please try again.';
-        header('Location: ../index.php');
+        header('Location: ' . BASE_URL . '/admin');
         exit();
     }
 }
@@ -46,7 +46,7 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Created destination', 'destination', $new_id, $name);
             $_SESSION['admin_success'] = "Destination created successfully.";
         }
-        header("Location: ../destinations.php"); exit();
+        header("Location: " . BASE_URL . "/admin/destinations"); exit();
 
     case 'delete_destination':
         $id = (int)($_GET['id'] ?? 0);
@@ -62,7 +62,7 @@ switch ($action) {
                 $_SESSION['admin_success'] = "Destination deleted.";
             }
         }
-        header("Location: ../destinations.php"); exit();
+        header("Location: " . BASE_URL . "/admin/destinations"); exit();
 
     // ===== PACKAGES =====
     case 'save_package':
@@ -94,7 +94,7 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Created package', 'package', $new_id, $title);
             $_SESSION['admin_success'] = "Package created successfully.";
         }
-        header("Location: ../packages.php"); exit();
+        header("Location: " . BASE_URL . "/admin/packages"); exit();
 
     case 'delete_package':
         $id = (int)($_GET['id'] ?? 0);
@@ -109,7 +109,7 @@ switch ($action) {
                 $_SESSION['admin_success'] = "Package deleted.";
             }
         }
-        header("Location: ../packages.php"); exit();
+        header("Location: " . BASE_URL . "/admin/packages"); exit();
 
     // ===== BOOKINGS =====
     case 'update_booking_status':
@@ -131,7 +131,7 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Deleted booking', 'booking', $id);
             $_SESSION['admin_success'] = "Booking deleted.";
         }
-        header("Location: ../bookings.php"); exit();
+        header("Location: " . BASE_URL . "/admin/bookings"); exit();
 
     // ===== USERS =====
     case 'update_user_role':
@@ -146,7 +146,7 @@ switch ($action) {
         } elseif ($id === $admin_id) {
             $_SESSION['admin_error'] = "You cannot change your own role.";
         }
-        header("Location: ../users.php"); exit();
+        header("Location: " . BASE_URL . "/admin/users"); exit();
 
     case 'delete_user':
         $id = (int)($_GET['id'] ?? 0);
@@ -159,7 +159,7 @@ switch ($action) {
         } elseif ($id === $admin_id) {
             $_SESSION['admin_error'] = "You cannot delete yourself.";
         }
-        header("Location: ../users.php"); exit();
+        header("Location: " . BASE_URL . "/admin/users"); exit();
 
     // ===== CONTACTS =====
     case 'mark_contact_read':
@@ -167,7 +167,7 @@ switch ($action) {
         if ($id > 0) {
             $db->query("UPDATE contacts SET is_read=1 WHERE id=$id");
         }
-        header("Location: ../contacts.php"); exit();
+        header("Location: " . BASE_URL . "/admin/contacts"); exit();
 
     case 'delete_contact':
         $id = (int)($_GET['id'] ?? 0);
@@ -176,7 +176,7 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Deleted contact message', 'contact', $id);
             $_SESSION['admin_success'] = "Message deleted.";
         }
-        header("Location: ../contacts.php"); exit();
+        header("Location: " . BASE_URL . "/admin/contacts"); exit();
 
     // ===== REVIEWS =====
     case 'delete_review':
@@ -186,7 +186,7 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Deleted review', 'review', $id);
             $_SESSION['admin_success'] = "Review deleted.";
         }
-        header("Location: ../reviews.php"); exit();
+        header("Location: " . BASE_URL . "/admin/reviews"); exit();
 
     // ===== SUBSCRIPTIONS =====
     case 'delete_subscription':
@@ -195,7 +195,7 @@ switch ($action) {
             $db->query("DELETE FROM subscriptions WHERE id=$id");
             $_SESSION['admin_success'] = "Subscriber removed.";
         }
-        header("Location: ../subscriptions.php"); exit();
+        header("Location: " . BASE_URL . "/admin/subscriptions"); exit();
 
     case 'export_subscribers_csv':
         header('Content-Type: text/csv');
@@ -247,14 +247,14 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Deleted journal', 'journal', $id);
             $_SESSION['admin_success'] = "Journal deleted.";
         }
-        header("Location: ../journals.php"); exit();
+        header("Location: " . BASE_URL . "/admin/journals"); exit();
 
     // ===== LOGS =====
     case 'clear_logs':
         $db->query("DELETE FROM admin_logs");
         logAdminAction($db, $admin_id, 'Cleared all activity logs');
         $_SESSION['admin_success'] = "All logs have been cleared.";
-        header("Location: ../logs.php"); exit();
+        header("Location: " . BASE_URL . "/admin/logs"); exit();
 
     // ===== SETTINGS =====
     case 'update_settings':
@@ -278,10 +278,10 @@ switch ($action) {
             logAdminAction($db, $admin_id, 'Deleted media file', 'media', 0, $file);
             $_SESSION['admin_success'] = "Media asset deleted.";
         }
-        header("Location: ../media.php"); exit();
+        header("Location: " . BASE_URL . "/admin/media"); exit();
 
     default:
         $_SESSION['admin_error'] = "Unknown action.";
-        header("Location: ../index.php"); exit();
+        header("Location: " . BASE_URL . "/admin"); exit();
 }
 ?>

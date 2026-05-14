@@ -11,7 +11,7 @@ $_SESSION['auth_mode'] = 'login';
 
 if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
     ogge_flash('error', 'Your session expired. Please sign in again.');
-    ogge_redirect('../pages/Account.php');
+    ogge_redirect(BASE_URL . '/account');
 }
 
 $email = ogge_normalize_email($_POST['email'] ?? '');
@@ -19,12 +19,12 @@ $password = $_POST['password'] ?? '';
 
 if ($email === '' || $password === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     ogge_flash('error', 'Enter a valid email and password.');
-    ogge_redirect('../pages/Account.php');
+    ogge_redirect(BASE_URL . '/account');
 }
 
 if (ogge_is_login_throttled($email)) {
     ogge_flash('error', 'Too many sign-in attempts. Please wait 15 minutes and try again.');
-    ogge_redirect('../pages/Account.php');
+    ogge_redirect(BASE_URL . '/account');
 }
 
 $stmt = $db->prepare('SELECT id, name, email, password, role FROM users WHERE email = ? LIMIT 1');
@@ -62,7 +62,7 @@ if ($user) {
 if (!$isValid) {
     ogge_record_failed_login($email);
     ogge_flash('error', 'Invalid email or password.');
-    ogge_redirect('../pages/Account.php');
+    ogge_redirect(BASE_URL . '/account');
 }
 
 ogge_clear_failed_logins($email);

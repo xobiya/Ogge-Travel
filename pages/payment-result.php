@@ -3,13 +3,13 @@ require_once __DIR__ . '/../includes/auth-helpers.php';
 ogge_start_secure_session();
 require_once __DIR__ . '/../includes/db-connect.php';
 
-if (!isset($_SESSION['user_id'])) { ogge_redirect('Account.php'); }
+if (!isset($_SESSION['user_id'])) { ogge_redirect(BASE_URL . '/account'); }
 
 $booking_id = (int)($_GET['booking_id'] ?? 0);
 $status     = $_GET['status'] ?? 'failed';   // 'success' | 'failed'
 $reason     = $_GET['reason'] ?? '';
 
-if ($booking_id < 1) { ogge_redirect('my-booking.php'); }
+if ($booking_id < 1) { ogge_redirect(BASE_URL . '/my-bookings'); }
 
 // Always re-query the booking so we reflect the real DB state
 $stmt = $db->prepare('SELECT b.*, p.title, p.price, p.image_url, u.email, u.name AS user_name
@@ -22,7 +22,7 @@ $stmt->execute();
 $booking = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
-if (!$booking) { ogge_redirect('my-booking.php'); }
+if (!$booking) { ogge_redirect(BASE_URL . '/my-bookings'); }
 
 // Trust the DB as source of truth; override URL param when booking is confirmed
 if ($booking['payment_status'] === 'paid' && $booking['status'] === 'confirmed') {
@@ -42,8 +42,8 @@ $current_year  = date('Y');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $is_success ? 'Payment Confirmed' : 'Payment Failed' ?> | OGGE Travel</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
-    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.4">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.4">
     <style>
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(24px); }

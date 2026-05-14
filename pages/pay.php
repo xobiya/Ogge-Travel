@@ -6,9 +6,9 @@ require_once __DIR__ . '/../includes/mail-helper.php';
 require_once __DIR__ . '/../includes/stripe-helper.php';
 require_once __DIR__ . '/../includes/chapa-helper.php';
 
-if (!isset($_SESSION['user_id'])) { ogge_redirect('Account.php'); }
+if (!isset($_SESSION['user_id'])) { ogge_redirect(BASE_URL . '/account'); }
 $booking_id = (int)($_GET['booking_id'] ?? 0);
-if ($booking_id < 1) { ogge_redirect('index.php'); }
+if ($booking_id < 1) { ogge_redirect(BASE_URL . '/home'); }
 
 $bookingStmt = $db->prepare('SELECT b.*, p.title, p.price, p.image_url, u.email, u.name as user_name
     FROM bookings b
@@ -20,7 +20,7 @@ $bookingStmt->execute();
 $booking = $bookingStmt->get_result()->fetch_assoc();
 $bookingStmt->close();
 
-if (!$booking) { ogge_flash('error', 'Booking not found.'); ogge_redirect('my-booking.php'); }
+if (!$booking) { ogge_flash('error', 'Booking not found.'); ogge_redirect(BASE_URL . '/my-bookings'); }
 
 $total_amount = $booking['price'] * $booking['travelers'];
 $exchange_rate = 120.0; // Fixed conversion rate for USD
@@ -42,7 +42,7 @@ if (isset($_GET['stripe_success']) && isset($_GET['session_id'])) {
         sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Stripe has been received. Your journey is now confirmed! Transaction ID: $tx_id");
         
         ogge_flash('success', "Payment successful via Stripe! Your journey is confirmed.");
-        ogge_redirect('my-booking.php');
+        ogge_redirect(BASE_URL . '/my-bookings');
     } else {
         error_log('Stripe Verification Failed for Session: ' . ($_GET['session_id'] ?? 'none'));
         ogge_flash('error', 'Could not verify payment. Please contact support with your booking ID.');
@@ -65,7 +65,7 @@ if (isset($_GET['chapa_success']) && isset($_GET['tx_ref'])) {
         sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount via Chapa has been received. Your journey is now confirmed! Transaction ID: $tx_id");
         
         ogge_flash('success', "Payment successful via Chapa! Your journey is confirmed.");
-        ogge_redirect('my-booking.php');
+        ogge_redirect(BASE_URL . '/my-bookings');
     } else {
         error_log('Chapa Verification Failed: ' . json_encode($verification));
         ogge_flash('error', 'Could not verify Chapa payment. Please contact support.');
@@ -81,7 +81,7 @@ if (isset($_GET['stripe_cancel'])) {
 if (isset($_POST['process_payment'])) {
     if (!ogge_validate_csrf($_POST['csrf_token'] ?? null)) {
         ogge_flash('error', 'Your session expired. Please try payment again.');
-        ogge_redirect('pay.php?booking_id=' . $booking_id);
+        ogge_redirect(BASE_URL . '/pay?booking_id=' . $booking_id);
     }
     $method = $_POST['payment_method'] ?? 'chapa';
     
@@ -94,7 +94,7 @@ if (isset($_POST['process_payment'])) {
     if ($method === 'stripe') {
         if (empty($config['stripe_secret_key']) || strpos($config['stripe_secret_key'], 'YOUR_SECRET_KEY') !== false) {
             ogge_flash('error', 'Stripe payment is currently unavailable.');
-            ogge_redirect('pay.php?booking_id=' . $booking_id);
+            ogge_redirect(BASE_URL . '/pay?booking_id=' . $booking_id);
         }
         $stripe = new StripeHelper($config);
         // Ensure Stripe gets the USD amount if currency is USD
@@ -106,7 +106,7 @@ if (isset($_POST['process_payment'])) {
     if ($method === 'chapa') {
         if (empty($config['chapa_secret_key']) || strpos($config['chapa_secret_key'], 'YOUR_SECRET_KEY') !== false) {
             ogge_flash('error', 'Chapa payment is currently unavailable.');
-            ogge_redirect('pay.php?booking_id=' . $booking_id);
+            ogge_redirect(BASE_URL . '/pay?booking_id=' . $booking_id);
         }
         $chapa = new ChapaHelper($config);
         $tx_ref = 'OGGE_' . $booking_id . '_' . time();
@@ -128,7 +128,7 @@ if (isset($_POST['process_payment'])) {
     
     sendCustomerNotification($booking['email'], "Payment Received! #$booking_id", "Your payment of ETB $total_amount has been received.");
     ogge_flash('success', "Payment successful! Your journey is confirmed.");
-    ogge_redirect('my-booking.php');
+    ogge_redirect(BASE_URL . '/my-bookings');
 }
 
 $csrfToken = ogge_csrf_token();
@@ -139,8 +139,8 @@ $csrfToken = ogge_csrf_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Settlement | OGGE Travel</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.3">
-    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.3">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.4">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.4">
     <script src="../assets/js/script.js?v=1.3"></script>
     <style>
         .payment-card-active {

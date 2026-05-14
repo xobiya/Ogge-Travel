@@ -1,5 +1,26 @@
 <?php
-$current_page = basename($_SERVER['PHP_SELF'], '.php');
+// Detect actual admin page from request URL, not PHP_SELF (which is always index.php via front controller)
+$_admin_request_url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+if (defined('BASE_URL') && BASE_URL !== '' && strpos($_admin_request_url, BASE_URL) === 0) {
+    $_admin_request_url = substr($_admin_request_url, strlen(BASE_URL));
+}
+$_admin_request_url = trim($_admin_request_url, '/');
+// Strip 'admin/' prefix to get the page name
+if (strpos($_admin_request_url, 'admin/') === 0) {
+    $current_page = substr($_admin_request_url, 6); // strip 'admin/'
+} elseif ($_admin_request_url === 'admin') {
+    $current_page = 'index';
+} else {
+    $current_page = basename($_SERVER['PHP_SELF'], '.php');
+}
+// Remove .php extension if present
+if (substr($current_page, -4) === '.php') {
+    $current_page = substr($current_page, 0, -4);
+}
+// Default to index if empty
+if (empty($current_page)) {
+    $current_page = 'index';
+}
 $admin_csrf_token = ogge_csrf_token();
 $pending_bookings_res = $db->query("SELECT COUNT(*) as c FROM bookings WHERE status = 'pending'");
 $pending_bookings = ($pending_bookings_res) ? $pending_bookings_res->fetch_assoc()['c'] : 0;
@@ -12,7 +33,7 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page_title ?? 'Admin') ?> — OGGE Admin</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css?v=1.4">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -27,7 +48,7 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
         .enhanced-img {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             filter: saturate(1.1) contrast(1.05);
-        
+        }
         .enhanced-img:hover {
             transform: scale(1.08);
             filter: saturate(1.2) contrast(1.1);
@@ -63,62 +84,62 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
     <nav class="flex-1 px-3 py-4">
         <p class="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-white/25 px-3 pt-3 pb-2">Main</p>
         
-        <a href="index.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'index' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'index' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
             Dashboard
         </a>
 
         <p class="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-white/25 px-3 pt-5 pb-2">Content</p>
 
-        <a href="destinations.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= ($current_page === 'destinations' || $current_page === 'destination-form') ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/destinations" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= ($current_page === 'destinations' || $current_page === 'destination-form') ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             Destinations
         </a>
-        <a href="packages.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= ($current_page === 'packages' || $current_page === 'package-form') ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/packages" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= ($current_page === 'packages' || $current_page === 'package-form') ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
             Packages
         </a>
-        <a href="media.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'media' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/media" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'media' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             Media Library
         </a>
 
         <p class="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-white/25 px-3 pt-5 pb-2">Operations</p>
 
-        <a href="bookings.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= ($current_page === 'bookings' || $current_page === 'booking-detail') ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/bookings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= ($current_page === 'bookings' || $current_page === 'booking-detail') ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
             Bookings
             <?php if ($pending_bookings > 0): ?><span class="ml-auto bg-red-500 text-white text-[0.65rem] font-bold px-2 py-0.5 rounded-full"><?= $pending_bookings ?></span><?php endif; ?>
         </a>
-        <a href="users.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'users' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/users" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'users' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             Users
         </a>
-        <a href="contacts.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'contacts' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/contacts" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'contacts' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             Messages
             <?php if ($unread_messages > 0): ?><span class="ml-auto bg-blue-500 text-white text-[0.65rem] font-bold px-2 py-0.5 rounded-full"><?= $unread_messages ?></span><?php endif; ?>
         </a>
-        <a href="reviews.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'reviews' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/reviews" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'reviews' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
             Reviews
         </a>
-        <a href="subscriptions.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'subscriptions' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/subscriptions" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'subscriptions' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
             Subscribers
         </a>
-        <a href="journals.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'journals' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/journals" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'journals' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2zM14 4v4h4"/></svg>
             Journals
         </a>
 
         <p class="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-white/25 px-3 pt-5 pb-2">System</p>
 
-        <a href="logs.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'logs' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/logs" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'logs' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             Activity Logs
         </a>
-        <a href="settings.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'settings' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
+        <a href="<?= BASE_URL ?>/admin/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.8rem] font-medium mb-0.5 transition-all <?= $current_page === 'settings' ? 'bg-champagne/[0.12] text-champagne' : 'text-white/55 hover:bg-sidebar-hover hover:text-white' ?>">
             <svg class="w-5 h-5 flex-shrink-0 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             Site Settings
         </a>
@@ -147,11 +168,11 @@ $unread_messages = ($unread_messages_res) ? $unread_messages_res->fetch_assoc()[
             <p class="text-sm text-slate-400">Admin / <span class="text-slate-700 font-semibold"><?= htmlspecialchars($page_title ?? 'Dashboard') ?></span></p>
         </div>
         <div class="flex items-center gap-2">
-            <a href="../pages/index.php" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
+            <a href="<?= BASE_URL ?>/" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 View Site
             </a>
-            <a href="../includes/logout.php" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
+            <a href="<?= BASE_URL ?>/includes/logout.php" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                 Logout
             </a>

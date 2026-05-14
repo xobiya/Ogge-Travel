@@ -13,7 +13,7 @@ $result = $db->query($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select a Package</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.4">
     <link rel="stylesheet" href="../assets/css/custome.css">
 </head>
 <body class="bg-gray-100">

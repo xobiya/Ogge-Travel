@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/auth-helpers.php';
+require_once __DIR__ . '/db-connect.php';
 ogge_start_secure_session();
 $_SESSION = [];
 
@@ -9,5 +10,5 @@ if (ini_get('session.use_cookies')) {
 }
 
 session_destroy();
-ogge_redirect('../pages/Account.php');
+ogge_redirect(BASE_URL . '/account');
 ?>

@@ -20,7 +20,7 @@ include('includes/admin-header.php');
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <input type="text" name="search" placeholder="Search..." value="<?= htmlspecialchars($search) ?>" class="pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-champagne/30 focus:border-champagne w-full sm:w-52">
             </form>
-            <a href="destination-form.php" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-800 bg-champagne hover:bg-champagne-light rounded-lg transition-colors whitespace-nowrap">
+            <a href="<?= BASE_URL ?>/admin/destination-form" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-800 bg-champagne hover:bg-champagne-light rounded-lg transition-colors whitespace-nowrap">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                 Add New
             </a>
@@ -38,7 +38,7 @@ include('includes/admin-header.php');
                     <td class="px-5 py-3 text-xs text-slate-400 hidden sm:table-cell"><?= date('M d, Y', strtotime($d['created_at'])) ?></td>
                     <td class="px-5 py-3 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <a href="destination-form.php?id=<?= $d['id'] ?>" class="px-3 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Edit</a>
+                            <a href="<?= BASE_URL ?>/admin/destination-form?id=<?= $d['id'] ?>" class="px-3 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Edit</a>
                             <button onclick="confirmDelete('includes/admin-actions.php?action=delete_destination&id=<?= $d['id'] ?>', '<?= htmlspecialchars(addslashes($d['name'])) ?>')" class="px-3 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">Delete</button>
                         </div>
                     </td>

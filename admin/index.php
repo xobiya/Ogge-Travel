@@ -145,7 +145,7 @@ include('includes/admin-header.php');
     <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
         <div class="px-8 py-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
             <h3 class="text-sm font-bold text-slate-800">Recent Bookings</h3>
-            <a href="bookings.php" class="text-[0.65rem] font-black uppercase tracking-wider text-champagne hover:text-champagne-dark transition-colors">View All →</a>
+            <a href="<?= BASE_URL ?>/admin/bookings" class="text-[0.65rem] font-black uppercase tracking-wider text-champagne hover:text-champagne-dark transition-colors">View All →</a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full">
@@ -173,7 +173,7 @@ include('includes/admin-header.php');
     <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
         <div class="px-8 py-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
             <h3 class="text-sm font-bold text-slate-800">Latest Enquiries</h3>
-            <a href="contacts.php" class="text-[0.65rem] font-black uppercase tracking-wider text-champagne hover:text-champagne-dark transition-colors">View All →</a>
+            <a href="<?= BASE_URL ?>/admin/contacts" class="text-[0.65rem] font-black uppercase tracking-wider text-champagne hover:text-champagne-dark transition-colors">View All →</a>
         </div>
         <div class="p-8 space-y-6">
             <?php while ($recent_messages && $m = $recent_messages->fetch_assoc()): ?>

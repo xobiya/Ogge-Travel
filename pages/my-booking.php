@@ -19,8 +19,8 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Travel Portfolio | OGGE Travel</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=1.3">
-    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.3">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.4">
+    <link rel="stylesheet" href="../assets/css/luxury.css?v=1.4">
     <script src="../assets/js/script.js?v=1.3"></script>
 </head>
 <body class="bg-[#faf8f5]">
